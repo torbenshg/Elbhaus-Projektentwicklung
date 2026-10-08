@@ -20,7 +20,8 @@ MOBILE DARSTELLUNG
   Nachverdichtung und Aufstockung reagieren auf Maus und Touch.
 
 KONTAKT
-- Name, E-Mail, Telefon, Objektadresse und Datenschutzbestätigung sind
+- Name, E-Mail, Telefon, Objektadresse und die Bestätigung der Kenntnisnahme
+  der Datenschutzerklärung sind
   Pflichtfelder. Die Nachricht ist optional.
 - Auf einem PHP-fähigen Webserver sendet contact.php die Anfrage an
   info@elbhaus-projekt.de. Der Server muss die PHP-Funktion mail unterstützen.
@@ -31,5 +32,8 @@ HINWEISE
 - Die FAQ befindet sich auf der Startseite.
 - Die Entwicklungsszenarien sind fiktive, gerundete Orientierungsbeispiele;
   Investitions- und Nebenkosten sind nicht berücksichtigt.
-- Impressum und Datenschutzerklärung sollten vor der endgültigen
-  Veröffentlichung rechtlich und hinsichtlich des Hosting-Anbieters geprüft werden.
+- Impressum und Datenschutzerklärung wurden auf den aktuellen technischen
+  Stand mit GitHub Pages, lokalen Schriften und ohne Analyse- oder
+  Marketingdienste abgestimmt. Eine Umsatzsteuer-Identifikationsnummer ist,
+  sofern vorhanden, noch im Impressum zu ergänzen. Änderungen bei Hosting,
+  Formularversand, Cookies oder Drittanbietern erfordern eine erneute Prüfung.

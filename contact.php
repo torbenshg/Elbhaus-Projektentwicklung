@@ -43,7 +43,7 @@ $email = trim((string)($_POST['email'] ?? ''));
 $phone = trim((string)($_POST['telefon'] ?? ''));
 $address = trim((string)($_POST['objektadresse'] ?? ''));
 $message = trim((string)($_POST['nachricht'] ?? ''));
-$consent = isset($_POST['datenschutz']);
+$privacyAcknowledged = isset($_POST['datenschutz']);
 
 if ($name === '' || strlen($name) > 320 || $address === '' || strlen($address) > 600) {
     respond(false, 'Bitte prüfen Sie Name und Objektadresse.', 422, $wantsJson);
@@ -51,8 +51,8 @@ if ($name === '' || strlen($name) > 320 || $address === '' || strlen($address) >
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254) {
     respond(false, 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', 422, $wantsJson);
 }
-if ($phone === '' || strlen($phone) > 160 || strlen($message) > 8000 || !$consent) {
-    respond(false, 'Bitte prüfen Sie Ihre Angaben und die Zustimmung zur Datenschutzerklärung.', 422, $wantsJson);
+if ($phone === '' || strlen($phone) > 160 || strlen($message) > 8000 || !$privacyAcknowledged) {
+    respond(false, 'Bitte prüfen Sie Ihre Angaben und bestätigen Sie die Kenntnisnahme der Datenschutzerklärung.', 422, $wantsJson);
 }
 
 $cleanEmail = str_replace(["\r", "\n"], '', $email);
