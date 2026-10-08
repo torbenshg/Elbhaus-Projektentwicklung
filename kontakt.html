@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kontakt | Elbhaus Projektentwicklung</title><meta name="description" content="Sprechen wir über das Potenzial Ihrer Immobilie in Hamburg. Senden Sie Elbhaus die Objektadresse und Ihre Ziele für eine persönliche Rückmeldung."><link rel="stylesheet" href="css/style.css?v=20261008-1830"><script>document.documentElement.classList.add("js");</script></head><body class="page-intro"><header>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kontakt | Elbhaus Projektentwicklung</title><meta name="description" content="Sprechen wir über das Potenzial Ihrer Immobilie in Hamburg. Senden Sie Elbhaus die Objektadresse und Ihre Ziele für eine persönliche Rückmeldung."><link rel="stylesheet" href="css/style.css?v=20261008-1850"><script>document.documentElement.classList.add("js");</script></head><body class="page-intro"><header>
   <div class="wrap nav">
     <a href="index.html" aria-label="Elbhaus Projektentwicklung – Startseite"><img class="logo" src="images/logo.png" alt="Elbhaus Projektentwicklung" width="1755" height="804"></a>
     <nav id="primary-nav" aria-label="Hauptnavigation">
@@ -42,7 +42,11 @@
       <p><b>Elbhaus Projektentwicklung GmbH</b><br>Barmbeker Str. 142<br>22299 Hamburg</p>
       <p><a href="tel:+494074074178">040 740 741 78</a><br><a href="mailto:info@elbhaus-projekt.de">info@elbhaus-projekt.de</a></p>
     </div>
-    <form data-mail action="mailto:info@elbhaus-projekt.de" method="post" enctype="text/plain" aria-label="Anfrage zur Potenzialprüfung">
+    <form data-contact-form action="contact.php" method="post" aria-label="Anfrage zur Potenzialprüfung">
+      <div class="form-honeypot" aria-hidden="true">
+        <label for="contact-website">Website</label>
+        <input id="contact-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
       <div class="form-field">
         <label for="contact-name">Name <span aria-hidden="true">*</span></label>
         <input id="contact-name" name="name" autocomplete="name" maxlength="160" required>
@@ -52,8 +56,8 @@
         <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required>
       </div>
       <div class="form-field">
-        <label for="contact-phone">Telefon <span class="field-optional">(optional)</span></label>
-        <input id="contact-phone" name="telefon" type="tel" autocomplete="tel" maxlength="80">
+        <label for="contact-phone">Telefon <span aria-hidden="true">*</span></label>
+        <input id="contact-phone" name="telefon" type="tel" autocomplete="tel" maxlength="80" required>
       </div>
       <div class="form-field">
         <label for="contact-address">Objektadresse <span aria-hidden="true">*</span></label>
@@ -65,7 +69,7 @@
       </div>
       <label class="check"><input name="datenschutz" type="checkbox" required> <span>Ich stimme der <a href="datenschutz.html">Datenschutzerklärung</a> zu. <span aria-hidden="true">*</span></span></label>
       <button class="submit" type="submit">Objekt prüfen lassen</button>
-      <p class="form-explanation">* Pflichtfelder. Die Anfrage öffnet Ihr E-Mail-Programm. Bitte senden Sie die vorbereitete E-Mail dort ab.</p>
+      <p class="form-explanation">* Pflichtfelder. Ihre Anfrage wird direkt und vertraulich an Elbhaus übermittelt.</p>
       <p class="form-status" role="status" aria-live="polite"></p>
       <noscript><p class="form-explanation">Sie können uns auch direkt an <a href="mailto:info@elbhaus-projekt.de">info@elbhaus-projekt.de</a> schreiben.</p></noscript>
     </form>
@@ -96,7 +100,7 @@
     </div>
   </div>
   <div class="footer-bottom footer-modern-bottom"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutzerklärung</a></div>
-</footer><script src="js/main.js?v=20261008-1830"></script><script>
+</footer><script src="js/main.js?v=20261008-1850"></script><script>
 (function(){
   document.querySelectorAll('.text-link, .service-areas .card a').forEach(function(link){
     var arrow=link.querySelector('.link-arrow');

@@ -18,29 +18,105 @@
     });
   }
 
-  document.querySelectorAll('form[data-mail]').forEach(form => {
-    form.addEventListener('submit', event => {
+  document.querySelectorAll('form[data-contact-form]').forEach(form => {
+    form.addEventListener('submit', async event => {
       event.preventDefault();
       if (!form.reportValidity()) return;
       const data = new FormData(form);
-      const value = name => String(data.get(name) || '').trim();
-      const subject = `Potenzialprüfung – ${value('objektadresse')}`;
-      const message = [
-        `Name: ${value('name')}`,
-        `E-Mail: ${value('email')}`,
-        `Telefon: ${value('telefon')}`,
-        `Objektadresse: ${value('objektadresse')}`,
-        '',
-        'Ihre Nachricht:',
-        value('nachricht'),
-      ].join('\n');
       const status = form.querySelector('.form-status');
-      if (status) {
-        status.textContent = 'Die E-Mail ist vorbereitet. Bitte senden Sie sie in Ihrem E-Mail-Programm ab. Alternativ schreiben Sie direkt an info@elbhaus-projekt.de.';
+      const button = form.querySelector('button[type="submit"]');
+      const originalLabel = button ? button.textContent : '';
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Anfrage wird gesendet …';
       }
-      window.location.href = `mailto:info@elbhaus-projekt.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+      if (status) {
+        status.classList.remove('is-success', 'is-error');
+        status.textContent = 'Ihre Anfrage wird übermittelt …';
+      }
+      form.setAttribute('aria-busy', 'true');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.ok !== true) {
+          throw new Error(result.message || 'Die Anfrage konnte nicht gesendet werden.');
+        }
+        form.reset();
+        if (status) {
+          status.classList.add('is-success');
+          status.textContent = 'Vielen Dank. Ihre Anfrage wurde gesendet. Wir melden uns persönlich bei Ihnen.';
+        }
+      } catch (error) {
+        if (status) {
+          status.classList.add('is-error');
+          status.innerHTML = 'Die Anfrage konnte gerade nicht übermittelt werden. Bitte schreiben Sie direkt an <a href="mailto:info@elbhaus-projekt.de">info@elbhaus-projekt.de</a>.';
+        }
+      } finally {
+        form.removeAttribute('aria-busy');
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+      }
     });
   });
+
+  const valueSection = document.querySelector('.value-development');
+  if (valueSection) {
+    const amounts = Array.from(valueSection.querySelectorAll('[data-count-euro]'));
+    const formatter = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 });
+    const values = amounts.map(element => {
+      const original = element.textContent.trim();
+      return {
+        element,
+        target: Number(original.replace(/\D/g, '')),
+        prefix: original.startsWith('+') ? '+' : '',
+      };
+    });
+    const render = (item, value) => {
+      item.element.textContent = `${item.prefix}${formatter.format(Math.round(value))} €`;
+    };
+    values.forEach(item => render(item, 0));
+
+    let hasRun = false;
+    const runCounters = () => {
+      if (hasRun) return;
+      hasRun = true;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        values.forEach(item => render(item, item.target));
+        return;
+      }
+      const duration = 2400;
+      const start = performance.now();
+      const tick = now => {
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        values.forEach(item => render(item, item.target * eased));
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runCounters();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.22 });
+      observer.observe(valueSection);
+    } else {
+      runCounters();
+    }
+  }
+
 })();
 
 
