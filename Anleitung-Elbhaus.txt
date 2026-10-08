@@ -1,52 +1,35 @@
-ELBHAUS – ÜBERARBEITETE WEBSITE
+ELBHAUS – WEBSITE-PAKET
 
-Das Paket enthält alle acht Seiten sowie die zugehörigen CSS-, JavaScript-
-und Bilddateien in der benötigten Ordnerstruktur.
+Das Paket enthält acht HTML-Seiten sowie CSS, JavaScript, Bilder, lokale
+Schriften und den optionalen PHP-Endpunkt für das Kontaktformular.
 
-ANSICHT
-Das ZIP-Paket vollständig entpacken und index.html im Browser öffnen.
-Die Ordner css, js und images müssen neben den HTML-Dateien liegen.
-Die Startseite heißt im Paket index.html, passend zu allen internen Links.
+VERÖFFENTLICHUNG
+- index.html ist die Startseite.
+- Die Ordner css, js, images und fonts müssen neben den HTML-Dateien liegen.
+- Für GitHub Pages werden alle statischen Dateien veröffentlicht.
+- GitHub Pages führt contact.php nicht aus. Für einen echten Formularversand
+  ist dort ein externer Formulardienst oder ein eigener Server-Endpunkt nötig.
 
-INHALTLICHE ÄNDERUNGEN
-- Eigentümernutzen und Entwicklungspotenziale als Einstieg auf der Startseite.
-- Vier Schritte von der ersten Einordnung bis zur Begleitung der Umsetzung.
-- Machbarkeitsstudie als Einstiegsprodukt; Projektentwicklung als Gesamtleistung.
-- Eigener Bereich zur Klärung und Schaffung von Baurecht vor einem möglichen Verkauf.
-- Drei ausdrücklich als schematisch gekennzeichnete Entwicklungssituationen.
-- Einheitlicher Kontakt mit Name, E-Mail, Telefon, Objektadresse und Nachricht.
-- Leistungsseiten und Navigation auf die neue Positionierung abgestimmt.
-- Bestehende Bilddateien, Grundgestaltung und Angaben zur Studienvergütung erhalten.
-- Montserrat als lokal eingebundene Webschrift einschließlich Lizenzdatei ergänzt.
-- Die ursprüngliche weiße Navigationsleiste ist ohne Zusatzicons erhalten.
-- Das Einstiegsbild der Entwicklungspotenziale bleibt positionsfest, wird ausschließlich eingeblendet und schließt unten mit dem nebenstehenden Text ab. Die vertikalen Trennlinien auf der Startseite sowie auf den drei Leistungsseiten reichen bis an die angrenzenden Abschnittslinien.
-- Die Prozessnummern 01 bis 04 blenden beim Scrollen leicht verlangsamt nacheinander ein. Die drei Leistungssymbole und die drei Grafiken der Entwicklungssituationen erscheinen jeweils als gemeinsame Gruppe gleichzeitig. Die Pfeile der weiterführenden Links wechseln beim Darüberfahren von → zu ↗.
-- Projektentwicklungs- und Ansprechpartnerbereiche fliegen beim Scrollen zweispaltig von links beziehungsweise rechts ein. Im Kontaktbereich bewegt sich ausschließlich das Formular von rechts; der linke Informationstext bleibt fest.
-- Auf den Unterseiten Projektentwicklung, Machbarkeitsstudie, Nachverdichtung, Aufstockung und Kontakt fliegen die ausgewählten Textblöcke beim eigenen Eintritt in den sichtbaren Bereich aus der jeweils festgelegten Richtung ein.
-- Das Kontakt-Eingabeformular fliegt auf der Startseite sowie auf Projektentwicklung, Machbarkeitsstudie, Nachverdichtung, Aufstockung und Kontakt beim Scrollen von rechts ein; der jeweilige linke Kontakttext bleibt fest.
-- Auf der Startseite fliegen die Inhaltsblöcke Entwicklungspotenziale, Arbeitsablauf, Machbarkeitsstudie, Leistungen, Verkaufsvorbereitung und typische Entwicklungssituationen beim Scrollen aus den jeweils festgelegten Richtungen ein; die geteilte Projektentwicklung bleibt links/rechts animiert.
-- Die Seite Nachverdichtung enthält vor dem Leistungsumfang sechs schematische Lageplan-Grafiken zu Hinterlandbebauung, Baulückenschluss, Innenhofbebauung, Eckergänzung, seitlicher Grundstücksteilung sowie Garagen- und Stellplatzflächen.
-- Der vollständige Block dieser sechs Nachverdichtungsgrafiken fährt beim Erreichen des sichtbaren Bereichs gemeinsam von links ein.
-- Der Startseitenbereich zum Ansprechpartner verwendet die Überschrift „Ihr Ansprechpartner / Geschäftsführer“, den Namen Torben Schattling und einen responsiven Porträtfoto-Platzhalter neben dem Text.
-- Auf Impressum und Datenschutzerklärung wurden die bisherigen oberen Unterüberschriften entfernt; auch dort fliegt ausschließlich das Kontaktformular beim Scrollen von rechts ein.
-- Seitenkopf und Rechtstext von Impressum und Datenschutzerklärung beginnen links auf derselben Inhaltsachse wie die Startseite; die Textzeilen behalten eine begrenzte Lesebreite.
-- Der Leistungsumfang der Nachverdichtung umfasst nun ausdrücklich die Begleitung von Planung, Genehmigung und baulicher Realisierung.
+MOBILE DARSTELLUNG
+- Die Grafiken der Bereiche „Was ist auf meinem Grundstück tatsächlich
+  möglich?“ und „Potenziale belastbar bewerten“ stehen mobil direkt unter
+  der jeweiligen Überschrift.
+- Die Pfeile der weiterführenden Links werden vollständig mit CSS-Linien
+  gezeichnet und drehen sich beim Anwählen nach rechts oben.
+- Die schematischen Grafiken auf der Startseite sowie auf den Seiten
+  Nachverdichtung und Aufstockung reagieren auf Maus und Touch.
 
 KONTAKT
-Das Formular bereitet eine E-Mail an info@elbhaus-projekt.de vor und öffnet
-das eingerichtete E-Mail-Programm. Die vorbereitete Nachricht muss dort
-abgesendet werden. Es gibt weiterhin keinen Formularserver.
-Name, E-Mail, Objektadresse und die Datenschutzbestätigung sind Pflichtfelder.
-Telefon und Nachricht sind optional.
+- Name, E-Mail, Telefon, Objektadresse und Datenschutzbestätigung sind
+  Pflichtfelder. Die Nachricht ist optional.
+- Auf einem PHP-fähigen Webserver sendet contact.php die Anfrage an
+  info@elbhaus-projekt.de. Der Server muss die PHP-Funktion mail unterstützen.
+- Bei GitHub Pages muss das Formular vor dem produktiven Einsatz an einen
+  statischen Formulardienst angebunden werden.
 
-PRÜFUNG
-Geprüft wurden die HTML-Struktur aller acht Seiten, interne Dateiverweise
-und Sprungziele, Bildverweise, Feldbeschriftungen und Pflichtfelder sowie
-die JavaScript-Logik des Menüs und der vollständigen E-Mail-Vorbereitung.
-Eine gerenderte Browser-Vorschau war in der Bearbeitungsumgebung für
-lokale Dateien gesperrt; die Darstellung bitte im eigenen Browser prüfen.
-
-RECHTSTEXTE
-Die Inhalte von Impressum und Datenschutzerklärung entsprechen weiterhin
-den übergebenen Dateien. datenschutz.html enthält weiterhin einen
-Platzhalter für den Hosting-Anbieter.
+HINWEISE
+- Die FAQ befindet sich auf der Startseite.
+- Die Entwicklungsszenarien sind fiktive, gerundete Orientierungsbeispiele;
+  Investitions- und Nebenkosten sind nicht berücksichtigt.
+- Impressum und Datenschutzerklärung sollten vor der endgültigen
+  Veröffentlichung rechtlich und hinsichtlich des Hosting-Anbieters geprüft werden.

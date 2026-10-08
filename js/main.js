@@ -117,6 +117,26 @@
     }
   }
 
+  const touchGraphics = document.querySelectorAll('.typical-situations .situation, .value-case, .infill-case');
+  touchGraphics.forEach(graphic => {
+    let releaseTimer;
+    const activate = event => {
+      if (event.pointerType !== 'touch') return;
+      window.clearTimeout(releaseTimer);
+      touchGraphics.forEach(item => {
+        if (item !== graphic) item.classList.remove('is-touch-active');
+      });
+      graphic.classList.add('is-touch-active');
+    };
+    const release = event => {
+      if (event.pointerType !== 'touch') return;
+      releaseTimer = window.setTimeout(() => graphic.classList.remove('is-touch-active'), 700);
+    };
+    graphic.addEventListener('pointerdown', activate, { passive: true });
+    graphic.addEventListener('pointerup', release, { passive: true });
+    graphic.addEventListener('pointercancel', release, { passive: true });
+  });
+
 })();
 
 
