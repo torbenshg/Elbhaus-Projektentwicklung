@@ -1,0 +1,285 @@
+// Gemeinsame Navigation und Anfrage für alle Seiten.
+(function () {
+  const menu = document.querySelector('header .menu');
+  const navigation = document.getElementById('primary-nav');
+  if (menu && navigation) {
+    const setMenuOpen = (open) => {
+      navigation.classList.toggle('open', open);
+      menu.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    };
+    menu.addEventListener('click', () => setMenuOpen(menu.getAttribute('aria-expanded') !== 'true'));
+    navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        menu.focus();
+      }
+    });
+  }
+
+  document.querySelectorAll('form[data-mail]').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      const value = name => String(data.get(name) || '').trim();
+      const subject = `Potenzialprüfung – ${value('objektadresse')}`;
+      const message = [
+        `Name: ${value('name')}`,
+        `E-Mail: ${value('email')}`,
+        `Telefon: ${value('telefon')}`,
+        `Objektadresse: ${value('objektadresse')}`,
+        '',
+        'Ihre Nachricht:',
+        value('nachricht'),
+      ].join('\n');
+      const status = form.querySelector('.form-status');
+      if (status) {
+        status.textContent = 'Die E-Mail ist vorbereitet. Bitte senden Sie sie in Ihrem E-Mail-Programm ab. Alternativ schreiben Sie direkt an info@elbhaus-projekt.de.';
+      }
+      window.location.href = `mailto:info@elbhaus-projekt.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    });
+  });
+})();
+
+
+// Kompakte Sticky-Navigation nach dem ersten Scrollbereich
+(function () {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 28);
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+})();
+
+
+// Kurzer Marken-Auftakt: zuerst nur das Elbhaus-Logo, danach Navigation und Seiteninhalt.
+// Die Verzögerung ist bewusst sehr kurz, damit die Seite nicht langsam wirkt.
+(function(){
+  const body=document.body;
+  if(!body || !body.classList.contains('page-intro')) return;
+  window.setTimeout(function(){
+    body.classList.add('intro-reveal');
+  }, 180);
+})();
+
+
+// Startseite: Skizze baut sich erst auf, wenn sie beim Scrollen sichtbar wird.
+(function(){
+  const sketches=document.querySelectorAll('[data-sketch-build]');
+  if(!sketches.length) return;
+
+  if(!('IntersectionObserver' in window)){
+    sketches.forEach(el=>el.classList.add('is-drawing'));
+    return;
+  }
+
+  const observer=new IntersectionObserver((entries,obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-drawing');
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:.28});
+
+  sketches.forEach(el=>observer.observe(el));
+})();
+
+
+// Freigestellte Aufstockungsskizze: erst beim Sichtbarwerden Linie für Linie aufbauen.
+(function(){
+ const el=document.querySelector('[data-line-sketch]');
+ if(!el) return;
+ const draw=()=>{
+   if(el.classList.contains('is-drawing')) return;
+   el.classList.add('is-drawing');
+   window.setTimeout(()=>el.classList.add('is-complete'),3250);
+ };
+ if(!('IntersectionObserver' in window)){draw();return;}
+ const io=new IntersectionObserver(entries=>{
+   entries.forEach(entry=>{
+     if(entry.isIntersecting){draw();io.disconnect();}
+   });
+ },{threshold:.25});
+ io.observe(el);
+})();
+
+// Echte SVG-Pfadanimation: startet einmal, sobald die Skizze ins Sichtfeld kommt.
+(function(){
+ const el=document.querySelector('[data-svg-sketch]');
+ if(!el)return;
+ const start=()=>el.classList.add('is-drawing');
+ if(!('IntersectionObserver' in window)){start();return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){start();io.disconnect()}}),{threshold:.28});
+ io.observe(el);
+})();
+
+// Originalgetreuer Linienaufbau der freigegebenen Aufstockungsskizze.
+(function(){
+ const box=document.querySelector('[data-approved-sketch]');
+ if(!box)return;
+ box.querySelectorAll('.approved-lines path').forEach((p,i)=>p.style.setProperty('--path-index',i));
+ const start=()=>box.classList.add('is-drawing');
+ if(!('IntersectionObserver' in window)){start();return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){start();io.disconnect()}}),{threshold:.24});
+ io.observe(box);
+})();
+
+// Zeichnet die aus der freigegebenen Originalskizze erkannten Linien erst beim Scrollen.
+(function(){
+ const el=document.querySelector('[data-exact-sketch]');
+ if(!el)return;
+ const start=()=>el.classList.add('is-drawing');
+ if(!('IntersectionObserver' in window)){start();return}
+ const io=new IntersectionObserver(entries=>{
+   entries.forEach(entry=>{if(entry.isIntersecting){start();io.disconnect();}});
+ },{threshold:.24});
+ io.observe(el);
+})();
+
+// Die nachgezeichnete Originalgeometrie entsteht erst beim Erreichen des Bereichs.
+(function(){
+ const el=document.querySelector('[data-traced-sketch]');
+ if(!el)return;
+ const start=()=>el.classList.add('is-drawing');
+ if(!('IntersectionObserver' in window)){start();return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){start();io.disconnect()}}),{threshold:.22});
+ io.observe(el);
+})();
+
+
+// Freigestellte Aufstockungsskizze beim Herunterscrollen langsam einblenden.
+(function(){
+  const el=document.querySelector('[data-sketch-fade]');
+  if(!el)return;
+  const show=()=>el.classList.add('is-visible');
+  if(!('IntersectionObserver' in window)){show();return;}
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){show();io.disconnect();}
+    });
+  },{threshold:.25});
+  io.observe(el);
+})();
+
+
+// Machbarkeitsstudien-Skizze analog zur Aufstockungsskizze langsam einblenden.
+(function(){
+  const el=document.querySelector('[data-study-sketch-fade]');
+  if(!el)return;
+  const show=()=>el.classList.add('is-visible');
+  if(!('IntersectionObserver' in window)){show();return}
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){show();io.disconnect()}});
+  },{threshold:.25});
+  io.observe(el);
+})();
+
+(function(){
+ const el=document.querySelector('[data-infill-sketch-fade]'); if(!el)return;
+ const show=()=>el.classList.add('is-visible');
+ if(!('IntersectionObserver' in window)){show();return}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){show();io.disconnect()}}),{threshold:.25});
+ io.observe(el);
+})();
+
+/* Leistungsumfang: Scroll-Reveal */
+(function(){
+  const lists=document.querySelectorAll('.scope-scroll-reveal');
+  if(!lists.length)return;
+  if(!('IntersectionObserver' in window)){
+    lists.forEach(el=>el.classList.add('is-visible'));
+    return;
+  }
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  lists.forEach(el=>io.observe(el));
+})();
+
+/* Prozessschritte 01–04 beim Erreichen des Bereichs zügig nacheinander einblenden. */
+(function(){
+  const groups=document.querySelectorAll('.process-steps');
+  if(!groups.length)return;
+  const show=el=>el.classList.add('is-visible');
+  if(!('IntersectionObserver' in window)){
+    groups.forEach(show);
+    return;
+  }
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        show(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.28,rootMargin:'0px 0px -8% 0px'});
+  groups.forEach(el=>io.observe(el));
+})();
+
+/* Die drei Leistungssymbole und die drei Entwicklungsgrafiken gruppenweise gleichzeitig einblenden. */
+(function(){
+  const groups=document.querySelectorAll('.service-areas .cards, .typical-situations .situations-grid');
+  if(!groups.length)return;
+  const show=el=>el.classList.add('is-visible');
+  if(!('IntersectionObserver' in window)){
+    groups.forEach(show);
+    return;
+  }
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        show(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.2,rootMargin:'0px 0px -8% 0px'});
+  groups.forEach(el=>io.observe(el));
+})();
+
+/* Zweispaltige Startseitenbereiche und ausschließlich das Kontaktformular seitlich einfliegen lassen. */
+(function(){
+  const sections=document.querySelectorAll('.scroll-split-reveal, .contact-form-reveal');
+  if(!sections.length)return;
+  const show=el=>el.classList.add('is-visible');
+  if(!('IntersectionObserver' in window)){
+    sections.forEach(show);
+    return;
+  }
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        show(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+  sections.forEach(el=>io.observe(el));
+})();
+
+/* Einzelne Textblöcke auf den Unterseiten erst beim eigenen Eintritt in den Viewport einfliegen lassen. */
+(function(){
+  const blocks=document.querySelectorAll('.scroll-fly-left, .scroll-fly-right');
+  if(!blocks.length)return;
+  const show=el=>el.classList.add('is-visible');
+  if(!('IntersectionObserver' in window)){
+    blocks.forEach(show);
+    return;
+  }
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        show(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.13,rootMargin:'0px 0px -7% 0px'});
+  blocks.forEach(el=>io.observe(el));
+})();
