@@ -5,7 +5,12 @@ Schriften und den optionalen PHP-Endpunkt für das Kontaktformular.
 
 VERÖFFENTLICHUNG
 - index.html ist die Startseite.
-- Die Ordner css, js, images und fonts müssen neben den HTML-Dateien liegen.
+- Alle Ordner unverändert hochladen, einschließlich projektentwicklung,
+  machbarkeitsstudie, nachverdichtung, aufstockung, kontakt, impressum und
+  datenschutz. Sie enthalten jeweils eine index.html für die kurze Adresse.
+- Die Ordner css, js, images und fonts bleiben im Hauptverzeichnis.
+- Die Startseite verwendet /, Unterseiten beispielsweise /projektentwicklung/.
+- Frühere .html-Adressen leiten auf die neuen Adressen weiter.
 - Für GitHub Pages werden alle statischen Dateien veröffentlicht.
 - GitHub Pages führt contact.php nicht aus. Für einen echten Formularversand
   ist dort ein externer Formulardienst oder ein eigener Server-Endpunkt nötig.

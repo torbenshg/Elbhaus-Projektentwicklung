@@ -1,20 +1,38 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Potenziale Ihrer Immobilie | Elbhaus Projektentwicklung Hamburg</title><meta name="description" content="Elbhaus erkennt und prüft Entwicklungspotenziale von Grundstücken und Bestandsimmobilien in Hamburg – für private Eigentümer, Bestandshalter und Investoren."><link rel="stylesheet" href="css/style.css?v=20261009-neubau-mieten-position"><script>document.documentElement.classList.add("js");</script></head><body class="page-intro page-home"><header>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Potenziale Ihrer Immobilie | Elbhaus Projektentwicklung Hamburg</title><meta name="description" content="Elbhaus erkennt und prüft Entwicklungspotenziale von Grundstücken und Bestandsimmobilien in Hamburg – für private Eigentümer, Bestandshalter und Investoren."><link rel="stylesheet" href="./css/style.css?v=20261009-lokale-vorschau"><script>document.documentElement.classList.add("js");</script><link rel="canonical" href="https://elbhaus-projekt.de/"><script>
+if(location.protocol === 'file:') {
+  const root = new URL('./', location.href);
+  const localLink = link => {
+    const href = link.getAttribute('href');
+    if(!href || !href.startsWith('/') || href.startsWith('//')) return;
+    const url = new URL(href.slice(1), root);
+    if(url.pathname.endsWith('/')) url.pathname += 'index.html';
+    link.href = url.href;
+  };
+  document.addEventListener('DOMContentLoaded', () => document.querySelectorAll('a[href]').forEach(localLink));
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if(link) localLink(link);
+  }, true);
+} else if(location.pathname.endsWith('/index.html')) {
+  history.replaceState(null, '', '/' + location.search + location.hash);
+}
+</script></head><body class="page-intro page-home"><header>
   <div class="wrap nav">
-    <a href="index.html" aria-label="Elbhaus Projektentwicklung – Startseite"><img class="logo" src="images/logo-vector.svg" alt="Elbhaus Projektentwicklung" width="1755" height="804"></a>
+    <a href="/" aria-label="Elbhaus Projektentwicklung – Startseite"><img class="logo" src="./images/logo-vector.svg" alt="Elbhaus Projektentwicklung" width="1755" height="804"></a>
     <nav id="primary-nav" aria-label="Hauptnavigation">
-        <a href="index.html" class="active" aria-current="page">Elbhaus</a>
-        <a href="projektentwicklung.html">Projektentwicklung</a>
-        <a href="machbarkeitsstudie.html">Machbarkeitsstudie</a>
-        <a href="nachverdichtung.html">Nachverdichtung</a>
-        <a href="aufstockung.html">Aufstockung</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/" class="active" aria-current="page">Elbhaus</a>
+        <a href="/projektentwicklung/">Projektentwicklung</a>
+        <a href="/machbarkeitsstudie/">Machbarkeitsstudie</a>
+        <a href="/nachverdichtung/">Nachverdichtung</a>
+        <a href="/aufstockung/">Aufstockung</a>
+        <a href="/kontakt/">Kontakt</a>
     </nav>
     <button class="menu" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-nav"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
   </div>
 </header>
 <main id="main-content">
 <section class="service-visual-hero owner-hero" aria-labelledby="home-heading">
-  <img src="images/header-bestand-neu.jpeg" alt="Bestandsgebäude mit Dachaufstockung vor blauem Himmel" width="1536" height="896" fetchpriority="high">
+  <img src="./images/header-bestand-neu.jpeg" alt="Bestandsgebäude mit Dachaufstockung vor blauem Himmel" width="1536" height="896" fetchpriority="high">
   <div class="service-visual-shade"></div>
   <div class="service-visual-copy">
     <div class="service-motion-line service-motion-line-top"></div>
@@ -28,13 +46,13 @@
 <section class="home-intro owner-intro" aria-labelledby="owner-question">
   <div class="wrap">
     <div class="home-sketch simple-sketch-fade" data-sketch-fade>
-      <img src="images/aufstockung-skizze-freigestellt.png" alt="Schematische Darstellung zusätzlicher Wohnfläche im Dachbereich" loading="lazy" width="1024" height="1536">
+      <img src="./images/aufstockung-skizze-freigestellt.png" alt="Schematische Darstellung zusätzlicher Wohnfläche im Dachbereich" loading="lazy" width="1024" height="1536">
     </div>
     <div class="home-intro-grid scroll-fly-right"><div class="home-intro-copy">
       <div class="eyebrow">Entwicklungspotenziale in Hamburg</div>
       <h2 id="owner-question">Was ist auf meinem Grundstück tatsächlich möglich?</h2>
       <div class="mobile-inline-sketch mobile-owner-intro-sketch" aria-hidden="true">
-        <img src="images/aufstockung-skizze-freigestellt.png" alt="" loading="lazy" width="1024" height="1536">
+        <img src="./images/aufstockung-skizze-freigestellt.png" alt="" loading="lazy" width="1024" height="1536">
       </div>
       <div class="prose">
         <p>Viele Grundstücke und Bestandsgebäude verfügen über Entwicklungspotenziale, die auf den ersten Blick nicht erkennbar sind. Zusätzliche Bebauung, Nachverdichtung oder eine Aufstockung können neue Wohnfläche schaffen und den wirtschaftlichen Wert einer Immobilie verändern.</p>
@@ -82,17 +100,17 @@
       <div class="eyebrow">Ihr Einstieg: die Machbarkeitsstudie</div>
       <h2 id="study-heading">Potenziale belastbar bewerten.</h2>
       <div class="mobile-inline-sketch mobile-study-sketch" aria-hidden="true">
-        <img src="images/machbarkeitsstudie-skizze-freigestellt.png" alt="" loading="lazy" width="947" height="1170">
+        <img src="./images/machbarkeitsstudie-skizze-freigestellt.png" alt="" loading="lazy" width="947" height="1170">
       </div>
       <div class="prose">
         <p>Aus einer ersten Idee wird eine fundierte Entscheidung, wenn die wesentlichen Rahmenbedingungen zusammenkommen. Unsere Machbarkeitsstudie untersucht, welche zusätzlichen Flächen möglich erscheinen, welche Voraussetzungen zu klären sind und wie sich das Vorhaben wirtschaftlich einordnen lässt.</p>
         <p>Sie erhalten einen Flächenkorridor, einen Kostenrahmen, eine Wirtschaftlichkeitsbetrachtung und eine klare Empfehlung für die nächsten Schritte.</p>
         <p>Nach dem ersten Austausch vereinbaren wir Umfang und Vergütung der vertieften Prüfung. So wissen Sie vor Beginn, welche Leistung Sie beauftragen.</p>
       </div>
-      <a class="text-link" href="machbarkeitsstudie.html">Mehr zur Machbarkeitsstudie <span class="link-arrow" aria-hidden="true"></span></a>
+      <a class="text-link" href="/machbarkeitsstudie/">Mehr zur Machbarkeitsstudie <span class="link-arrow" aria-hidden="true"></span></a>
     </div>
     <div class="home-study-sketch simple-sketch-fade" data-study-sketch-fade>
-      <img src="images/machbarkeitsstudie-skizze-freigestellt.png" alt="Schematische Analyse von Grundstück und Bebauung" loading="lazy" width="947" height="1170">
+      <img src="./images/machbarkeitsstudie-skizze-freigestellt.png" alt="Schematische Analyse von Grundstück und Bebauung" loading="lazy" width="947" height="1170">
     </div>
   </div>
 </section>
@@ -108,7 +126,7 @@
 <path d="M34 49 L39 47 M43 47 L48 45 M52 44 L58 42"/>
 <path d="M70 13 L84 18 L80 30 M75 17 L80 21 L87 12"/>
 <path d="M10 52 L24 65 M12 49 L9 35 M76 61 L84 54"/>
-</g></svg></div><div class="service-name">Machbarkeitsstudie</div><h3>Potenziale belastbar bewerten</h3><p>Der Einstieg in Ihre Entwicklung: Planungsrecht, Flächen, Kosten und Wirtschaftlichkeit als nachvollziehbare Entscheidungsgrundlage.</p><a href="machbarkeitsstudie.html">Mehr zur Machbarkeitsstudie <span class="link-arrow" aria-hidden="true"></span></a></article>
+</g></svg></div><div class="service-name">Machbarkeitsstudie</div><h3>Potenziale belastbar bewerten</h3><p>Der Einstieg in Ihre Entwicklung: Planungsrecht, Flächen, Kosten und Wirtschaftlichkeit als nachvollziehbare Entscheidungsgrundlage.</p><a href="/machbarkeitsstudie/">Mehr zur Machbarkeitsstudie <span class="link-arrow" aria-hidden="true"></span></a></article>
       <article class="card"><div class="service-icon sketch-service-icon" aria-hidden="true"><svg viewBox="0 0 96 72"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
 <path d="M8 53 L28 42 L48 50 L68 39 L89 50 L49 67 Z"/>
 <path d="M12 51 L12 31 L29 22 L29 42 M29 22 L43 29 L43 47"/>
@@ -116,14 +134,14 @@
 <path d="M37 54 L37 39 L48 34 L58 40 L58 49 M48 34 L48 51"/>
 <path d="M16 35 L25 31 M16 41 L25 37 M63 29 L69 26 M77 27 L83 30"/>
 <path d="M7 57 L48 71 L91 54 M5 50 L28 38 M67 36 L92 48"/>
-</g></svg></div><div class="service-name">Nachverdichtung</div><h3>Ungenutzte Grundstücksflächen entwickeln</h3><p>Zusätzliche Bebauung auf großen Grundstücken, in Baulücken oder auf rückwärtigen Flächen strukturiert prüfen.</p><a href="nachverdichtung.html">Mehr zur Nachverdichtung <span class="link-arrow" aria-hidden="true"></span></a></article>
+</g></svg></div><div class="service-name">Nachverdichtung</div><h3>Ungenutzte Grundstücksflächen entwickeln</h3><p>Zusätzliche Bebauung auf großen Grundstücken, in Baulücken oder auf rückwärtigen Flächen strukturiert prüfen.</p><a href="/nachverdichtung/">Mehr zur Nachverdichtung <span class="link-arrow" aria-hidden="true"></span></a></article>
       <article class="card"><div class="service-icon sketch-service-icon" aria-hidden="true"><svg viewBox="0 0 96 72"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
 <path d="M8 60 L48 48 L88 59 M12 59 L12 35 L48 25 L84 36 L84 59"/>
 <path d="M12 35 L48 23 L84 36 M18 34 L18 25 L48 15 L78 26 L78 34"/>
 <path d="M18 25 L48 13 L78 26 M27 22 L27 16 M48 13 L48 7 M68 22 L68 16"/>
 <path d="M20 42 L31 39 L31 53 L20 56 Z M38 36 L48 33 L48 49 L38 52 Z M56 34 L66 37 L66 52 L56 49 Z M72 39 L80 42 L80 55 L72 52 Z"/>
 <path d="M10 57 L48 46 L86 57 M9 62 L48 51 L87 62"/>
-</g></svg></div><div class="service-name">Aufstockung</div><h3>Neue Fläche im Bestand schaffen</h3><p>Unausgeschöpfte Dachbereiche für eine Aufstockung oder einen Dachgeschossausbau prüfen und weiterentwickeln.</p><a href="aufstockung.html">Mehr zur Aufstockung <span class="link-arrow" aria-hidden="true"></span></a></article>
+</g></svg></div><div class="service-name">Aufstockung</div><h3>Neue Fläche im Bestand schaffen</h3><p>Unausgeschöpfte Dachbereiche für eine Aufstockung oder einen Dachgeschossausbau prüfen und weiterentwickeln.</p><a href="/aufstockung/">Mehr zur Aufstockung <span class="link-arrow" aria-hidden="true"></span></a></article>
     </div>
   </div>
 </section>
@@ -135,7 +153,7 @@
     </div>
     <div class="development-banner-grid">
       <p class="development-left-copy">Projektentwicklung verbindet die einzelnen Leistungen zu einem gemeinsamen Weg. Wir konkretisieren tragfähige Varianten, strukturieren die weiteren Planungsschritte und begleiten Abstimmungen sowie die Umsetzung mit den erforderlichen Fachplanern und Partnern.</p>
-      <div class="development-right-copy"><p>Sie können Elbhaus mit der Entwicklung Ihres eigenen Grundstücks beauftragen. Ziele, Leistungsumfang und die Form der Zusammenarbeit legen wir gemeinsam fest.</p><a class="text-link" href="projektentwicklung.html">Mehr zur Projektentwicklung <span class="link-arrow" aria-hidden="true"></span></a></div>
+      <div class="development-right-copy"><p>Sie können Elbhaus mit der Entwicklung Ihres eigenen Grundstücks beauftragen. Ziele, Leistungsumfang und die Form der Zusammenarbeit legen wir gemeinsam fest.</p><a class="text-link" href="/projektentwicklung/">Mehr zur Projektentwicklung <span class="link-arrow" aria-hidden="true"></span></a></div>
     </div>
   </div>
 </section>
@@ -150,7 +168,7 @@
       <p>Eine belastbare planungsrechtliche und wirtschaftliche Prüfung macht zusätzliche Flächen und realistische Entwicklungswege nachvollziehbar. Wird eine Entwicklungsoption weiter konkretisiert und das erforderliche Baurecht geschaffen oder hinreichend abgesichert, kann dies den Grundstückswert und den erzielbaren Verkaufspreis deutlich erhöhen.</p>
       <p>Elbhaus strukturiert diesen Prozess – von der Potenzialanalyse über die Konkretisierung einer geeigneten Variante bis zur Vorbereitung der erforderlichen planungsrechtlichen und genehmigungsbezogenen Schritte. So kann der geschaffene Mehrwert im späteren Verkaufsprozess sichtbar und verhandelbar werden.</p>
       <p class="sale-value-note">Die tatsächliche Wertwirkung hängt vom Objekt, dem erreichbaren Baurecht, den Kosten und der Marktsituation ab.</p>
-      <a class="text-link" href="projektentwicklung.html#verkauf">Entwicklung vor Verkauf vorbereiten <span class="link-arrow" aria-hidden="true"></span></a>
+      <a class="text-link" href="/projektentwicklung/#verkauf">Entwicklung vor Verkauf vorbereiten <span class="link-arrow" aria-hidden="true"></span></a>
     </div>
   </div>
 </section>
@@ -159,9 +177,9 @@
     <div class="eyebrow">Typische Entwicklungssituationen</div>
     <h2 id="situations-heading">Wo zusätzliches Potenzial liegen kann.</h2>
     <div class="situations-grid">
-      <article class="situation"><a class="situation-diagram-link" href="nachverdichtung.html" aria-label="Großes Grundstück mit Einfamilienhaus: mehr erfahren"><div class="situation-diagram"><svg viewBox="0 0 220 160" role="img" aria-label="Schematisches großes Grundstück mit kleinem Bestandsgebäude und zusätzlicher möglicher Baufläche"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 14H206V146H14Z"/><path d="M30 86V53L61 31L92 53V86Z M30 53H92 M49 86V63H69V86 M25 94H99"/><path class="potential-outline" d="M125 47H185V113H125Z"/><path d="M125 128H186 M24 135H100"/><path class="potential-outline" d="M155 64V96 M139 80H171"/></g></svg></div></a><h3>Großes Grundstück mit Einfamilienhaus</h3><p>Prüfung einer zusätzlichen Bebauung.</p></article>
-      <article class="situation"><a class="situation-diagram-link" href="aufstockung.html" aria-label="Mehrfamilienhaus mit unausgeschöpftem Dachbereich: mehr erfahren"><div class="situation-diagram"><svg viewBox="0 0 220 160" role="img" aria-label="Schematisches Mehrfamilienhaus mit hervorgehobenem zusätzlichem Dachbereich"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M45 63H175V142H45Z M37 147H183 M39 63H181"/><path class="potential-outline" d="M45 61V30L110 15L175 30V61 M45 30H175"/><path d="M60 78H78V96H60Z M101 78H119V96H101Z M142 78H160V96H142Z M60 110H78V128H60Z M142 110H160V128H142Z M100 142V110H120V142"/></g></svg></div></a><h3>Mehrfamilienhaus mit unausgeschöpftem Dachbereich</h3><p>Prüfung von Aufstockung oder Dachgeschossausbau.</p></article>
-      <article class="situation"><a class="situation-diagram-link" href="nachverdichtung.html" aria-label="Innenhof oder rückwärtige Grundstücksfläche: mehr erfahren"><div class="situation-diagram"><svg viewBox="0 0 220 160" role="img" aria-label="Schematischer Innenhof mit bestehender Bebauung und möglicher zusätzlicher Bebauung im rückwärtigen Bereich"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 14H206V146H14Z M26 28H59V128H26Z M161 87H194V128H161Z M59 99H161V128H59Z M90 99V128 M130 99V128"/><path class="potential-outline" d="M105 28H181V65H105Z"/><path d="M71 42V86 M71 86H94"/></g></svg></div></a><h3>Innenhof oder rückwärtige Grundstücksfläche</h3><p>Prüfung einer Nachverdichtung.</p></article>
+      <article class="situation"><a class="situation-diagram-link" href="/nachverdichtung/" aria-label="Großes Grundstück mit Einfamilienhaus: mehr erfahren"><div class="situation-diagram"><svg viewBox="0 0 220 160" role="img" aria-label="Schematisches großes Grundstück mit kleinem Bestandsgebäude und zusätzlicher möglicher Baufläche"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 14H206V146H14Z"/><path d="M30 86V53L61 31L92 53V86Z M30 53H92 M49 86V63H69V86 M25 94H99"/><path class="potential-outline" d="M125 47H185V113H125Z"/><path d="M125 128H186 M24 135H100"/><path class="potential-outline" d="M155 64V96 M139 80H171"/></g></svg></div></a><h3>Großes Grundstück mit Einfamilienhaus</h3><p>Prüfung einer zusätzlichen Bebauung.</p></article>
+      <article class="situation"><a class="situation-diagram-link" href="/aufstockung/" aria-label="Mehrfamilienhaus mit unausgeschöpftem Dachbereich: mehr erfahren"><div class="situation-diagram"><svg viewBox="0 0 220 160" role="img" aria-label="Schematisches Mehrfamilienhaus mit hervorgehobenem zusätzlichem Dachbereich"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M45 63H175V142H45Z M37 147H183 M39 63H181"/><path class="potential-outline" d="M45 61V30L110 15L175 30V61 M45 30H175"/><path d="M60 78H78V96H60Z M101 78H119V96H101Z M142 78H160V96H142Z M60 110H78V128H60Z M142 110H160V128H142Z M100 142V110H120V142"/></g></svg></div></a><h3>Mehrfamilienhaus mit unausgeschöpftem Dachbereich</h3><p>Prüfung von Aufstockung oder Dachgeschossausbau.</p></article>
+      <article class="situation"><a class="situation-diagram-link" href="/nachverdichtung/" aria-label="Innenhof oder rückwärtige Grundstücksfläche: mehr erfahren"><div class="situation-diagram"><svg viewBox="0 0 220 160" role="img" aria-label="Schematischer Innenhof mit bestehender Bebauung und möglicher zusätzlicher Bebauung im rückwärtigen Bereich"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 14H206V146H14Z M26 28H59V128H26Z M161 87H194V128H161Z M59 99H161V128H59Z M90 99V128 M130 99V128"/><path class="potential-outline" d="M105 28H181V65H105Z"/><path d="M71 42V86 M71 86H94"/></g></svg></div></a><h3>Innenhof oder rückwärtige Grundstücksfläche</h3><p>Prüfung einer Nachverdichtung.</p></article>
     </div>
     <p class="schematic-note">Schematische Beispiele. Die tatsächliche Entwicklungsmöglichkeit ist immer objektspezifisch zu prüfen.</p>
   </div>
@@ -172,7 +190,7 @@
     <h2 id="value-development-heading">Vom Entwicklungspotenzial zum wirtschaftlichen Mehrwert.</h2>
     <p class="value-development-intro">Zusätzliche Fläche oder gesichertes Baurecht können den Wert einer Immobilie verändern. Drei vereinfachte Beispiele zeigen, wie Entwicklungspotenziale sichtbar und wirtschaftlich nutzbar werden können.</p>
     <div class="value-cases-grid">
-      <a class="value-case" href="projektentwicklung.html#verkauf" aria-label="Baurecht vor dem Verkauf – mehr zur Entwicklung vor einem Verkauf">
+      <a class="value-case" href="/projektentwicklung/#verkauf" aria-label="Baurecht vor dem Verkauf – mehr zur Entwicklung vor einem Verkauf">
         <div class="value-case-name">Baurecht vor dem Verkauf</div>
         <h3>Zusätzliches Baurecht sichern</h3>
         <div class="value-case-diagram"><svg viewBox="0 0 340 158" role="img" aria-label="Vorher-Nachher-Schema eines Grundstücks mit zusätzlich vorbereitetem Baurecht"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><text x="10" y="13">Vorher</text><text x="198" y="13">Nachher</text><path d="M10 25H142V142H10Z M45 99H107V134H45Z M73 134V142 M4 149H148"/><path d="M198 25H330V142H198Z M233 99H295V134H233Z M261 134V142 M192 149H336"/><path class="value-new-volume" d="M232 37H296V78H232Z"/><path class="value-new-boundary" d="M198 87H330"/><path class="value-arrow" d="M153 82H187 M180 76l7 6-7 6"/></g></svg></div>
@@ -180,7 +198,7 @@
         <dl class="value-comparison"><div><dt>Vorher</dt><dd data-count-euro>1.000.000 €</dd></div><div><dt>Nachher</dt><dd data-count-euro>1.300.000 €</dd></div></dl>
         <div class="value-delta"><span>Brutto-Differenz vor Investitionskosten</span><strong data-count-euro>+300.000 €</strong><small>+30 % brutto gegenüber dem Ausgangswert</small></div>
       </a>
-      <a class="value-case" href="nachverdichtung.html" aria-label="Nachverdichtung – zusätzlichen Baukörper realisieren">
+      <a class="value-case" href="/nachverdichtung/" aria-label="Nachverdichtung – zusätzlichen Baukörper realisieren">
         <div class="value-case-name">Nachverdichtung</div>
         <h3>Zusätzlichen Baukörper realisieren</h3>
         <div class="value-case-diagram"><svg viewBox="0 0 340 158" role="img" aria-label="Vorher-Nachher-Schema eines Grundstücks mit zusätzlichem Wohngebäude"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><text x="10" y="13">Vorher</text><text x="198" y="13">Nachher</text><path d="M10 25H142V142H10Z M45 99H107V134H45Z M73 134V142 M4 149H148"/><path d="M198 25H330V142H198Z M233 99H295V134H233Z M261 134V142 M192 149H336"/><path class="value-new-volume value-built-volume" d="M230 37H298V78H230Z"/><path d="M242 47H255V60H242Z M273 47H286V60H273Z"/><path class="value-arrow" d="M153 82H187 M180 76l7 6-7 6"/></g></svg></div>
@@ -188,7 +206,7 @@
         <dl class="value-comparison"><div><dt>Vorher</dt><dd data-count-euro>1.000.000 €</dd></div><div><dt>Nachher</dt><dd data-count-euro>1.800.000 €</dd></div></dl>
         <div class="value-delta"><span>Brutto-Differenz vor Investitionskosten</span><strong data-count-euro>+800.000 €</strong><small>+80 % brutto gegenüber dem Ausgangswert</small></div>
       </a>
-      <a class="value-case" href="aufstockung.html" aria-label="Dachgeschossausbau – neue Wohnfläche im Bestand schaffen">
+      <a class="value-case" href="/aufstockung/" aria-label="Dachgeschossausbau – neue Wohnfläche im Bestand schaffen">
         <div class="value-case-name">Dachgeschossausbau</div>
         <h3>Neue Wohnfläche im Bestand schaffen</h3>
         <div class="value-case-diagram"><svg viewBox="0 0 340 158" role="img" aria-label="Vorher-Nachher-Schema eines Mehrfamilienhauses mit ausgebautem Dachgeschoss"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><text x="10" y="13">Vorher</text><text x="198" y="13">Nachher</text><path d="M24 66H128V140H24Z M24 66L76 30L128 66 M39 83H55V99H39Z M68 83H84V99H68Z M97 83H113V99H97Z M39 110H55V126H39Z M68 110H84V126H68Z M97 110H113V126H97Z M18 146H134"/><path d="M212 66H316V140H212Z M227 83H243V99H227Z M256 83H272V99H256Z M285 83H301V99H285Z M227 110H243V126H227Z M256 110H272V126H256Z M285 110H301V126H285Z M206 146H322"/><path class="value-new-volume" d="M212 66L264 30L316 66Z"/><path d="M228 57V43H251V57 M277 57V43H300V57"/><path class="value-arrow" d="M153 82H187 M180 76l7 6-7 6"/></g></svg></div>
@@ -265,7 +283,7 @@
       <p><b>Elbhaus Projektentwicklung GmbH</b><br>Barmbeker Str. 142<br>22299 Hamburg</p>
       <p><a href="tel:+494074074178">040 740 741 78</a><br><a href="mailto:info@elbhaus-projekt.de">info@elbhaus-projekt.de</a></p>
     </div>
-    <form data-contact-form action="contact.php" method="post" aria-label="Anfrage zur Potenzialprüfung">
+    <form data-contact-form action="./contact.php" method="post" aria-label="Anfrage zur Potenzialprüfung">
       <div class="form-honeypot" aria-hidden="true">
         <label for="contact-website">Website</label>
         <input id="contact-website" name="website" tabindex="-1" autocomplete="off">
@@ -290,7 +308,7 @@
         <label for="contact-message">Ihre Nachricht <span class="field-optional">(optional)</span></label>
         <textarea id="contact-message" name="nachricht" placeholder="Kurze Beschreibung des Objekts und Ihrer Ziele" maxlength="4000"></textarea>
       </div>
-      <label class="check"><input name="datenschutz" type="checkbox" required> <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> zur Kenntnis genommen. <span aria-hidden="true">*</span></span></label>
+      <label class="check"><input name="datenschutz" type="checkbox" required> <span>Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> zur Kenntnis genommen. <span aria-hidden="true">*</span></span></label>
       <button class="submit" type="submit">Objekt prüfen lassen</button>
       <p class="form-explanation">* Pflichtfelder. Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.</p>
       <p class="form-status" role="status" aria-live="polite"></p>
@@ -303,7 +321,7 @@
   <div class="wrap">
     <div class="footer-modern-main">
       <div class="footer-modern-brand">
-        <img class="footer-logo" src="images/logo.png" alt="Elbhaus Projektentwicklung" loading="lazy" width="1755" height="804">
+        <img class="footer-logo" src="./images/logo.png" alt="Elbhaus Projektentwicklung" loading="lazy" width="1755" height="804">
       </div>
       <div class="footer-modern-address">
         <p><b>Elbhaus Projektentwicklung GmbH</b><br>Barmbeker Str. 142<br>22299 Hamburg</p>
@@ -313,14 +331,14 @@
         <p>E-Mail<br><a href="mailto:info@elbhaus-projekt.de">info@elbhaus-projekt.de</a></p>
       </div>
       <nav class="footer-modern-nav" aria-label="Footernavigation">
-      <a href="index.html">Elbhaus</a>
-      <a href="projektentwicklung.html">Projektentwicklung</a>
-      <a href="machbarkeitsstudie.html">Machbarkeitsstudie</a>
-      <a href="nachverdichtung.html">Nachverdichtung</a>
-      <a href="aufstockung.html">Aufstockung</a>
-      <a href="kontakt.html">Kontakt</a>
+      <a href="/">Elbhaus</a>
+      <a href="/projektentwicklung/">Projektentwicklung</a>
+      <a href="/machbarkeitsstudie/">Machbarkeitsstudie</a>
+      <a href="/nachverdichtung/">Nachverdichtung</a>
+      <a href="/aufstockung/">Aufstockung</a>
+      <a href="/kontakt/">Kontakt</a>
       </nav>
     </div>
   </div>
-  <div class="footer-bottom footer-modern-bottom"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutzerklärung</a></div>
-</footer><script src="js/main.js?v=20261009-neubau-mieten-position"></script></body></html>
+  <div class="footer-bottom footer-modern-bottom"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutzerklärung</a></div>
+</footer><script src="./js/main.js?v=20261009-lokale-vorschau"></script></body></html>
