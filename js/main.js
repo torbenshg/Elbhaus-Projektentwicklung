@@ -81,6 +81,31 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
 // Rotate the original line drawing as one unit on the actual button events.
 (() => {
   const initializeArrowButtons = () => {
+    // Open footer links on a deliberate first tap, without intercepting scrolling.
+    document.querySelectorAll('.footer-modern-nav a').forEach(link => {
+      let tap;
+      link.addEventListener('touchstart', event => {
+        if (event.touches.length !== 1) { tap = null; return; }
+        const touch = event.touches[0];
+        tap = {x: touch.clientX, y: touch.clientY, time: Date.now(), scroll: window.scrollY};
+      }, {passive: true});
+      link.addEventListener('touchmove', event => {
+        if (!tap || event.touches.length !== 1) { tap = null; return; }
+        const touch = event.touches[0];
+        if (Math.hypot(touch.clientX - tap.x, touch.clientY - tap.y) > 10) tap = null;
+      }, {passive: true});
+      link.addEventListener('touchcancel', () => { tap = null; }, {passive: true});
+      link.addEventListener('touchend', event => {
+        const touch = event.changedTouches[0];
+        const valid = tap && touch && !event.touches.length && Date.now() - tap.time < 600
+          && Math.abs(window.scrollY - tap.scroll) < 10
+          && Math.hypot(touch.clientX - tap.x, touch.clientY - tap.y) <= 10;
+        tap = null;
+        if (!valid || event.defaultPrevented) return;
+        event.preventDefault();
+        window.location.assign(link.href);
+      }, {passive: false});
+    });
     document.querySelectorAll('.owner-hero .primary-cta').forEach(button => {
       let releaseTimer;
       const activate = () => {
