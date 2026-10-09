@@ -81,6 +81,39 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
 // Rotate the original line drawing as one unit on the actual button events.
 (() => {
   const initializeArrowButtons = () => {
+    document.querySelectorAll('.owner-hero .primary-cta').forEach(button => {
+      let releaseTimer;
+      const activate = () => {
+        clearTimeout(releaseTimer);
+        button.classList.add('is-touch-active');
+        button.style.setProperty('background-color', '#12334b', 'important');
+        button.style.setProperty('color', '#fff', 'important');
+      };
+      const reset = () => {
+        clearTimeout(releaseTimer);
+        button.classList.remove('is-touch-active');
+        button.style.removeProperty('background-color');
+        button.style.removeProperty('color');
+      };
+      const release = () => {
+        clearTimeout(releaseTimer);
+        releaseTimer = window.setTimeout(reset, 500);
+      };
+      button.addEventListener('mouseenter', activate);
+      button.addEventListener('mouseleave', reset);
+      button.addEventListener('pointerenter', event => {
+        if (event.pointerType !== 'touch') activate();
+      });
+      button.addEventListener('pointerleave', event => {
+        if (event.pointerType !== 'touch') reset();
+      });
+      button.addEventListener('pointerdown', activate, {passive: true});
+      button.addEventListener('pointerup', release, {passive: true});
+      button.addEventListener('pointercancel', release, {passive: true});
+      button.addEventListener('touchstart', activate, {passive: true});
+      button.addEventListener('touchend', release, {passive: true});
+      button.addEventListener('touchcancel', release, {passive: true});
+    });
     document.querySelectorAll('.link-arrow').forEach(arrow => {
       const button = arrow.closest('a, button');
       if (!button) return;
@@ -338,7 +371,7 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
     garageBase: '<path d="M18 101H162 M27 59H73V101H27Z M81 59H127V101H81Z M35 70H65V101 M89 70H119V101 M137 76H158L164 88V101H132V88Z M139 88H160 M139 101a6 6 0 0 0 12 0 M150 101a6 6 0 0 0 12 0"/>',
     otherBase: '<path d="M15 102H165 M22 43H84V102H22Z M36 58H50V72H36Z M57 58H71V72H57Z M42 102V81H64V102 M98 27H154V102H98Z M111 43H123V57H111Z M132 43H144V57H132Z M111 68H123V82H111Z M132 68H144V82H132Z"/>',
     unclearChoice: '<rect x="9" y="11" width="162" height="98"/><text class="finder-symbol" x="90" y="76" text-anchor="middle" fill="currentColor" stroke="none" font-family="Montserrat, Arial, sans-serif" font-size="45" font-weight="200">§</text>',
-    unclearPotentialChoice: '<rect x="9" y="11" width="162" height="98"/><circle cx="80" cy="54" r="24"/><path d="M97 71L120 94"/>',
+    unclearPotentialChoice: '<rect x="9" y="11" width="162" height="98"/><circle cx="84" cy="54" r="14"/><path d="M94 64L108 78"/>',
     sellChoice: '<rect x="9" y="11" width="162" height="98"/><text class="finder-symbol" x="90" y="76" text-anchor="middle" fill="currentColor" stroke="none" font-family="Montserrat, Arial, sans-serif" font-size="45" font-weight="200">€</text>',
     efh: '<path d="M9 11H171V109H9Z M20 69V43L47 24L74 43V69Z M20 43H74 M37 69V51H56V69 M16 76H79"/><path class="finder-potential" d="M105 34H157V82H105Z"/>',
     mfh: '<path d="M35 42H145V108H35Z M30 112H150 M51 57H65V71H51Z M83 57H97V71H83Z M115 57H129V71H115Z M51 82H65V96H51Z M115 82H129V96H115Z M82 108V83H98V108"/><path class="finder-potential" d="M35 42V23L90 11L145 23V42Z"/>',
@@ -350,7 +383,7 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
     attic: '<path d="M29 50H151V108H29Z M24 108H156 M47 66H62V81H47Z M82.5 66H97.5V81H82.5Z M118 66H133V81H118Z"/><path class="finder-potential" d="M29 50L90 14L151 50Z M76 36V23H104V36"/>',
     old: '<path d="M10 105H170 M22 58H75V105H22Z M34 72H48V86H34Z"/><path class="finder-potential" d="M98 24H158V105H98Z M111 39H126V54H111Z M135 39H150V54H135Z"/>',
     sell: '<path d="M9 11H171V109H9Z M22 69H76V97H22Z"/><path class="finder-potential" d="M105 29H158V71H105Z M15 82H165"/><path d="M138 17l7 7 14-16"/>',
-    flat: '<path d="M22 49H158V108H22Z M17 108H163 M41 65H56V80H41Z M72 65H87V80H72Z M123 65H138V80H123Z"/><path class="finder-potential" d="M46 20H134V49H46Z"/>',
+    flat: '<path d="M22 50H158V108H22Z M17 108H163 M42 66H57V81H42Z M82.5 66H97.5V81H82.5Z M123 66H138V81H123Z"/><path class="finder-potential" d="M46 21H134V50H46Z"/>',
     yard: '<path d="M9 11H171V109H9Z M19 23H161V40H19Z M19 40H37V97H19Z M143 40H161V97H143Z"/><path class="finder-potential" d="M68 60H112V86H68Z"/>',
     gap: '<path d="M10 106H170 M17 41H62V106H17Z M119 27H164V106H119Z"/><path class="finder-potential" d="M68 54H113V106H68Z"/>',
     unclear: '<path d="M9 11H171V109H9Z M21 73H75V97H21Z"/><path class="finder-potential" d="M102 29H157V73H102Z M9 82H171"/><path d="M127 45v12 M127 65v1"/>',
