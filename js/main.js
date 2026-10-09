@@ -1,4 +1,75 @@
+// Keep the illustration highlight independent of the linked card's navigation.
+(() => {
+  const initializeScenarioHover = () => {
+    document.querySelectorAll('.value-cases-grid .value-case').forEach(card => {
+      const shapes = card.querySelectorAll('.value-new-volume, .value-new-boundary');
+      const highlight = () => {
+        shapes.forEach(shape => {
+          shape.style.setProperty('stroke-dasharray', 'none', 'important');
+          shape.style.setProperty('stroke-width', '2.4', 'important');
+          if (shape.classList.contains('value-new-volume')) {
+            shape.style.setProperty('fill', 'rgba(18, 51, 75, 0.25)', 'important');
+          }
+        });
+      };
+      const reset = () => {
+        shapes.forEach(shape => {
+          shape.style.removeProperty('stroke-dasharray');
+          shape.style.removeProperty('stroke-width');
+          shape.style.removeProperty('fill');
+        });
+      };
+      card.addEventListener('mouseenter', highlight);
+      card.addEventListener('pointerenter', highlight);
+      card.addEventListener('focus', highlight);
+      card.addEventListener('pointerdown', highlight);
+      card.addEventListener('mouseleave', reset);
+      card.addEventListener('pointerleave', reset);
+      card.addEventListener('blur', reset);
+      card.addEventListener('pointercancel', reset);
+    });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeScenarioHover, { once: true });
+  } else {
+    initializeScenarioHover();
+  }
+})();
+
+
 // Gemeinsame Navigation und Anfrage für alle Seiten.
+// Rotate the original line drawing as one unit on the actual button events.
+(() => {
+  const initializeArrowButtons = () => {
+    document.querySelectorAll('.link-arrow').forEach(arrow => {
+      const button = arrow.closest('a, button');
+      if (!button) return;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      arrow.style.setProperty('transition', reducedMotion ? 'none' : 'transform 280ms ease', 'important');
+      const show = () => arrow.style.setProperty('transform', 'translate(2px, -2px) rotate(-45deg)', 'important');
+      const reset = () => arrow.style.setProperty('transform', 'translate(0, 0) rotate(0deg)', 'important');
+      button.addEventListener('pointerenter', event => {
+        if (event.pointerType !== 'touch') show();
+      });
+      button.addEventListener('mouseenter', show);
+      button.addEventListener('focus', show);
+      button.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'touch') arrow.style.setProperty('transition', 'none', 'important');
+        show();
+      });
+      button.addEventListener('pointerleave', reset);
+      button.addEventListener('mouseleave', reset);
+      button.addEventListener('blur', reset);
+      button.addEventListener('pointercancel', reset);
+    });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeArrowButtons, { once: true });
+  } else {
+    initializeArrowButtons();
+  }
+})();
+
 (function () {
   const menu = document.querySelector('header .menu');
   const navigation = document.getElementById('primary-nav');
