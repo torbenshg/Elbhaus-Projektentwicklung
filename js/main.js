@@ -1,3 +1,43 @@
+// Neubau-Angebotsmieten: Balken und Beschriftung wachsen gemeinsam.
+document.querySelectorAll('.rent-chart').forEach(chart => {
+  const groups = Array.from(chart.querySelectorAll('.rent-bar-group')).map(group => ({
+    value: Number(group.dataset.value),
+    bar: group.querySelector('.rent-bar'),
+    label: group.querySelector('.rent-amount')
+  }));
+  const format = value => value.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const paint = progress => groups.forEach(({value, bar, label}) => {
+    const current = value * progress;
+    const height = current / 30 * 300;
+    bar.setAttribute('y', 344 - height);
+    bar.setAttribute('height', height);
+    label.setAttribute('y', 330 - height);
+    label.textContent = format(current);
+  });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  paint(0);
+  const animate = () => {
+    let start;
+    const tick = time => {
+      if (start === undefined) start = time;
+      const fraction = Math.min(1, (time - start) / 2400);
+      const progress = fraction < .5 ? 4 * fraction ** 3 : 1 - (-2 * fraction + 2) ** 3 / 2;
+      paint(progress);
+      if (fraction < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (!('IntersectionObserver' in window)) { animate(); return; }
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      observer.disconnect();
+      animate();
+    }
+  }, {threshold: .22});
+  observer.observe(chart);
+});
+
+
 // Keep the illustration highlight independent of the linked card's navigation.
 (() => {
   const initializeScenarioHover = () => {

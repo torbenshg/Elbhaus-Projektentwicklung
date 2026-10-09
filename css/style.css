@@ -2269,3 +2269,16 @@ header.is-scrolled nav a,header.is-scrolled .menu{color:var(--text)}
 @media(prefers-reduced-motion:reduce){
   header,header nav a,header .menu{transition:none}
 }
+
+/* Ruhige Marktgrafik im gleichen Raster wie die Projektentwicklung. */
+.project-rents { border-top: 1px solid var(--soft-line); padding: 72px 0 60px; }
+.project-rents h2 { margin: 12px 0 18px; }
+.rent-unit { font-size: 14px; color: #666; margin: 0; }
+.rent-chart-scroll { overflow-x: auto; margin-top: 28px; }
+.rent-chart { display: block; width: 100%; min-width: 650px; height: auto; overflow: visible; }
+.rent-bar { fill: #303030; }
+.rent-amount { fill: #303030; font-size: 29px; font-weight: 400; }
+.rent-year { fill: #777; font-size: 15px; }
+.rent-source { font-size: 11px; line-height: 1.6; color: #777; margin: 18px 0 0; }
+.rent-source a { color: inherit; text-underline-offset: 3px; }
+@media (max-width: 700px) { .project-rents { padding: 44px 0 38px; } }
