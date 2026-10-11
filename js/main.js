@@ -959,3 +959,74 @@ document.addEventListener('keydown', event => {
     if (!event.target.closest('[data-service-block]')) blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, false); });
   });
 })();
+
+
+// Three identical sets allow invisible rebasing and endless native swiping.
+(() => {
+  document.querySelectorAll('.scenario-slider').forEach(slider => {
+    const track = slider.querySelector('.scenario-slider-track');
+    const originals = Array.from(track.querySelectorAll('.scenario-slide'));
+    const controls = slider.querySelector('.scenario-slider-controls');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const copy = slide => {
+      const clone = slide.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.setAttribute('tabindex', '-1');
+      clone.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+      return clone;
+    };
+    track.prepend(...originals.map(copy));
+    track.append(...originals.map(copy));
+    let cycle = 0, step = 0, frame = 0, animating = false;
+    const queue = [];
+    const measure = () => {
+      step = originals[1].offsetLeft - originals[0].offsetLeft;
+      cycle = step * originals.length;
+    };
+    const normalize = () => {
+      if (!cycle || animating) return;
+      const left = track.scrollLeft;
+      if (left < cycle * .5 || left > cycle * 1.5) {
+        track.scrollLeft = cycle * .5 + (((left - cycle * .5) % cycle) + cycle) % cycle;
+      }
+    };
+    const animateNext = () => {
+      if (animating || !queue.length) return;
+      normalize();
+      const direction = queue.shift();
+      const start = track.scrollLeft;
+      const target = (Math.round(start / step) + direction) * step;
+      if (reduced.matches) {track.scrollLeft = target;normalize();animateNext();return;}
+      animating = true;
+      let started;
+      const tick = time => {
+        if (started === undefined) started = time;
+        const progress = Math.min(1, (time - started) / 780);
+        const eased = progress * progress * (3 - 2 * progress);
+        track.scrollLeft = start + (target - start) * eased;
+        if (progress < 1) frame = requestAnimationFrame(tick);
+        else {animating = false;normalize();animateNext();}
+      };
+      frame = requestAnimationFrame(tick);
+    };
+    const move = direction => {queue.push(direction);animateNext();};
+    const interrupt = () => {cancelAnimationFrame(frame);animating = false;queue.length = 0;normalize();};
+    controls.querySelector('.scenario-prev').addEventListener('click', () => move(-1));
+    controls.querySelector('.scenario-next').addEventListener('click', () => move(1));
+    track.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {event.preventDefault();move(event.key === 'ArrowLeft' ? -1 : 1);}
+    });
+    ['pointerdown', 'touchstart', 'wheel'].forEach(type => track.addEventListener(type, interrupt, {passive:true}));
+    track.addEventListener('scroll', normalize, {passive:true});
+    window.addEventListener('resize', () => {
+      interrupt();
+      const index = step ? track.scrollLeft / step : originals.length;
+      measure();
+      track.scrollLeft = index * step;
+      normalize();
+    });
+    measure();
+    track.scrollLeft = cycle;
+    controls.hidden = false;
+  });
+})();

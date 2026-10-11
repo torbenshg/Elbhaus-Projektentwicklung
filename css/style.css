@@ -2464,6 +2464,36 @@ main > section.editorial-hero + section{border-top:0!important}
  .editorial-hero-vertical{display:none}
 }
 
+/* The existing schematic cards, only with less space and in a swipeable row. */
+.typical-situations.scenario-gallery{background:#fff;padding:52px 0 38px;overflow:hidden}
+.scenario-gallery h2{margin:0 0 30px}
+.scenario-slider{position:relative;--slide-width:320px;--slide-gap:20px;--gallery-gutter:max(24px,calc((100vw - 1180px)/2))}
+.scenario-slider-track{position:relative;display:flex;gap:var(--slide-gap);overflow-x:auto;padding-inline:var(--gallery-gutter);overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:auto}
+.scenario-slider-track::-webkit-scrollbar{display:none}
+.scenario-gallery .infill-case.scenario-slide{display:block;text-decoration:none;flex:0 0 var(--slide-width);width:var(--slide-width);height:var(--slide-width);box-sizing:border-box;border:1px solid var(--soft-line);padding:16px;-webkit-tap-highlight-color:transparent}
+.scenario-gallery .infill-case-diagram{height:145px;margin-bottom:16px}
+.scenario-gallery .infill-case-diagram svg{width:240px;max-width:100%;margin:auto}
+.scenario-gallery .infill-case h3{font-size:20px;font-weight:400;margin:0 0 10px}
+.scenario-gallery .infill-case p{font-size:14px;line-height:1.6;margin:0}
+.scenario-slider-track:focus-visible{outline:1px solid var(--blue);outline-offset:-2px}
+.scenario-gallery .scenario-slide:focus-visible{outline:1px solid var(--blue);outline-offset:-2px}
+.scenario-gallery .infill-case.is-touch-active .infill-new-volume{fill:rgba(18,51,75,.08);stroke-dasharray:5 4;stroke-width:1.5;filter:none}
+@media(hover:hover){.scenario-gallery .infill-case:hover .infill-new-volume{fill:rgba(18,51,75,.24);stroke-dasharray:none;stroke-width:2.4;filter:drop-shadow(0 3px 3px rgba(18,51,75,.18))}}
+@media(hover:none){.scenario-gallery .infill-case:hover .infill-new-volume{fill:rgba(18,51,75,.08);stroke-dasharray:5 4;stroke-width:1.5;filter:none}}
+.scenario-slider-controls{position:absolute;inset:0;pointer-events:none}
+.scenario-slider-controls[hidden]{display:none}
+.scenario-slider-controls button{position:absolute;top:calc(50% - 22px);width:44px;height:44px;padding:0;border:1px solid var(--soft-line);border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;cursor:pointer;pointer-events:auto;transition:background .2s}
+.scenario-slider-controls button:hover{background:#f3f3ef}
+.scenario-slider-controls button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.scenario-prev svg{transform:rotate(180deg)}
+.scenario-prev{left:6px}.scenario-next{right:6px}
+@media(max-width:760px){
+ .typical-situations.scenario-gallery{padding:40px 0 30px}
+ .scenario-gallery h2{margin-bottom:24px}
+ .scenario-slider{--gallery-gutter:20px;--slide-gap:16px}
+ .scenario-gallery .infill-case-diagram{height:135px}
+}
+@media(prefers-reduced-motion:reduce){.scenario-slider-controls button{transition:none}}
 
 /* Montserrat und leichte Überschriften entsprechend der gewählten Vorschau. */
 body{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.7}
