@@ -883,3 +883,45 @@ document.addEventListener('keydown', event => {
     document.querySelectorAll('summary.accordion-pointer-focus').forEach(summary => summary.classList.remove('accordion-pointer-focus'));
   }
 }, true);
+
+
+(function () {
+  const blocks = Array.from(document.querySelectorAll('[data-service-block]'));
+  if (!blocks.length) return;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  function setOpen(block, open) {
+    block.classList.toggle('is-open', open);
+    const panel = block.querySelector('.service-reveal-panel');
+    panel.setAttribute('aria-hidden', String(!open));
+    panel.inert = !open;
+  }
+  function openOnly(block) {
+    blocks.forEach(other => { if (other !== block) { other.dataset.pinned = ''; setOpen(other, false); } });
+    setOpen(block, true);
+  }
+  blocks.forEach(block => {
+    const toggle = block.querySelector('.service-reveal-toggle');
+    block.addEventListener('pointerenter', () => { if (finePointer.matches) openOnly(block); });
+    block.addEventListener('pointerleave', () => {
+      if (finePointer.matches && block.dataset.pinned !== 'true' && !block.contains(document.activeElement)) setOpen(block, false);
+    });
+    block.addEventListener('focusin', () => openOnly(block));
+    block.addEventListener('focusout', event => {
+      if (!block.contains(event.relatedTarget) && block.dataset.pinned !== 'true') setOpen(block, false);
+    });
+    block.addEventListener('click', event => {
+      // Mouse and keyboard follow the link immediately; touch first reveals it.
+      if (!finePointer.matches && event.detail !== 0 && block.dataset.pinned !== 'true') {
+        event.preventDefault();
+        openOnly(block);
+        block.dataset.pinned = 'true';
+      }
+    });
+    block.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { block.dataset.pinned = ''; toggle.focus(); setOpen(block, false); }
+    });
+  });
+  document.addEventListener('pointerdown', event => {
+    if (!event.target.closest('[data-service-block]')) blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, false); });
+  });
+})();
