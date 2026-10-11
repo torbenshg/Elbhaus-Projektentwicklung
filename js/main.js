@@ -977,6 +977,20 @@ document.addEventListener('keydown', event => {
     };
     track.prepend(...originals.map(copy));
     track.append(...originals.map(copy));
+    // Observe the graphic itself, including clipping by the horizontal track.
+    const mobile = window.matchMedia('(max-width: 760px)');
+    const visibleGraphics = new Map();
+    const refreshVisibility = () => {
+      visibleGraphics.forEach((fullyVisible, graphic) => {
+        graphic.closest('.scenario-slide').classList.toggle('is-fully-visible', mobile.matches && fullyVisible);
+      });
+    };
+    const visibilityObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => visibleGraphics.set(entry.target, entry.isIntersecting && entry.intersectionRatio >= 1));
+      refreshVisibility();
+    }, {threshold:[0,1]});
+    track.querySelectorAll('.infill-case-diagram svg').forEach(graphic => visibilityObserver.observe(graphic));
+    mobile.addEventListener('change', refreshVisibility);
     let contactPoint = null, contactSlide = null;
     const clearContact = () => {
       if (contactSlide) contactSlide.classList.remove('is-finger-contact');

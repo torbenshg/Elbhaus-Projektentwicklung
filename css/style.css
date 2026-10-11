@@ -2493,6 +2493,7 @@ main > section.editorial-hero + section{border-top:0!important}
  .scenario-gallery h2{margin-bottom:24px}
  .scenario-slider{--gallery-gutter:20px;--slide-gap:16px}
  .scenario-gallery .infill-case-diagram{height:135px}
+ .scenario-gallery .infill-case.scenario-slide.is-fully-visible .infill-new-volume{fill:rgba(18,51,75,.24);stroke-dasharray:none;stroke-width:2.4;filter:drop-shadow(0 3px 3px rgba(18,51,75,.18))}
 }
 @media(prefers-reduced-motion:reduce){.scenario-slider-controls button{transition:none}}
 
