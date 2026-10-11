@@ -2475,12 +2475,18 @@ h1,h2,h3{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-weight:300;let
  .editorial-hero-label{margin-bottom:16px}
 }
 .editorial-hero-label{font-size:15px;font-weight:400;letter-spacing:0}
+header nav .menu-instagram{display:none}
+.home-footer-modern .footer-instagram{display:none}
 @media(max-width:1100px){
  html.js header nav{display:flex;position:fixed;inset:0;width:100%;height:100dvh;max-height:none;box-sizing:border-box;z-index:2;background:var(--blue);border:0;padding:124px 20px 40px;gap:22px;align-items:flex-start;justify-content:flex-start;clip-path:inset(0 0 100% 0);visibility:hidden;pointer-events:none;overflow-y:auto;overscroll-behavior:contain;transition:clip-path .55s cubic-bezier(.22,.61,.36,1),visibility 0s .55s}
  html.js header nav.open{clip-path:inset(0);visibility:visible;pointer-events:auto;transition:clip-path .55s cubic-bezier(.22,.61,.36,1),visibility 0s}
  html.js header nav::before{content:"";position:absolute;top:76px;left:20px;right:20px;height:1px;background:rgba(255,255,255,.7)}
  html.js header nav a,html.js .page-home header:not(.is-scrolled) nav a{display:block;width:max-content;max-width:100%;margin:0;padding:0;color:#fff!important;font-size:clamp(22px,6.2vw,28px);line-height:1.4;font-weight:400;letter-spacing:-.025em;background:transparent!important;border:0;text-decoration:none;white-space:normal}
  html.js header nav a:hover,html.js header nav a.active,html.js header nav a:focus-visible{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+ html.js header nav a[data-menu-secondary],html.js .page-home header:not(.is-scrolled) nav a[data-menu-secondary]{font-size:18px;font-weight:300}
+ html.js header nav a[data-menu-secondary]:nth-of-type(6){margin-top:28px}
+ html.js header nav a.menu-instagram,html.js .page-home header:not(.is-scrolled) nav a.menu-instagram{display:flex;align-items:center;justify-content:center;align-self:flex-end;margin-top:auto;width:44px;min-height:44px;flex-shrink:0;text-decoration:none}
+ header nav .menu-instagram svg{display:block;width:24px;height:24px}
  html.js header .menu[aria-expanded="true"]{position:fixed;top:14px;right:20px;z-index:3;color:#fff!important}
  html.js header .menu[aria-expanded="true"] .menu-icon{width:28px}
  html.js header .menu[aria-expanded="true"] .menu-icon > span{width:28px;height:1px}
@@ -2523,6 +2529,17 @@ details > summary.accordion-pointer-focus:focus{outline:none!important;box-shado
 .faq-list summary > span:first-child{min-width:0}
 @media(prefers-reduced-motion:reduce){.scope-item .scope-chevron,.faq-list .scope-chevron{transition:none}}
 @media(max-width:760px){
+ .home-footer-modern .footer-modern-main{grid-template-columns:1fr;gap:28px;padding-bottom:0}
+ .home-footer-modern .footer-modern-brand,.home-footer-modern .footer-modern-address,.home-footer-modern .footer-modern-contact,.home-footer-modern .footer-modern-nav{grid-column:1}
+ .home-footer-modern .footer-modern-nav{margin-top:12px;border-top:1px solid var(--text)}
+ .home-footer-modern .footer-modern-nav a:nth-child(n){font-size:clamp(28px,7.5vw,34px);line-height:1.25;font-weight:300;letter-spacing:-.025em;text-align:left;padding:42px 0;margin:0;border:0;border-bottom:1px solid var(--text);background:transparent;color:var(--text)}
+ .home-footer-modern .footer-modern-nav a[aria-current="page"],.home-footer-modern .footer-modern-nav a:hover,.home-footer-modern .footer-modern-nav a:focus-visible{background:transparent;color:var(--text);text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:1px}
+ .home-footer-modern .footer-modern-bottom{border-top:0;width:calc(100% - 40px);margin:42px auto 0;padding:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:14px;font-size:16px;line-height:1.5;color:#000}
+ .home-footer-modern .footer-modern-bottom > a{color:#000;text-decoration:none;background:transparent}
+ .home-footer-modern .footer-modern-bottom a[aria-current="page"]{background:transparent;color:#000;text-decoration:underline;text-underline-offset:4px}
+ .home-footer-modern .footer-modern-bottom > a:hover,.home-footer-modern .footer-modern-bottom > a:focus-visible{text-decoration:underline;text-underline-offset:4px}
+ .home-footer-modern .footer-modern-bottom .footer-instagram{display:flex;align-items:center;justify-content:flex-start;width:44px;min-height:44px;margin-top:12px;color:#000}
+ .home-footer-modern .footer-instagram svg{display:block;width:24px;height:24px}
  body,.prose,.knowledge-prose{font-size:16px}
  .intro-text-only p{font-size:16px;line-height:1.8;margin-bottom:22px}
  .service-intro-media.intro-text-only,.feasibility-intro-media.intro-text-only{margin-bottom:40px}
