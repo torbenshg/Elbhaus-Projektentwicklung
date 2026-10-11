@@ -882,6 +882,27 @@ document.addEventListener('keydown', event => {
 }, true);
 
 // Each divider follows only its two neighboring scenarios.
+(() => {
+  const rules = Array.from(document.querySelectorAll('[data-mobile-scroll-rule],[data-mobile-rule-top],[data-mobile-rule-bottom]'));
+  const mobile = window.matchMedia('(max-width:760px)');
+  const reduced = window.matchMedia('(prefers-reduced-motion:reduce)');
+  let pending = false;
+  const draw = () => {
+    pending = false;
+    rules.forEach(rule => {
+      const bounds = rule.getBoundingClientRect();
+      const position = rule.hasAttribute('data-mobile-rule-bottom') ? bounds.bottom : bounds.top;
+      const progress = !mobile.matches || reduced.matches ? 1 : Math.max(0, Math.min(1, (window.innerHeight * .9 - position) / (window.innerHeight * .45)));
+      rule.style.setProperty('--mobile-rule-progress', String(progress));
+    });
+  };
+  const schedule = () => {if (!pending) {pending = true;requestAnimationFrame(draw);}};
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', schedule, {passive:true});
+  window.addEventListener('pageshow', schedule);
+  draw();
+})();
+
 document.querySelectorAll('.value-cases-grid').forEach(grid => {
   const cards = Array.from(grid.querySelectorAll(':scope > .value-case'));
   if (cards.length !== 3) return;
