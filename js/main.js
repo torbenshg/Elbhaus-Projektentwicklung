@@ -803,6 +803,9 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
       const smooth = progress * progress * (3 - 2 * progress);
       section.style.setProperty('--crop', `${smooth * (phone.matches ? 20 : 36)}px`);
       section.style.setProperty('--rule-progress', String(smooth));
+      const horizontal = section.querySelector('.editorial-hero-horizontal');
+      const initialBar = Math.min(1, 24 / Math.max(24, horizontal.offsetWidth));
+      section.style.setProperty('--horizontal-progress', String(initialBar + (1 - initialBar) * smooth));
       const copy = section.querySelector('.editorial-hero-copy');
       section.style.setProperty('--header-copy-height', `${copy.getBoundingClientRect().height}px`);
     });

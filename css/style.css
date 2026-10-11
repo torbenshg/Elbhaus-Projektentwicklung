@@ -2442,7 +2442,7 @@ main > section.editorial-hero + section{border-top:0!important}
 .editorial-hero h1{font-size:clamp(36px,4.1vw,60px);line-height:1.15;font-weight:300;letter-spacing:-.035em;color:var(--text);margin:0;max-width:590px;text-align:left;text-wrap:balance;overflow-wrap:break-word}
 .editorial-hero-media{position:absolute;inset:0 0 0 50%;min-width:0;height:auto;overflow:hidden;clip-path:inset(var(--crop));will-change:clip-path}
 .editorial-hero-media img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:none!important}
-.editorial-hero-horizontal{position:absolute;bottom:0;left:max(48px,calc((100vw - 1200px)/2));right:max(48px,calc((100vw - 1200px)/2));height:1px;background:#c7ccce;transform:scaleX(var(--rule-progress));transform-origin:center;pointer-events:none}
+.editorial-hero-horizontal{position:absolute;bottom:0;left:max(48px,calc((100vw - 1200px)/2));right:max(48px,calc((100vw - 1200px)/2));height:1px;background:#c7ccce;transform:scaleX(var(--horizontal-progress,.04));transform-origin:center;pointer-events:none}
 .editorial-hero-vertical{position:absolute;bottom:0;top:0;left:50%;width:1px;background:#c7ccce;transform:scaleY(var(--rule-progress));transform-origin:center bottom;pointer-events:none}
 @media(max-width:1100px){
  .editorial-hero-copy{padding-left:32px;padding-right:34px}
@@ -2450,7 +2450,7 @@ main > section.editorial-hero + section{border-top:0!important}
  .editorial-hero h1{font-size:clamp(34px,4.4vw,52px)}
 }
 @media(max-width:760px) and (hover:none) and (pointer:coarse){
- .editorial-hero{height:auto!important;min-height:0;grid-template-columns:1fr;grid-template-rows:clamp(320px,60svh,560px) auto}
+ .editorial-hero{height:auto!important;min-height:0;grid-template-columns:1fr;grid-template-rows:max(360px,70svh) auto}
  .editorial-hero-copy{grid-column:1;grid-row:2;padding:28px 20px 40px;min-height:0}
  .editorial-hero h1{font-size:clamp(33px,7.5vw,46px);line-height:1.16;max-width:620px}
  .editorial-hero-label{font-size:13px;margin-bottom:18px}
@@ -2459,7 +2459,7 @@ main > section.editorial-hero + section{border-top:0!important}
  .editorial-hero-vertical{display:none}
 }
 @media(prefers-reduced-motion:reduce){
- .editorial-hero{--crop:0px!important;--rule-progress:1!important}
+ .editorial-hero{--crop:0px!important;--rule-progress:1!important;--horizontal-progress:1!important}
  .editorial-hero-media{will-change:auto}
  .editorial-hero-vertical{display:none}
 }
