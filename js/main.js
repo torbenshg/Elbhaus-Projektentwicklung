@@ -977,6 +977,32 @@ document.addEventListener('keydown', event => {
     };
     track.prepend(...originals.map(copy));
     track.append(...originals.map(copy));
+    let contactPoint = null, contactSlide = null;
+    const clearContact = () => {
+      if (contactSlide) contactSlide.classList.remove('is-finger-contact');
+      contactPoint = null;
+      contactSlide = null;
+    };
+    const highlightContact = () => {
+      if (!contactPoint) return;
+      const hit = document.elementFromPoint(contactPoint.x, contactPoint.y);
+      const card = hit && hit.closest('.scenario-slide');
+      const next = card && track.contains(card) ? card : null;
+      if (next === contactSlide) return;
+      if (contactSlide) contactSlide.classList.remove('is-finger-contact');
+      contactSlide = next;
+      if (contactSlide) contactSlide.classList.add('is-finger-contact');
+    };
+    const followTouch = event => {
+      const touch = event.touches[0];
+      if (!touch) {clearContact();return;}
+      contactPoint = {x:touch.clientX,y:touch.clientY};
+      highlightContact();
+    };
+    document.addEventListener('touchstart', followTouch, {passive:true});
+    document.addEventListener('touchmove', followTouch, {passive:true});
+    document.addEventListener('touchend', followTouch, {passive:true});
+    document.addEventListener('touchcancel', followTouch, {passive:true});
     let cycle = 0, step = 0, frame = 0, animating = false;
     const queue = [];
     const measure = () => {
@@ -1017,7 +1043,7 @@ document.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {event.preventDefault();move(event.key === 'ArrowLeft' ? -1 : 1);}
     });
     ['pointerdown', 'touchstart', 'wheel'].forEach(type => track.addEventListener(type, interrupt, {passive:true}));
-    track.addEventListener('scroll', normalize, {passive:true});
+    track.addEventListener('scroll', () => {normalize();highlightContact();}, {passive:true});
     window.addEventListener('resize', () => {
       interrupt();
       const index = step ? track.scrollLeft / step : originals.length;

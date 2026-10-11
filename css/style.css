@@ -2480,6 +2480,7 @@ main > section.editorial-hero + section{border-top:0!important}
 .scenario-gallery .infill-case.is-touch-active .infill-new-volume{fill:rgba(18,51,75,.08);stroke-dasharray:5 4;stroke-width:1.5;filter:none}
 @media(hover:hover){.scenario-gallery .infill-case:hover .infill-new-volume{fill:rgba(18,51,75,.24);stroke-dasharray:none;stroke-width:2.4;filter:drop-shadow(0 3px 3px rgba(18,51,75,.18))}}
 @media(hover:none){.scenario-gallery .infill-case:hover .infill-new-volume{fill:rgba(18,51,75,.08);stroke-dasharray:5 4;stroke-width:1.5;filter:none}}
+.scenario-gallery .infill-case.scenario-slide.is-finger-contact .infill-new-volume{fill:rgba(18,51,75,.24);stroke-dasharray:none;stroke-width:2.4;filter:drop-shadow(0 3px 3px rgba(18,51,75,.18))}
 .scenario-slider-controls{position:absolute;inset:0;pointer-events:none}
 .scenario-slider-controls[hidden]{display:none}
 .scenario-slider-controls button{position:absolute;top:calc(50% - 22px);width:44px;height:44px;padding:0;border:1px solid var(--soft-line);border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;cursor:pointer;pointer-events:auto;transition:background .2s}
