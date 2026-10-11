@@ -550,6 +550,21 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
   headBack.addEventListener('click', goBack);
   render();
 })();
+// Keep the link arrow turned throughout a touch gesture, including native scrolling.
+(function () {
+  let touchedLink = null;
+  const clear = () => {
+    if (touchedLink) touchedLink.classList.remove('is-finger-contact');
+    touchedLink = null;
+  };
+  document.addEventListener('touchstart', event => {
+    clear();
+    touchedLink = event.target.closest('.owner-study-cta, .process-intro .text-link');
+    if (touchedLink) touchedLink.classList.add('is-finger-contact');
+  }, { passive: true });
+  document.addEventListener('touchend', event => { if (!event.touches.length) clear(); }, { passive: true });
+  document.addEventListener('touchcancel', clear, { passive: true });
+})();
 
 
 // Kompakte Sticky-Navigation nach dem ersten Scrollbereich
@@ -901,6 +916,13 @@ document.addEventListener('keydown', event => {
   }
   blocks.forEach(block => {
     const toggle = block.querySelector('.service-reveal-toggle');
+    let previewOnlyClick = false;
+    block.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
+      previewOnlyClick = block.dataset.pinned !== 'true';
+      openOnly(block);
+      block.dataset.pinned = 'true';
+    }, { passive: true });
     block.addEventListener('pointerenter', () => { if (finePointer.matches) openOnly(block); });
     block.addEventListener('pointerleave', () => {
       if (finePointer.matches && block.dataset.pinned !== 'true' && !block.contains(document.activeElement)) setOpen(block, false);
@@ -910,17 +932,29 @@ document.addEventListener('keydown', event => {
       if (!block.contains(event.relatedTarget) && block.dataset.pinned !== 'true') setOpen(block, false);
     });
     block.addEventListener('click', event => {
-      // Mouse and keyboard follow the link immediately; touch first reveals it.
-      if (!finePointer.matches && event.detail !== 0 && block.dataset.pinned !== 'true') {
+      // The first touch reveals on contact; a subsequent deliberate tap follows the link.
+      if (event.detail !== 0 && (previewOnlyClick || (!finePointer.matches && block.dataset.pinned !== 'true'))) {
         event.preventDefault();
         openOnly(block);
         block.dataset.pinned = 'true';
       }
+      previewOnlyClick = false;
     });
     block.addEventListener('keydown', event => {
       if (event.key === 'Escape') { block.dataset.pinned = ''; toggle.focus(); setOpen(block, false); }
     });
   });
+  // Native scrolling stays enabled, including after pointercancel from the browser.
+  document.addEventListener('touchmove', event => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    const block = element && element.closest('[data-service-block]');
+    if (block && blocks.includes(block)) {
+      openOnly(block);
+      block.dataset.pinned = 'true';
+    }
+  }, { passive: true });
   document.addEventListener('pointerdown', event => {
     if (!event.target.closest('[data-service-block]')) blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, false); });
   });
