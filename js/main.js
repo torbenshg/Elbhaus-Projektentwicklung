@@ -246,58 +246,39 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
     });
   });
 
-  const valueSection = document.querySelector('.value-development');
-  if (valueSection) {
-    const amounts = Array.from(valueSection.querySelectorAll('[data-count-euro]'));
+  // Count each scenario independently whenever its accordion is opened.
+  document.querySelectorAll('details.value-case').forEach(card => {
     const formatter = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 });
-    const values = amounts.map(element => {
+    const values = Array.from(card.querySelectorAll('[data-count-euro]')).map(element => {
       const original = element.textContent.trim();
-      return {
-        element,
-        target: Number(original.replace(/\D/g, '')),
-        prefix: original.startsWith('+') ? '+' : '',
-      };
+      return {element, target: Number(original.replace(/\D/g, '')), prefix: original.startsWith('+') ? '+' : ''};
     });
-    const render = (item, value) => {
-      item.element.textContent = `${item.prefix}${formatter.format(Math.round(value))} €`;
-    };
-    values.forEach(item => render(item, 0));
-
-    let hasRun = false;
-    const runCounters = () => {
-      if (hasRun) return;
-      hasRun = true;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        values.forEach(item => render(item, item.target));
-        return;
-      }
-      const duration = 2400;
+    let frame = null;
+    const render = progress => values.forEach(item => {
+      item.element.textContent = `${item.prefix}${formatter.format(Math.round(item.target * progress))} €`;
+    });
+    render(0);
+    card.addEventListener('accordion:change', event => {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      render(0);
+      if (!event.detail.expanded) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { render(1); return; }
       const start = performance.now();
       const tick = now => {
-        const progress = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        values.forEach(item => render(item, item.target * eased));
-        if (progress < 1) requestAnimationFrame(tick);
+        const progress = Math.min(1, (now - start) / 2400);
+        render(1 - Math.pow(1 - progress, 3));
+        frame = progress < 1 ? requestAnimationFrame(tick) : null;
       };
-      requestAnimationFrame(tick);
-    };
+      frame = requestAnimationFrame(tick);
+    });
+  });
 
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            runCounters();
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.22 });
-      observer.observe(valueSection);
-    } else {
-      runCounters();
-    }
-  }
-
-  const touchGraphics = document.querySelectorAll('.typical-situations .situation, .value-case, .infill-case');
+  document.querySelectorAll('.management-editorial-trial').forEach(block => {
+    block.addEventListener('mouseenter', () => block.classList.add('is-hover-active'));
+    block.addEventListener('mouseleave', () => block.classList.remove('is-hover-active'));
+  });
+  const touchGraphics = document.querySelectorAll('.typical-situations .situation, .value-case, .infill-case, .management-editorial-row');
   touchGraphics.forEach(graphic => {
     let releaseTimer;
     const activate = event => {
@@ -862,8 +843,9 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
       event.preventDefault();
       const startHeight = details.getBoundingClientRect().height;
       expanded = !expanded;
+      details.dispatchEvent(new CustomEvent('accordion:change', {detail:{expanded}}));
       if (animation) { animation.cancel(); animation = null; }
-      if (icon) icon.style.transform = expanded ? 'rotate(45deg)' : 'rotate(0deg)';
+      if (icon) icon.style.transform = expanded ? (icon.classList.contains('value-toggle-arrow') ? 'rotate(180deg)' : 'rotate(45deg)') : 'rotate(0deg)';
       if (reduced.matches || typeof details.animate !== 'function') {
         details.open = expanded;
         resetStyles();
@@ -898,6 +880,38 @@ document.addEventListener('keydown', event => {
     document.querySelectorAll('summary.accordion-pointer-focus').forEach(summary => summary.classList.remove('accordion-pointer-focus'));
   }
 }, true);
+
+// Each divider follows only its two neighboring scenarios.
+document.querySelectorAll('.value-cases-grid').forEach(grid => {
+  const cards = Array.from(grid.querySelectorAll(':scope > .value-case'));
+  if (cards.length !== 3) return;
+  const desktop = window.matchMedia('(min-width:851px)');
+  const update = () => {
+    const headingHeight = Math.max(...cards.map(card => card.querySelector('summary > div').getBoundingClientRect().height));
+    grid.style.setProperty('--value-heading-height', `${Math.ceil(headingHeight)}px`);
+    const bodies = cards.map(card => card.querySelector('.value-case-body'));
+    const equalize = desktop.matches && cards.every(card => card.open);
+    const naturalHeight = Math.max(...bodies.map(body => {
+      const last = body.lastElementChild;
+      return last ? last.getBoundingClientRect().bottom - body.getBoundingClientRect().top : 0;
+    }));
+    bodies.forEach(body => {
+      const value = equalize ? `${Math.ceil(naturalHeight)}px` : '';
+      if (body.style.minHeight !== value) body.style.minHeight = value;
+    });
+    const heights = cards.map(card => card.getBoundingClientRect().height);
+    grid.style.setProperty('--value-line-one', `${Math.max(heights[0], heights[1])}px`);
+    grid.style.setProperty('--value-line-two', `${Math.max(heights[1], heights[2])}px`);
+  };
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(update);
+    cards.forEach(card => observer.observe(card));
+  }
+  cards.forEach(card => card.addEventListener('toggle', update));
+  window.addEventListener('resize', update, {passive:true});
+  if (document.fonts) document.fonts.ready.then(update);
+  update();
+});
 
 
 (function () {
@@ -1069,4 +1083,27 @@ document.addEventListener('keydown', event => {
     track.scrollLeft = cycle;
     controls.hidden = false;
   });
+})();
+
+
+// The circle follows scroll progress, starting at the top and drawing clockwise.
+(() => {
+  const circles = Array.from(document.querySelectorAll('.process-circle'));
+  if (!circles.length) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let pending = false;
+  const draw = () => {
+    const height = window.innerHeight;
+    circles.forEach(circle => {
+      const top = circle.getBoundingClientRect().top;
+      const progress = reduced.matches ? 1 : Math.max(0, Math.min(1, (height * .86 - top) / (height * .5)));
+      circle.querySelector('.process-circle-ring').style.strokeDashoffset = String(1 - progress);
+    });
+    pending = false;
+  };
+  const schedule = () => {if (!pending) {pending = true;requestAnimationFrame(draw);}};
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', schedule);
+  reduced.addEventListener('change', schedule);
+  draw();
 })();
