@@ -830,6 +830,50 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
 })();
 
 // Einige Browser markieren summary auch nach einem Mausklick als focus-visible.
+// Höhe und Symbol laufen synchron; erneute Klicks kehren die laufende Bewegung um.
+(() => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('details').forEach(details => {
+    const summary = details.querySelector(':scope > summary');
+    if (!summary) return;
+    const icon = summary.querySelector('.scope-chevron');
+    let expanded = details.open;
+    let animation = null;
+    const resetStyles = () => {
+      details.style.removeProperty('height');
+      details.style.removeProperty('overflow');
+    };
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      const startHeight = details.getBoundingClientRect().height;
+      expanded = !expanded;
+      if (animation) { animation.cancel(); animation = null; }
+      if (icon) icon.style.transform = expanded ? 'rotate(45deg)' : 'rotate(0deg)';
+      if (reduced.matches || typeof details.animate !== 'function') {
+        details.open = expanded;
+        resetStyles();
+        return;
+      }
+      resetStyles();
+      details.open = expanded;
+      const endHeight = details.getBoundingClientRect().height;
+      // Keep the contents mounted while the closing height is animated.
+      details.open = true;
+      details.style.overflow = 'hidden';
+      const current = details.animate([
+        { height: `${startHeight}px` }, { height: `${endHeight}px` }
+      ], { duration: 400, easing: 'cubic-bezier(.22,.61,.36,1)' });
+      animation = current;
+      current.onfinish = () => {
+        if (animation !== current) return;
+        details.open = expanded;
+        animation = null;
+        resetStyles();
+      };
+    });
+  });
+})();
+
 document.addEventListener('pointerdown', event => {
   const summary = event.target.closest('details > summary');
   if (summary) summary.classList.add('accordion-pointer-focus');
