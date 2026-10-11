@@ -174,12 +174,23 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
   if (menu && navigation) {
     const setMenuOpen = (open) => {
       navigation.classList.toggle('open', open);
+      document.body.classList.toggle('mobile-menu-open', open);
       menu.setAttribute('aria-expanded', String(open));
       menu.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
     };
     menu.addEventListener('click', () => setMenuOpen(menu.getAttribute('aria-expanded') !== 'true'));
+    const mobileNavigation = window.matchMedia('(max-width: 1100px)');
+    if (mobileNavigation.addEventListener) mobileNavigation.addEventListener('change', event => {
+      if (!event.matches) setMenuOpen(false);
+    });
     navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
     document.addEventListener('keydown', event => {
+      if (event.key === 'Tab' && mobileNavigation.matches && menu.getAttribute('aria-expanded') === 'true') {
+        const links = Array.from(navigation.querySelectorAll('a'));
+        const first = links[0];
+        if (!event.shiftKey && document.activeElement === menu) { event.preventDefault(); first.focus(); }
+        else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); menu.focus(); }
+      }
       if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
         setMenuOpen(false);
         menu.focus();
@@ -799,13 +810,11 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
       section.style.setProperty('--nav-height', `${barHeight}px`);
       section.style.setProperty('--stage-height', `${Math.max(1, window.innerHeight - barHeight)}px`);
       const bounds = section.getBoundingClientRect();
-      const progress = reduced.matches ? 1 : clamp((barHeight - bounds.top) / Math.max(260, bounds.height * .65));
-      const smooth = progress * progress * (3 - 2 * progress);
+      const progress = clamp((barHeight - bounds.top) / Math.max(260, bounds.height * .65));
+      const smooth = reduced.matches ? (progress > 0 ? 1 : 0) : progress * progress * (3 - 2 * progress);
       section.style.setProperty('--crop', `${smooth * (phone.matches ? 20 : 36)}px`);
       section.style.setProperty('--rule-progress', String(smooth));
-      const horizontal = section.querySelector('.editorial-hero-horizontal');
-      const initialBar = Math.min(1, 24 / Math.max(24, horizontal.offsetWidth));
-      section.style.setProperty('--horizontal-progress', String(initialBar + (1 - initialBar) * smooth));
+      section.style.setProperty('--horizontal-progress', String(smooth));
       const copy = section.querySelector('.editorial-hero-copy');
       section.style.setProperty('--header-copy-height', `${copy.getBoundingClientRect().height}px`);
     });
