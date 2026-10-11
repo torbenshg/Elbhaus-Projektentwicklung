@@ -2217,6 +2217,58 @@ html:not(.js) .simple-sketch-fade img,html:not(.js) .home-study-sketch img,html:
   .js .scroll-fly-left,.js .scroll-fly-right{opacity:1;transform:none;transition:none}
 }
 
+/* Wissensbereich: ruhige Artikelzeilen und gut lesbare Einzelbeiträge. */
+.home-knowledge,.knowledge-overview,.knowledge-article{border-top:1px solid var(--soft-line);padding:64px 0}
+.knowledge-heading{max-width:760px;margin-bottom:38px}
+.knowledge-intro{max-width:760px;margin:0 0 42px;font-size:18px;line-height:1.7}
+.knowledge-list{margin-bottom:32px}
+.knowledge-row{display:grid;grid-template-columns:220px minmax(0,1fr);gap:42px;padding:32px 0;border-top:1px solid var(--soft-line)}
+.knowledge-row:last-child{border-bottom:1px solid var(--soft-line)}
+.knowledge-row .eyebrow{padding-top:5px}
+.knowledge-row h2{margin:0 0 14px;font-size:28px;line-height:1.3;max-width:850px}
+.knowledge-row h2 a{color:inherit;text-decoration:none}
+.knowledge-row h2 a:hover{text-decoration:underline;text-underline-offset:5px}
+.knowledge-row p{max-width:760px;margin:0 0 20px;line-height:1.7}
+.knowledge-row .text-link,.home-knowledge>.wrap>.text-link,.knowledge-cta .text-link{display:inline-flex;align-items:center;gap:15px;padding:12px 18px;border:1px solid var(--soft-line);color:var(--text);text-decoration:none;transition:background-color .2s ease}
+.knowledge-row .text-link:hover,.home-knowledge>.wrap>.text-link:hover,.knowledge-cta .text-link:hover{background:#ededeb}
+.knowledge-article .wrap{max-width:1040px}
+.knowledge-back{display:inline-block;margin-bottom:42px;color:var(--text);text-underline-offset:5px}
+.knowledge-article h1{font-size:clamp(32px,4vw,52px);line-height:1.18;max-width:940px;margin:14px 0 26px}
+.knowledge-lead{max-width:850px;font-size:21px;line-height:1.65;margin-bottom:48px}
+.knowledge-prose{max-width:800px}
+.knowledge-prose h2{font-size:27px;line-height:1.3;margin:38px 0 16px}
+.knowledge-prose p{line-height:1.85;margin:0 0 22px}
+.knowledge-sources{border-top:1px solid var(--soft-line);margin-top:40px;padding-top:14px}
+.knowledge-sources h2{font-size:18px;margin:12px 0}
+.knowledge-sources a{color:var(--text);font-size:14px;line-height:1.9;text-underline-offset:4px}
+.knowledge-cta{border-top:1px solid var(--soft-line);padding-top:32px;margin-top:48px}
+.knowledge-cta h2{font-size:28px;margin:0 0 12px}
+.knowledge-editorial{padding:76px 0}
+.knowledge-overview.knowledge-editorial{border-top:0;padding-top:82px}
+.knowledge-editorial-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:start}
+.knowledge-editorial-heading h1,.knowledge-editorial-heading h2{font-size:clamp(44px,5.4vw,76px);line-height:1.05;font-weight:400;margin:0 0 32px}
+.knowledge-editorial-entry{margin:0 0 58px}
+.knowledge-editorial-entry:last-child{margin-bottom:0}
+.knowledge-editorial-entry h2{font-size:22px;font-weight:500;line-height:1.4;margin:0 0 12px}
+.knowledge-editorial-entry h2 a{color:inherit;text-decoration:none}
+.knowledge-editorial-entry p{font-size:19px;line-height:1.65;margin:0 0 26px}
+.knowledge-read-link{display:inline-flex;align-items:center;gap:12px;min-height:44px;color:var(--text);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.knowledge-read-link:hover{color:var(--brand)}
+@media(max-width:760px){
+ .knowledge-editorial-grid{grid-template-columns:1fr;gap:36px}
+ .knowledge-overview.knowledge-editorial{padding-top:48px}
+ .knowledge-editorial-heading h1,.knowledge-editorial-heading h2{font-size:44px;margin-bottom:0}
+ .knowledge-editorial-heading .knowledge-read-link{margin-top:18px}
+ .knowledge-editorial-entry{margin-bottom:38px}
+ .knowledge-editorial-entry p{font-size:17px;margin-bottom:18px}
+ .home-knowledge,.knowledge-overview,.knowledge-article{padding:42px 0}
+ .knowledge-row{grid-template-columns:1fr;gap:12px;padding:26px 0}
+ .knowledge-row h2{font-size:25px}
+ .knowledge-lead{font-size:18px;margin-bottom:32px}
+ .knowledge-prose h2{font-size:25px}
+ .knowledge-back{margin-bottom:28px}
+}
+
 /* Schlanke Kopfzeile auf allen Seiten, mit gleichmäßiger Logo-Skalierung. */
 header .nav{min-height:68px;padding-block:0;gap:24px}
 header.is-scrolled .nav{min-height:60px;padding-block:0}
@@ -2287,3 +2339,181 @@ header.is-scrolled nav a,header.is-scrolled .menu{color:var(--text)}
 .rent-source { font-size: 11px; line-height: 1.6; color: #777; margin: 18px 0 0; }
 .rent-source a { color: inherit; text-underline-offset: 3px; }
 @media (max-width: 700px) { .project-rents { padding: 44px 0 38px; } }
+
+/* Gemeinsames, ruhiges Editorial-Raster für sämtliche Seiten. */
+:root{--text:#24282b;--muted:#676d71;--soft-line:#e3e5e5;--section-wash:#fafaf8;--soft:#f7f7f4;--max:1200px;--section-space:86px}
+body{line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{width:min(var(--max),calc(100% - 96px))}
+h1,h2,h3{letter-spacing:-.025em;text-wrap:balance}
+h2{font-size:clamp(28px,3vw,40px);line-height:1.2;font-weight:300;margin-bottom:26px}
+h3{line-height:1.35;font-weight:400}
+p{margin-top:0;margin-bottom:22px}
+.prose{font-size:16px;line-height:1.8}
+.prose p:last-child{margin-bottom:0}
+.eyebrow{font-size:12px;line-height:1.5;letter-spacing:.08em;font-weight:500;color:var(--muted);margin-bottom:18px}
+main > section .wrap > .eyebrow,main > section .grid2 > div > .eyebrow{padding-top:0}
+main > section .wrap > .eyebrow::before,main > section .grid2 > div > .eyebrow::before{display:none}
+.soft{background:var(--section-wash)}
+section.home-study.soft{background:var(--section-wash)!important}
+.development-banner,.value-development{background:var(--section-wash)}
+header nav a{font-weight:400}
+header nav a.active{font-weight:500}
+
+/* Bildlose Seitenauftakte: Titel und Beschreibung auf dem Inhaltsraster. */
+.service-visual-hero.typography-compact-hero{height:auto!important;min-height:0!important;padding:76px 0 68px!important;display:block;text-align:left}
+.typography-compact-hero .service-visual-copy{position:relative;inset:auto;transform:none;width:min(var(--max),calc(100% - 96px));margin:0 auto;text-align:left}
+.service-visual-hero.typography-compact-hero h1,.service-visual-hero.typography-compact-hero h2{font-size:clamp(44px,5.5vw,72px)!important;line-height:1.08;font-weight:300;margin:0 0 26px!important;max-width:100%;color:var(--blue)!important}
+.service-visual-hero.typography-compact-hero p,.service-visual-hero.typography-compact-hero .eyebrow{font-size:18px!important;line-height:1.65;max-width:730px;margin:0!important}
+.typography-compact-hero .service-motion-line{display:none}
+.owner-hero .service-visual-copy{text-shadow:none}
+
+/* Einheitliche Spalten; die durchgehenden Abschnittstrennlinien bleiben. */
+.project-structured-section > .project-structured-grid{grid-template-columns:minmax(0,.82fr) 1px minmax(0,1.18fr);column-gap:48px}
+.project-section-heading h2{font-size:clamp(29px,3vw,39px);font-weight:300;line-height:1.25}
+.project-section-copy.prose{line-height:1.8}
+.development-banner-grid{gap:64px}
+.sale-value-grid{gap:48px}
+.sale-value-copy{padding-left:48px}
+.home-faq-grid{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:64px}
+.knowledge-editorial-grid{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:96px}
+.knowledge-editorial-heading h1,.knowledge-editorial-heading h2{font-weight:300;font-size:clamp(44px,5.5vw,72px)}
+.knowledge-editorial-entry h2{font-weight:400;font-size:22px;letter-spacing:-.015em}
+.knowledge-editorial-entry p{font-size:17px;line-height:1.75}
+.knowledge-read-link:hover{color:var(--blue)}
+.knowledge-prose{line-height:1.8}
+.knowledge-prose h2{font-weight:300;line-height:1.25}
+
+/* Weniger Binnenrahmen, einheitliche Links und ein ruhiger Kontaktabschluss. */
+.cards{border-top:0;border-bottom:0}
+.card h3,.value-case h3{font-size:24px;font-weight:400;line-height:1.3;letter-spacing:-.02em}
+.card p{line-height:1.75}
+.service-name,.value-case-name{font-size:12px;font-weight:500;letter-spacing:.045em}
+.cards .card a,.text-link{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;padding-bottom:5px}
+.service-areas .cards{margin-top:34px}
+.process-steps{margin-top:34px}
+.process-step h3{font-size:20px;font-weight:400}
+.contact{background:var(--section-wash);padding:var(--section-space) 0}
+.contact h2{font-weight:300;font-size:clamp(30px,3vw,40px)}
+.contact input,.contact textarea{border-radius:0;background:transparent;font-size:15px}
+.contact .submit{font-size:13px;letter-spacing:0;text-transform:none;padding:14px 24px}
+.prose h2{border-top:0;padding-top:0;margin-top:42px}
+.prose li{border-bottom:0;padding-top:7px;padding-bottom:7px}
+.prose li::before{top:19px}
+.legal h2{font-size:27px;font-weight:400}
+
+@media(max-width:1100px){
+ .wrap,.typography-compact-hero .service-visual-copy{width:calc(100% - 64px)}
+ .project-structured-section > .project-structured-grid{column-gap:32px}
+ .knowledge-editorial-grid{gap:64px}
+}
+@media(max-width:850px){
+ :root{--section-space:56px}
+ .wrap,.typography-compact-hero .service-visual-copy{width:calc(100% - 40px)}
+ h2{font-size:30px}
+ .service-visual-hero.typography-compact-hero{padding:48px 0 44px!important}
+ .service-visual-hero.typography-compact-hero h1,.service-visual-hero.typography-compact-hero h2{font-size:42px!important;margin-bottom:22px!important}
+ .service-visual-hero.typography-compact-hero p{font-size:16px!important}
+ .project-structured-section > .project-structured-grid{grid-template-columns:1fr;gap:28px}
+ .project-structured-grid::before{display:none}
+ .project-section-heading,.project-section-copy{grid-column:1;grid-row:auto}
+ .project-section-heading h2{font-size:30px}
+ .sale-value-grid,.home-faq-grid,.knowledge-editorial-grid{grid-template-columns:1fr;gap:32px}
+ .sale-value-copy{border-left:0;padding-left:0}
+ .knowledge-editorial-heading h1,.knowledge-editorial-heading h2{font-size:44px}
+ .knowledge-editorial-entry p{font-size:16px}
+ .knowledge-editorial-entry{margin-bottom:38px}
+ .card h3,.value-case h3{font-size:22px}
+ .contact h2{font-size:30px}
+ .contact{padding:56px 0}
+}
+@media(max-width:480px){
+ .service-visual-hero.typography-compact-hero h1,.service-visual-hero.typography-compact-hero h2{font-size:36px!important;overflow-wrap:break-word}
+ .owner-hero .service-visual-copy{width:calc(100% - 40px)}
+ .knowledge-editorial-heading h1,.knowledge-editorial-heading h2{font-size:40px}
+}
+
+/* Titel links, ruhiges Bild rechts; ausschließlich die Bildmaske verändert sich. */
+.editorial-hero{--crop:0px;--rule-progress:0;--nav-height:68px;position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:0;height:calc(100vh - var(--nav-height));height:calc(100dvh - var(--nav-height));padding:0;background:#fafaf8;isolation:isolate;border:0!important}
+.editorial-hero{height:var(--stage-height,calc(100vh - var(--nav-height)))!important;grid-template-rows:minmax(0,1fr)}
+/* Die feste Oberkante des Folgeabschnitts würde die Scrolllinie überlagern. */
+main > section.editorial-hero + section{border-top:0!important}
+.editorial-hero-copy{grid-column:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:clamp(20px,6vh,60px) 56px clamp(20px,6vh,58px) max(48px,calc((100vw - 1200px)/2));min-width:0;min-height:0}
+.editorial-hero-label{font-size:15px;line-height:1.5;font-weight:400;color:var(--muted);margin:0 0 24px;letter-spacing:0}
+.editorial-hero h1{font-size:clamp(36px,4.1vw,60px);line-height:1.15;font-weight:300;letter-spacing:-.035em;color:var(--text);margin:0;max-width:590px;text-align:left;text-wrap:balance;overflow-wrap:break-word}
+.editorial-hero-media{position:absolute;inset:0 0 0 50%;min-width:0;height:auto;overflow:hidden;clip-path:inset(var(--crop));will-change:clip-path}
+.editorial-hero-media img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:none!important}
+.editorial-hero-horizontal{position:absolute;bottom:0;left:max(48px,calc((100vw - 1200px)/2));right:max(48px,calc((100vw - 1200px)/2));height:1px;background:#c7ccce;transform:scaleX(var(--rule-progress));transform-origin:center;pointer-events:none}
+.editorial-hero-vertical{position:absolute;bottom:0;top:0;left:50%;width:1px;background:#c7ccce;transform:scaleY(var(--rule-progress));transform-origin:center bottom;pointer-events:none}
+@media(max-width:1100px){
+ .editorial-hero-copy{padding-left:32px;padding-right:34px}
+ .editorial-hero-horizontal{left:32px;right:32px}
+ .editorial-hero h1{font-size:clamp(34px,4.4vw,52px)}
+}
+@media(max-width:760px) and (hover:none) and (pointer:coarse){
+ .editorial-hero{height:auto!important;min-height:0;grid-template-columns:1fr;grid-template-rows:clamp(320px,60svh,560px) auto}
+ .editorial-hero-copy{grid-column:1;grid-row:2;padding:28px 20px 40px;min-height:0}
+ .editorial-hero h1{font-size:clamp(33px,7.5vw,46px);line-height:1.16;max-width:620px}
+ .editorial-hero-label{font-size:13px;margin-bottom:18px}
+ .editorial-hero-media{position:relative;inset:auto;grid-column:1;grid-row:1;height:100%;clip-path:none}
+ .editorial-hero-horizontal{top:auto;bottom:0;left:20px;right:20px}
+ .editorial-hero-vertical{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .editorial-hero{--crop:0px!important;--rule-progress:1!important}
+ .editorial-hero-media{will-change:auto}
+ .editorial-hero-vertical{display:none}
+}
+
+
+/* Montserrat und leichte Überschriften entsprechend der gewählten Vorschau. */
+body{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.7}
+button,input,textarea,select,.potential-finder-option,.potential-finder-head-back,.potential-finder-back{font-family:inherit}
+h1,h2,h3{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-weight:300;letter-spacing:-.025em}
+.editorial-hero h1{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-weight:300;font-size:clamp(36px,4.1vw,60px);line-height:1.15;letter-spacing:-.035em}
+@media(min-width:761px) and (max-height:640px){
+ .editorial-hero h1{font-size:clamp(26px,min(4.1vw,7vh),60px)}
+ .editorial-hero-label{margin-bottom:16px}
+}
+.editorial-hero-label{font-size:15px;font-weight:400;letter-spacing:0}
+.js .knowledge-editorial-entry.scroll-fly-left{transition-duration:1.2s;transition-delay:var(--knowledge-reveal-delay,0ms)}
+.editorial-hero-label,.editorial-hero h1{animation:editorial-title-enter 1.5s cubic-bezier(.22,.61,.36,1) both}
+.editorial-hero h1{animation-delay:.12s}
+@keyframes editorial-title-enter{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.editorial-hero-label,.editorial-hero h1{animation:none}}
+.project-section-heading h2,.knowledge-editorial-heading h1,.knowledge-editorial-heading h2,.knowledge-prose h2,.contact h2{font-weight:300}
+.card h3,.value-case h3,.process-step h3{font-weight:400}
+.service-visual-hero.typography-compact-hero h1,.service-visual-hero.typography-compact-hero h2{font-weight:300}
+.prose,.knowledge-prose{font-size:16px;line-height:1.8}
+.eyebrow,.service-name,.value-case-name{font-weight:500}
+.service-intro-media.intro-text-only,.feasibility-intro-media.intro-text-only{display:block;max-width:900px;margin:0 0 58px;min-height:0;padding:0}
+.intro-text-only::before{display:none!important;content:none!important}
+.intro-text-only .service-intro-text,.intro-text-only .feasibility-intro-text{width:100%;max-width:none;padding:0;margin:0;grid-column:auto;grid-row:auto}
+.intro-text-only p{font-size:16px;line-height:1.8;margin:0 0 24px}
+.intro-text-only p:last-child{margin-bottom:0}
+.contact-single-intro .intro-text-only{max-width:900px;margin:0;padding:0}
+.knowledge-overview-left .knowledge-editorial-grid{display:block}
+.knowledge-overview-left .knowledge-editorial-list{max-width:800px;margin-left:0}
+.knowledge-back{display:inline-flex;align-items:center;gap:12px;min-height:44px}
+.contact .submit,.knowledge-cta .knowledge-contact-button{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;padding:14px 24px;border:1px solid var(--blue);border-radius:0;background:transparent;color:var(--blue);font:400 13px/1.4 "Montserrat",Arial,Helvetica,sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.knowledge-cta .knowledge-contact-button:hover,.knowledge-cta .knowledge-contact-button:active,.knowledge-cta .knowledge-contact-button:focus-visible{background:var(--blue);color:#fff}
+/* Maus und Touch klappen nur auf; Tastaturfokus bleibt erkennbar. */
+details > summary,details > summary *{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+details > summary:focus:not(:focus-visible){outline:none;box-shadow:none}
+details > summary.accordion-pointer-focus:focus{outline:none!important;box-shadow:none!important}
+/* Feines Plus, das sich beim Öffnen zum X dreht, wie in der Referenz. */
+.scope-item .scope-chevron,.faq-list .scope-chevron{position:relative;display:block;width:24px;height:24px;border:0;transform:rotate(0deg);flex:0 0 24px;transition:transform .45s ease-in-out}
+.scope-item .scope-chevron::before,.scope-item .scope-chevron::after,.faq-list .scope-chevron::before,.faq-list .scope-chevron::after{content:"";position:absolute;display:block;background:currentColor}
+.scope-item .scope-chevron::before,.faq-list .scope-chevron::before{left:0;right:0;top:calc(50% - .5px);height:1px}
+.scope-item .scope-chevron::after,.faq-list .scope-chevron::after{top:0;bottom:0;left:calc(50% - .5px);width:1px}
+.scope-item[open] .scope-chevron,.faq-list details[open] .scope-chevron{transform:rotate(45deg)}
+.faq-list summary::after,.faq-list summary::before{content:none!important}
+.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:28px;padding-right:4px}
+.faq-list summary > span:first-child{min-width:0}
+@media(prefers-reduced-motion:reduce){.scope-item .scope-chevron,.faq-list .scope-chevron{transition:none}}
+@media(max-width:760px){
+ body,.prose,.knowledge-prose{font-size:16px}
+ .intro-text-only p{font-size:16px;line-height:1.8;margin-bottom:22px}
+ .service-intro-media.intro-text-only,.feasibility-intro-media.intro-text-only{margin-bottom:40px}
+ .editorial-hero h1{font-size:clamp(33px,7.5vw,46px)}
+ .editorial-hero-label{font-size:13px}
+}

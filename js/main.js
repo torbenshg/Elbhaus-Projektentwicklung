@@ -780,3 +780,50 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
   },{threshold:.13,rootMargin:'0px 0px -7% 0px'});
   blocks.forEach(el=>io.observe(el));
 })();
+
+
+
+// Scrollposition steuert Bildausschnitt und Linien in beide Richtungen.
+(() => {
+  const headers = Array.from(document.querySelectorAll('[data-scroll-header]'));
+  if (!headers.length) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const phone = window.matchMedia('(max-width: 760px) and (hover: none) and (pointer: coarse)');
+  let scheduled = false;
+  const clamp = value => Math.max(0, Math.min(1, value));
+  function render() {
+    scheduled = false;
+    const bar = document.querySelector('header');
+    const barHeight = bar ? bar.getBoundingClientRect().height : 0;
+    headers.forEach(section => {
+      section.style.setProperty('--nav-height', `${barHeight}px`);
+      section.style.setProperty('--stage-height', `${Math.max(1, window.innerHeight - barHeight)}px`);
+      const bounds = section.getBoundingClientRect();
+      const progress = reduced.matches ? 1 : clamp((barHeight - bounds.top) / Math.max(260, bounds.height * .65));
+      const smooth = progress * progress * (3 - 2 * progress);
+      section.style.setProperty('--crop', `${smooth * (phone.matches ? 20 : 36)}px`);
+      section.style.setProperty('--rule-progress', String(smooth));
+      const copy = section.querySelector('.editorial-hero-copy');
+      section.style.setProperty('--header-copy-height', `${copy.getBoundingClientRect().height}px`);
+    });
+  }
+  function schedule() {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(render); }
+  }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('pageshow', schedule);
+  if (reduced.addEventListener) reduced.addEventListener('change', schedule);
+  render();
+})();
+
+// Einige Browser markieren summary auch nach einem Mausklick als focus-visible.
+document.addEventListener('pointerdown', event => {
+  const summary = event.target.closest('details > summary');
+  if (summary) summary.classList.add('accordion-pointer-focus');
+}, true);
+document.addEventListener('keydown', event => {
+  if (['Tab', 'Enter', ' '].includes(event.key)) {
+    document.querySelectorAll('summary.accordion-pointer-focus').forEach(summary => summary.classList.remove('accordion-pointer-focus'));
+  }
+}, true);
