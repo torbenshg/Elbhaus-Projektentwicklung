@@ -2531,7 +2531,9 @@ details > summary.accordion-pointer-focus:focus{outline:none!important;box-shado
 .faq-list summary > span:first-child{min-width:0}
 @media(prefers-reduced-motion:reduce){.scope-item .scope-chevron,.faq-list .scope-chevron{transition:none}}
 @media(max-width:760px){
- .home-footer-modern .footer-modern-main{grid-template-columns:1fr;gap:28px;padding-bottom:0}
+ .home-footer-modern .footer-modern-main{grid-template-columns:1fr;gap:28px;padding-bottom:0;text-align:left}
+ .home-footer-modern .footer-modern-brand .footer-logo{margin-left:0;margin-right:auto;object-position:left top}
+ .home-footer-modern .footer-modern-contact{align-items:flex-start}
  .home-footer-modern .footer-modern-brand,.home-footer-modern .footer-modern-address,.home-footer-modern .footer-modern-contact,.home-footer-modern .footer-modern-nav{grid-column:1}
  .home-footer-modern .footer-modern-nav{margin-top:12px;border-top:1px solid var(--text)}
  .home-footer-modern .footer-modern-nav a:nth-child(n){font-size:clamp(28px,3vw,40px);line-height:1.25;font-weight:300;letter-spacing:-.025em;text-align:left;padding:42px 0;margin:0;border:0;border-bottom:1px solid var(--text);background:transparent;color:var(--text)}
