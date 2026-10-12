@@ -2911,3 +2911,41 @@ main h2,.editorial-hero h1,.management-editorial-copy h3{font-family:"Montserrat
  .scope-item > summary,.project-intro-accordion.scope-item > summary,.management-career.scope-item > summary,.faq-list details > summary,.value-case > .value-case-summary{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.5}
  .value-development-embedded .value-case-summary .value-case-name,.value-case-summary h3{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.5}
 }
+
+/* Mobile editorial scale based on the supplied Quantum reference. */
+@media(max-width:760px){
+ body{font-size:16px;line-height:1.5}
+ main h1,main h2,.editorial-hero h1,.knowledge-editorial-heading h1{font-size:36px!important;line-height:1.2!important;font-weight:400;letter-spacing:-.025em}
+ main p,main li,.prose,.knowledge-prose,.owner-welcome .prose p,.project-process-editorial .process-intro p,.project-overview .project-section-copy p{font-size:16px!important;line-height:1.5!important}
+ main h3{font-size:22px;line-height:1.35}
+ main .text-link,main .inline-link,main .knowledge-back,main .knowledge-card-date{font-size:16px;line-height:1.5}
+ .home-footer-modern .footer-modern-address,.home-footer-modern .footer-modern-contact,.home-footer-modern .footer-modern-address p,.home-footer-modern .footer-modern-contact p{font-size:16px;line-height:1.5}
+ .home-footer-modern .footer-modern-nav a:nth-child(n){font-size:36px;line-height:1.2}
+ /* Keep labels and accordion titles subordinate to section headings. */
+ .infill-editorial-grid .infill-case h3,.scenario-gallery .infill-case h3{font-size:15px;line-height:1.35}
+ .value-case-summary h3{font-size:16px;line-height:1.5}
+ .potential-finder .potential-finder-question{font-size:12px!important;line-height:1.5!important}
+ .service-reveal-title{font-size:30px!important;line-height:1.2!important}
+}
+
+/* Keep the process's final accordion rule, remove the separate section divider. */
+main > .development-process + .service-areas-reveal::before{content:none}
+/* Standard black separator before the schematic forms on both service pages. */
+.infill-editorial-grid{border-top:1px solid #000;padding-top:48px}
+/* FAQ rows follow the same left-plus editorial treatment as Projektentwicklung. */
+.faq-list .project-intro-accordion.scope-item{border:0;border-top:1px solid #000;margin:0}
+.faq-list .project-intro-accordion.scope-item:last-child{border-bottom:1px solid #000}
+.faq-list .project-intro-accordion.scope-item summary{justify-content:flex-start;gap:16px;padding:18px 0;color:var(--text)}
+.faq-list .project-intro-accordion.scope-item > p{padding:10px 0 22px 40px;margin:0;font-size:18px;font-weight:400;line-height:1.65}
+/* Place career information in its own grid row so opening it cannot resize the portrait. */
+.management-editorial-row{align-items:start;row-gap:0}
+.management-editorial-copy,.management-editorial-information{display:contents}
+.management-editorial-copy h3{grid-column:1;grid-row:1;margin:0 0 50px;padding:0}
+.management-editorial-qualifications{grid-column:1;grid-row:2}
+.management-editorial-portrait{grid-column:2;grid-row:1 / span 2;align-self:stretch;aspect-ratio:auto;min-height:0}
+.management-career.scope-item{grid-column:1 / -1;grid-row:3}
+@media(max-width:760px){
+ .infill-editorial-grid{padding-top:36px}
+ .faq-list .project-intro-accordion.scope-item > p{padding-left:0;font-size:16px}
+ .management-editorial-copy h3{margin-bottom:28px}
+}
