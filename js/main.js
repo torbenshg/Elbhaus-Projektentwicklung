@@ -78,6 +78,25 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
 
 
 // Gemeinsame Navigation und Anfrage für alle Seiten.
+(() => {
+  const form = document.querySelector('[data-knowledge-filter]');
+  if (!form) return;
+  const select = form.querySelector('select');
+  const cards = Array.from(document.querySelectorAll('[data-knowledge-topic]'));
+  const status = document.querySelector('[data-knowledge-filter-status]');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    let count = 0;
+    cards.forEach(card => {
+      card.hidden = Boolean(select.value && card.dataset.knowledgeTopic !== select.value);
+      if (!card.hidden) {
+        count++;
+        card.classList.add('is-visible');
+      }
+    });
+    status.textContent = `${count} ${count === 1 ? 'Artikel' : 'Artikel'} angezeigt${select.value ? ' zum Thema ' + select.value : ''}.`;
+  });
+})();
 // Rotate the original line drawing as one unit on the actual button events.
 (() => {
   const initializeArrowButtons = () => {
