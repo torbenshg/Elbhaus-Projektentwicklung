@@ -25,13 +25,11 @@ MOBILE DARSTELLUNG
   Nachverdichtung und Aufstockung reagieren auf Maus und Touch.
 
 KONTAKT
-- Name, E-Mail, Telefon, Objektadresse und die Bestätigung der Kenntnisnahme
-  der Datenschutzerklärung sind
-  Pflichtfelder. Die Nachricht ist optional.
-- Auf einem PHP-fähigen Webserver sendet contact.php die Anfrage an
-  info@elbhaus-projekt.de. Der Server muss die PHP-Funktion mail unterstützen.
-- Bei GitHub Pages muss das Formular vor dem produktiven Einsatz an einen
-  statischen Formulardienst angebunden werden.
+- Ein Kontaktformular ist ausschließlich im Potenzialfinder vorhanden.
+- Kontaktaufnahme per Telefon unter 040 740 741 78 oder per E-Mail an
+  info@elbhaus-projekt.de.
+- Der Potenzialfinder zeigt die Ergebnisse direkt im Browser. Bei Absenden
+  des Formulars werden die Anfrage und die Auswahl an contact.php übermittelt.
 
 HINWEISE
 - Die FAQ befindet sich auf der Startseite.

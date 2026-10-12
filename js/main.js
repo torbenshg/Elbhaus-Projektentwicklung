@@ -217,53 +217,7 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
     });
   }
 
-  document.querySelectorAll('form[data-contact-form]').forEach(form => {
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      if (!form.reportValidity()) return;
-      const data = new FormData(form);
-      const status = form.querySelector('.form-status');
-      const button = form.querySelector('button[type="submit"]');
-      const originalLabel = button ? button.textContent : '';
-      if (button) {
-        button.disabled = true;
-        button.textContent = 'Anfrage wird gesendet …';
-      }
-      if (status) {
-        status.classList.remove('is-success', 'is-error');
-        status.textContent = 'Ihre Anfrage wird übermittelt …';
-      }
-      form.setAttribute('aria-busy', 'true');
 
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' },
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok || result.ok !== true) {
-          throw new Error(result.message || 'Die Anfrage konnte nicht gesendet werden.');
-        }
-        form.reset();
-        if (status) {
-          status.classList.add('is-success');
-          status.textContent = 'Vielen Dank. Ihre Anfrage wurde gesendet. Wir melden uns persönlich bei Ihnen.';
-        }
-      } catch (error) {
-        if (status) {
-          status.classList.add('is-error');
-          status.innerHTML = 'Die Anfrage konnte gerade nicht übermittelt werden. Bitte schreiben Sie direkt an <a href="mailto:info@elbhaus-projekt.de">info@elbhaus-projekt.de</a>.';
-        }
-      } finally {
-        form.removeAttribute('aria-busy');
-        if (button) {
-          button.disabled = false;
-          button.textContent = originalLabel;
-        }
-      }
-    });
-  });
 
   // Count each scenario independently whenever its accordion is opened.
   document.querySelectorAll('details.value-case').forEach(card => {
@@ -320,15 +274,49 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
 })();
 
 // Interaktiver Potenzialfinder auf der Startseite.
+// Reveal the destination image under a finger while retaining native swiping.
+(function () {
+  const menu = document.querySelector('.footer-service-menu');
+  if (!menu) return;
+  let active = null, point = null, releaseTimer;
+  function clear() {
+    if (active) active.classList.remove('is-image-active');
+    active = null;
+  }
+  function update() {
+    if (!point) return;
+    const hit = document.elementFromPoint(point.x, point.y);
+    const link = hit && hit.closest('.footer-service-menu-link');
+    const next = link && menu.contains(link) ? link : null;
+    if (next === active) return;
+    clear();
+    active = next;
+    if (active) active.classList.add('is-image-active');
+  }
+  function follow(event) {
+    const touch = event.touches[0];
+    if (!touch) return;
+    window.clearTimeout(releaseTimer);
+    point = { x: touch.clientX, y: touch.clientY };
+    update();
+  }
+  document.addEventListener('touchstart', follow, { passive: true });
+  document.addEventListener('touchmove', follow, { passive: true });
+  menu.addEventListener('scroll', update, { passive: true });
+  document.addEventListener('touchend', () => {
+    point = null;
+    releaseTimer = window.setTimeout(clear, 450);
+  }, { passive: true });
+  document.addEventListener('touchcancel', () => { point = null; clear(); }, { passive: true });
+})();
+
 (function () {
   const root = document.getElementById('elbhaus-potential-finder');
   if (!root) return;
 
   const content = root.querySelector('[data-finder-content]');
-  const question = root.querySelector('.potential-finder-question');
-  const stepLabel = root.querySelector('[data-finder-step]');
-  const headBack = root.querySelector('[data-finder-head-back]');
   const progress = root.querySelector('[data-finder-progress]');
+  const resultBack = root.querySelector('[data-finder-result-back]');
   const state = { step: 1, type: null, situation: null };
 
   const types = [
@@ -436,10 +424,15 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
   const selectedSituation = () => (situations[state.type] || []).find(item => item[0] === state.situation);
 
   function setProgress() {
-    stepLabel.textContent = `Schritt ${state.step} von 3`;
-    headBack.hidden = state.step === 1;
+    resultBack.hidden = state.step !== 3;
     progress.setAttribute('aria-label', `Fortschritt: Schritt ${state.step} von 3`);
-    progress.querySelectorAll('span').forEach((bar, index) => bar.classList.toggle('is-active', index < state.step));
+    progress.querySelectorAll('[data-stage]').forEach(button => {
+      const stage = Number(button.dataset.stage);
+      button.classList.toggle('is-active', stage <= state.step);
+      button.disabled = (stage === 2 && !state.type) || (stage === 3 && !state.situation);
+      if (stage === state.step) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    });
   }
 
   function bindTouchStates() {
@@ -480,25 +473,31 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
     });
   }
 
-  function goBack() {
-    state.step = Math.max(1, state.step - 1);
-    if (state.step === 1) state.situation = null;
+  function goToStep(step) {
+    if (step < state.step) {
+      state.situation = null;
+      if (step === 1) state.type = null;
+    }
+    state.step = step;
     render();
+  }
+
+  function goBack() {
+    goToStep(Math.max(1, state.step - 1));
   }
 
   function render() {
     setProgress();
     if (state.step === 1) {
-      question.textContent = 'Immobilientyp auswählen.';
       content.innerHTML = `<div class="potential-finder-options potential-finder-types">${types.map(type => `<button type="button" class="potential-finder-option" data-finder-type="${type[0]}">${diagram(`${type[0]}Base`)}<strong>${escapeHtml(type[1])}</strong></button>`).join('')}</div>`;
       content.querySelectorAll('[data-finder-type]').forEach(button => button.addEventListener('click', () => {
         state.type = button.dataset.finderType;
+        state.situation = null;
         state.step = 2;
         render();
       }));
     } else if (state.step === 2) {
-      question.textContent = 'Ausgangssituation auswählen.';
-      const options = situations[state.type] || situations.other;
+      const options = situations[state.type];
       content.innerHTML = `<div class="potential-finder-options potential-finder-situations">${options.map(item => `<button type="button" class="potential-finder-option" data-finder-situation="${item[0]}">${situationDiagram(item[0])}<strong>${escapeHtml(item[1])}</strong></button>`).join('')}</div>`;
       content.querySelectorAll('[data-finder-situation]').forEach(button => button.addEventListener('click', () => {
         state.situation = button.dataset.finderSituation;
@@ -506,7 +505,6 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
         render();
       }));
     } else {
-      question.textContent = 'Mögliche Entwicklungspotenziale.';
       const type = selectedType();
       const situation = selectedSituation();
       const results = ideas[state.situation] || ideas.unclear;
@@ -544,10 +542,25 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
         }
       });
     }
+    content.querySelectorAll('.potential-finder-option').forEach(button => {
+      const selected = state.step === 1 ? button.dataset.finderType === state.type : button.dataset.finderSituation === state.situation;
+      button.classList.toggle('is-selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    if (state.step === 2) {
+      content.insertAdjacentHTML('beforeend', '<div class="finder-step-actions"><button type="button" data-finder-previous>Vorheriger Schritt</button></div>');
+      content.querySelector('[data-finder-previous]').addEventListener('click', goBack);
+    }
     bindTouchStates();
   }
 
-  headBack.addEventListener('click', goBack);
+  resultBack.addEventListener('click', goBack);
+  progress.querySelectorAll('[data-stage]').forEach(button => {
+    button.addEventListener('click', () => {
+      if (button.disabled || Number(button.dataset.stage) === state.step) return;
+      goToStep(Number(button.dataset.stage));
+    });
+  });
   render();
 })();
 // Keep the link arrow turned throughout a touch gesture, including native scrolling.

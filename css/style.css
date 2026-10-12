@@ -1760,8 +1760,8 @@ header nav a{margin:0;padding:8px 10px;white-space:nowrap}
 .potential-finder-head-back[hidden]{display:none}
 .potential-finder-step{flex:none;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .potential-finder-progress{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:20px}
-.potential-finder-progress span{height:2px;background:#d7d9d7;transition:background .25s ease}
-.potential-finder-progress span.is-active{background:var(--blue)}
+.potential-finder-progress > button{height:2px;background:#d7d9d7;transition:background .25s ease}
+.potential-finder-progress > button.is-active{background:var(--blue)}
 .potential-finder-content{padding-bottom:22px}
 .potential-finder-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--soft-line);border-bottom:1px solid var(--soft-line)}
 .potential-finder-options.potential-finder-situations{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -1807,8 +1807,8 @@ header nav a{margin:0;padding:8px 10px;white-space:nowrap}
 .potential-finder-consent{grid-column:1/-1;display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:12px;line-height:1.55}
 .potential-finder-consent input{flex:none;width:16px;height:16px;margin:2px 0 0;padding:0;accent-color:var(--blue)}
 .potential-finder-consent a{text-decoration:underline;text-underline-offset:3px}
-.potential-finder-submit{grid-column:1/-1!important;border-color:var(--blue)!important;color:var(--blue)!important;font-family:"Montserrat",Arial,Helvetica,sans-serif!important;font-size:13px!important;font-weight:600;letter-spacing:0!important;text-transform:none;padding:12px 22px!important}
-.potential-finder-submit:hover{background:var(--blue)!important;color:#fff!important}
+.potential-finder-submit{grid-column:1/-1!important;background:#12334b!important;border-color:#fff!important;color:#fff!important;font-family:"Montserrat",Arial,Helvetica,sans-serif!important;font-size:13px!important;font-weight:600;letter-spacing:0!important;text-transform:none;padding:12px 22px!important}
+.potential-finder-submit:hover:not(:disabled){background:#fff!important;color:#12334b!important}
 .potential-finder-submit:disabled{opacity:.55;cursor:wait}
 .potential-finder-form-note,.potential-finder-form .form-status{grid-column:1/-1;margin:0;color:var(--muted);font-size:12px;line-height:1.55}
 .potential-finder-form .form-status:empty{display:none}
@@ -1990,7 +1990,7 @@ button:hover .link-arrow,button:focus-visible .link-arrow,button:active .link-ar
 .form-status.is-error{color:#8b3c35}
 .form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
 form noscript{grid-column:1/-1}
-.home-faq{background:#fff;border-top:1px solid var(--soft-line);border-bottom:1px solid var(--soft-line)}
+.home-faq{background:#fff;border-top:1px solid var(--soft-line);border-bottom:0}
 .home-faq-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:76px;align-items:start}
 .home-faq-heading{position:sticky;top:128px}
 .home-faq-heading h2{margin-bottom:20px}
@@ -2708,7 +2708,8 @@ main > .development-process + .service-areas-reveal::before,main > .service-area
 .management-editorial-copy h3{font-size:clamp(24px,2.5vw,32px);font-weight:300;margin:0 0 50px}
 .management-editorial-copy p{font-size:16px;line-height:1.7;margin:0}
 .management-career.scope-item{margin-top:20px;border:0;max-width:680px}
-.management-career.scope-item summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:44px;padding:8px 0;font:400 16px/1.7 "Montserrat",Arial,Helvetica,sans-serif;list-style:none;cursor:pointer}
+.management-career.scope-item summary{display:flex;align-items:center;justify-content:flex-start;gap:16px;min-height:44px;padding:8px 0;border:0;font:400 16px/1.7 "Montserrat",Arial,Helvetica,sans-serif;list-style:none;cursor:pointer}
+.management-career.scope-item,.management-career.scope-item:last-child{border:0}
 .management-career-body{padding:12px 0 20px}
 .management-editorial-portrait{display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1;background:var(--soft);color:var(--blue);opacity:.20;transition:opacity .4s ease}
 .management-editorial-portrait svg{width:55%;height:70%;fill:none;stroke:currentColor;stroke-width:1.5}
@@ -2930,6 +2931,8 @@ main h2,.editorial-hero h1,.management-editorial-copy h3{font-family:"Montserrat
 
 /* Keep the process's final accordion rule, remove the separate section divider. */
 main > .development-process + .service-areas-reveal::before{content:none}
+/* Keep the scenario row's own rule, remove the extra separator below it. */
+main > .scenario-gallery + .sale-value-section::before{content:none}
 /* Standard black separator before the schematic forms on both service pages. */
 .infill-editorial-grid{border-top:1px solid #000;padding-top:48px}
 /* FAQ rows follow the same left-plus editorial treatment as Projektentwicklung. */
@@ -2948,4 +2951,455 @@ main > .development-process + .service-areas-reveal::before{content:none}
  .infill-editorial-grid{padding-top:36px}
  .faq-list .project-intro-accordion.scope-item > p{padding-left:0;font-size:16px}
  .management-editorial-copy h3{margin-bottom:28px}
+}
+
+/* Elbhaus Codes share the established project accordion layout. */
+.home-claim.elbhaus-codes{background:#fff}
+.elbhaus-codes-intro{max-width:none;margin-bottom:38px}
+.elbhaus-codes-intro p{font-size:20px;line-height:1.6}
+.elbhaus-codes-list .project-intro-accordion.scope-item summary{justify-content:flex-start;font-size:20px;min-height:60px;gap:16px;padding:18px 0}
+.elbhaus-codes-list .scope-chevron{flex-shrink:0}
+.elbhaus-codes-list .project-intro-answer.prose{padding:10px 0 22px 40px;max-width:none}
+@media(max-width:760px){.elbhaus-codes-intro{margin-bottom:28px}.elbhaus-codes-list .project-intro-accordion.scope-item summary{font-size:16px;min-height:60px}}
+
+@media(max-width:760px){.elbhaus-codes-list .project-intro-answer.prose{padding-left:0}}
+
+/* The unchanged manager presentation belongs to the Elbhaus Codes section. */
+.home-claim.elbhaus-codes{padding-bottom:0}
+.elbhaus-codes > .management-editorial-trial{padding-top:80px;margin-top:0}
+.elbhaus-codes > .management-editorial-trial::before{content:none}
+.elbhaus-codes + .home-faq{border-top:0!important}
+.page-home main > .project-sale-preparation + .elbhaus-codes{border-top:0!important}
+@media(max-width:760px){.elbhaus-codes > .management-editorial-trial{padding-top:56px}}
+
+/* Trial homepage header: two opposing image reveals and a centered name. */
+.home-split-hero{position:relative;display:grid;grid-template-columns:1fr 1fr;height:calc(100svh - 88px);min-height:640px;padding:0;background:var(--blue);overflow:hidden;isolation:isolate}
+.home-split-panel{position:relative;min-width:0;overflow:hidden}
+.home-split-photo{position:absolute;inset:0;overflow:hidden;animation-duration:1.65s;animation-timing-function:cubic-bezier(.22,.61,.36,1);animation-fill-mode:both}
+.home-split-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.home-split-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,23,35,.12) 10%,rgba(7,23,35,.35) 42%,rgba(7,23,35,.82) 100%)}
+.home-split-left .home-split-photo{animation-name:home-reveal-up}
+.home-split-right .home-split-photo{animation-name:home-reveal-down}
+.home-split-brand{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);margin:0;color:#fff;font-size:clamp(44px,6vw,88px);font-weight:400;line-height:1.1;z-index:2;animation:home-header-copy .9s .95s both}
+.home-split-links,.home-split-description{position:absolute;left:clamp(28px,5vw,88px);right:clamp(28px,5vw,88px);bottom:86px;color:#fff;animation:home-header-copy 1s 1.15s both}
+.home-split-links{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.home-split-links a{color:#fff;text-decoration:none;text-underline-offset:5px;text-decoration-thickness:1px;font-size:clamp(18px,1.7vw,24px);font-weight:400;line-height:1.45;transition:opacity .2s}
+.home-split-links a:hover{opacity:1}
+.home-split-description p{font-size:20px;line-height:1.6;margin:0 0 22px;color:#fff;max-width:480px}
+.home-split-description p:last-child{margin-bottom:0}
+.home-split-scroll{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:44px;height:44px;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:26px;animation:home-header-copy 1s 1.35s both}
+@keyframes home-reveal-up{from{clip-path:inset(100% 0 0)}to{clip-path:inset(0)}}
+@keyframes home-reveal-down{from{clip-path:inset(0 0 100%)}to{clip-path:inset(0)}}
+@keyframes home-header-copy{from{opacity:0}to{opacity:1}}
+@media(max-width:760px){
+ .home-split-hero{height:calc(100svh - 76px);min-height:640px}
+ .home-split-brand{top:30%;font-size:36px!important}
+ .home-split-links,.home-split-description{left:16px;right:16px;bottom:78px}
+ .home-split-links{gap:14px}
+ .home-split-links a{font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+ .home-split-description p{font-size:16px!important;line-height:1.5!important;margin-bottom:18px}
+}
+@media(prefers-reduced-motion:reduce){.home-split-photo,.home-split-brand,.home-split-links,.home-split-description,.home-split-scroll{animation:none}}
+
+/* Full viewport trial with aligned text starts and a quieter central wordmark. */
+.home-split-hero{height:100vh;height:100dvh;min-height:0}
+.home-split-brand{top:34%;font-size:28px!important;line-height:1.2!important}
+.home-split-links,.home-split-description{top:54%;bottom:auto}
+.home-split-links{gap:0}
+.home-split-links a{font-size:20px;line-height:1.6}
+@media(max-width:760px){
+ .home-split-hero{height:100vh;height:100dvh;min-height:0}
+ .home-split-brand{top:32%;font-size:24px!important}
+ .home-split-links,.home-split-description{top:50%;bottom:auto}
+ .home-split-links{gap:0}
+ .home-split-links a{font-size:16px;line-height:1.5}
+}
+
+.home-split-hero{background:#fff}
+
+/* Lower, aligned header copy; center the name in both directions. */
+.home-split-brand{top:50%;left:50%;transform:translate(-50%,-50%)}
+.home-split-links,.home-split-description{top:68%;bottom:auto}
+.home-split-links{gap:0}
+.home-split-links a{white-space:nowrap;overflow-wrap:normal;word-break:normal}
+@media(max-width:760px){
+ .home-split-brand{top:50%}
+ .home-split-links,.home-split-description{top:68%;left:12px;right:12px}
+ .home-split-links a{font-size:clamp(11px,3.6vw,16px);white-space:nowrap;overflow-wrap:normal}
+ .home-split-description p{font-size:clamp(12px,3.6vw,16px)!important;line-height:1.4!important;margin-bottom:12px}
+ .home-split-scroll{bottom:4px}
+}
+
+/* Hero links must not inherit the global navigation's padding or hover border. */
+nav.home-split-links{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:0;margin:0;border:0;background:transparent;visibility:visible;z-index:2}
+nav.home-split-links a,nav.home-split-links a:hover,nav.home-split-links a:active,nav.home-split-links a:focus-visible{display:block;width:auto;padding:0;margin:0;border:0;border-bottom:0;box-shadow:none;background:transparent;color:#fff;white-space:nowrap;line-height:1.6}
+nav.home-split-links a::before,nav.home-split-links a::after{content:none}
+
+.home-split-brand img{display:block;width:190px;max-width:40vw;height:auto}
+@media(max-width:760px){.home-split-brand img{width:150px;max-width:44vw}}
+
+/* Isolate this four-line service list from every global nav rule. */
+.home-split-hero .home-split-links{display:grid;grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;justify-content:start;gap:0;padding:0;margin:0;height:auto;min-height:0;background:transparent;border:0;z-index:2}
+.home-split-hero .home-split-links a{display:block;width:max-content;max-width:100%;height:auto;min-height:0;padding:0;margin:0;border:0;background:transparent;box-shadow:none;white-space:nowrap;font-size:20px;line-height:1.6;color:#fff}
+.home-split-hero .home-split-links a:hover,.home-split-hero .home-split-links a:focus-visible{border:0;background:transparent;box-shadow:none;color:#fff}
+.home-split-hero .home-split-links a::before,.home-split-hero .home-split-links a::after{content:none}
+@media(max-width:760px){.home-split-hero .home-split-links a{font-size:clamp(11px,3.6vw,16px)}}
+
+/* Match the space after the hero to the Projektentwicklung introduction. */
+.owner-welcome,.project-overview{padding-top:86px}
+@media(max-width:850px){.owner-welcome,.project-overview{padding-top:58px}}
+
+/* Two-by-two finder steps with only the central cross as a divider. */
+.potential-finder-options,.potential-finder-options.potential-finder-situations{position:relative;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px;gap:0;border:0}
+.potential-finder-options::before,.potential-finder-options::after{content:"";position:absolute;background:#000;pointer-events:none;z-index:1}
+.potential-finder-options::before{left:50%;top:0;bottom:0;width:1px}
+.potential-finder-options::after{left:0;right:0;top:50%;height:1px}
+.potential-finder-options .potential-finder-option:nth-child(n){border:0;padding:18px 24px}
+@media(max-width:760px){.potential-finder-options,.potential-finder-options.potential-finder-situations{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:180px}.potential-finder-options .potential-finder-option:nth-child(n){padding:16px 12px}}
+
+/* Equal cross arms and compact symbol/text groups beside the middle axis. */
+.home-potential-finder{background:#fff}
+.potential-finder-options,.potential-finder-options.potential-finder-situations{--finder-cross-size:min(340px,calc(100vw - 40px));max-width:780px;margin-inline:auto;grid-auto-rows:170px}
+.potential-finder-options::before{top:50%;bottom:auto;height:var(--finder-cross-size);width:1px;transform:translateY(-50%)}
+.potential-finder-options::after{left:50%;right:auto;top:50%;width:var(--finder-cross-size);height:1px;transform:translateX(-50%)}
+.potential-finder-options .potential-finder-option:nth-child(n){display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:12px 24px;background:transparent}
+.potential-finder-options .potential-finder-option:nth-child(odd){align-items:flex-end}
+.potential-finder-options .potential-finder-diagram{order:0;width:200px;max-width:100%;height:84px;margin:0 0 10px;flex:none}
+.potential-finder-options .potential-finder-option strong{order:1;display:block;width:200px;max-width:100%;text-align:center}
+@media(max-width:760px){
+ .potential-finder-options,.potential-finder-options.potential-finder-situations{grid-auto-rows:170px}
+ .potential-finder-options .potential-finder-option:nth-child(n){padding:12px 14px}
+ .potential-finder-options .potential-finder-diagram,.potential-finder-options .potential-finder-option strong{width:160px;max-width:100%}
+}
+
+/* Finder trial based on the connected stepper and open icon row reference. */
+.potential-finder{border:1px solid var(--blue);padding:24px 32px 28px;background:#fff}
+.potential-finder-head{padding:0 0 24px}
+.potential-finder-progress{position:relative;grid-template-columns:repeat(3,1fr);gap:0;max-width:680px;margin:0 auto 38px}
+.potential-finder-progress::before{content:"";position:absolute;top:17px;left:16.6667%;right:16.6667%;height:1px;background:var(--blue)}
+.potential-finder-progress > button{position:relative;appearance:none;border:0;border-radius:0;min-width:0;margin:0;padding:46px 0 0;height:auto;background:transparent!important;text-align:center;font-family:inherit;font-size:12px;line-height:1.4;color:var(--blue);cursor:pointer}
+.potential-finder-progress > button::before{content:attr(data-stage);position:absolute;top:0;left:50%;transform:translateX(-50%);width:34px;height:34px;border:1px solid var(--blue);border-radius:50%;background:#fff;display:grid;place-items:center;font-size:14px}
+.potential-finder-progress > button.is-active::before{background:var(--blue);color:#fff}
+.potential-finder-options,.potential-finder-options.potential-finder-situations{max-width:none;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:180px}
+.potential-finder-options::before,.potential-finder-options::after{content:none}
+.potential-finder-options .potential-finder-option:nth-child(n){align-items:center;justify-content:center;padding:16px 12px;text-align:center}
+.potential-finder-options .potential-finder-diagram{width:160px;max-width:100%;height:90px}
+.potential-finder-options .potential-finder-option strong{width:auto;font-size:15px}
+.potential-finder-options .potential-finder-option.is-selected{opacity:1!important}
+.potential-finder-option.is-selected .potential-finder-diagram g{stroke-width:2.4}
+.potential-finder-option.is-selected strong{text-decoration:underline;text-underline-offset:5px}
+.finder-step-actions{display:flex;justify-content:center;gap:18px;margin-top:26px}
+.finder-step-actions button{border:1px solid var(--blue);background:#fff;color:var(--blue);font:400 15px/1.5 "Montserrat",Arial,sans-serif;padding:10px 22px;cursor:pointer}
+.finder-step-actions button:hover:not(:disabled){background:var(--blue);color:#fff}
+.finder-step-actions button:disabled{opacity:.4;cursor:default}
+@media(max-width:760px){.potential-finder{padding:20px 14px}.potential-finder-options,.potential-finder-options.potential-finder-situations{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.potential-finder-progress{margin-bottom:24px}.finder-step-actions{gap:12px}.finder-step-actions button{font-size:13px;padding:10px 12px}}
+
+/* Elbhaus-blue finder with white icons, text and fine reference-style outlines. */
+.home-potential-finder{background:#12334b;--blue:#fff;--text:#fff;--muted:rgba(255,255,255,.76);--soft-line:rgba(255,255,255,.35);--line:rgba(255,255,255,.55);color:#fff}
+.home-potential-finder h2,.home-potential-finder h3,.home-potential-finder p,.home-potential-finder label,.home-potential-finder strong{color:#fff}
+.home-potential-finder .potential-finder{background:transparent;border-color:#fff}
+.home-potential-finder .potential-finder-step,.home-potential-finder .potential-finder-question{color:#fff}
+.home-potential-finder .potential-finder-progress > button::before{background:#12334b;color:#fff;border-color:#fff}
+.home-potential-finder .potential-finder-progress > button.is-active::before{background:#fff;color:#12334b}
+.home-potential-finder .finder-step-actions button{background:transparent;color:#fff;border-color:#fff}
+.home-potential-finder .finder-step-actions button:hover:not(:disabled){background:#fff;color:#12334b}
+.home-potential-finder .potential-finder-form{background:transparent;border-color:rgba(255,255,255,.4)}
+.home-potential-finder input:not([type="checkbox"]),.home-potential-finder textarea{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.home-potential-finder .potential-finder-form button[type="submit"]{background:#fff;color:#12334b;border-color:#fff}
+
+.home-potential-finder .potential-finder-form button[type="submit"]{background:#12334b;color:#fff;border:1px solid #fff}
+
+/* Keep unavailable stages visible; native buttons support mouse, touch and keyboard. */
+.potential-finder-progress > button:disabled{cursor:default}
+.potential-finder-result-back{display:block;margin:0 0 20px auto;padding:10px 22px;border:1px solid #fff;background:transparent;color:#fff;font:400 15px/1.5 "Montserrat",Arial,sans-serif;cursor:pointer}
+.potential-finder-result-back[hidden]{display:none}
+.home-potential-finder .potential-finder-result-back:hover,.home-potential-finder .potential-finder-result-back:focus-visible{background:#fff!important;color:#12334b!important;border-color:#fff!important}
+.potential-finder-navigation{display:flex;align-items:flex-end;gap:24px;margin-bottom:38px}
+.potential-finder-navigation .potential-finder-progress{flex:1;min-width:0;width:100%;margin:0 auto}
+.potential-finder-navigation .potential-finder-result-back{flex:none;margin:0 0 -11px;padding:10px 16px;font-size:12px;line-height:1.4;transition:background-color .2s ease,color .2s ease}
+.potential-finder-result-back:active{background:#fff;color:#12334b}
+@media(max-width:760px){.potential-finder-navigation{gap:10px;margin-bottom:24px}.potential-finder-navigation .potential-finder-result-back{padding:10px 8px}}
+
+/* Highlight only the potential result cards against the blue finder section. */
+.home-potential-finder .potential-finder-results{grid-template-columns:1fr;gap:14px;border:0}
+.home-potential-finder .potential-finder-results.is-single{grid-template-columns:1fr}
+.home-potential-finder .potential-finder-final-results .potential-finder-result{background:#fff;color:#000;--blue:#000;--text:#000;--muted:#000;padding:20px;border:0;grid-template-columns:minmax(0,1fr);grid-template-rows:subgrid;grid-row:span 3;align-items:start;gap:12px}
+.home-potential-finder .potential-finder-result > div:not(.potential-finder-diagram){display:contents}
+.home-potential-finder .potential-finder-result .potential-finder-diagram{width:180px;max-width:100%;height:94px;margin:0;grid-row:auto}
+.home-potential-finder .potential-finder-result h3,.home-potential-finder .potential-finder-result p{margin:0}
+.home-potential-finder .potential-finder-result h3{font-size:22px;font-weight:600;line-height:1.35}
+.home-potential-finder .potential-finder-result p{font-size:15px;line-height:1.6}
+.home-potential-finder .potential-finder-result h3,.home-potential-finder .potential-finder-result p,.home-potential-finder .potential-finder-result .potential-finder-diagram{color:#000}
+@media(max-width:760px){
+ .home-potential-finder .potential-finder-results{gap:12px 10px}
+ .home-potential-finder .potential-finder-final-results .potential-finder-result{padding:16px;gap:12px}
+ .home-potential-finder .potential-finder-result h3{font-size:20px;overflow-wrap:anywhere}
+ .home-potential-finder .potential-finder-result p{overflow-wrap:anywhere}
+}
+@media(max-width:480px){
+ .home-potential-finder .potential-finder-final-results .potential-finder-result{padding:12px;gap:10px}
+ .home-potential-finder .potential-finder-result .potential-finder-diagram{height:74px}
+ .home-potential-finder .potential-finder-result h3{font-size:18px}
+ .home-potential-finder .potential-finder-result p{font-size:14px}
+}
+
+/* Clearly highlight the inquiry action on hover and keyboard focus. */
+.home-potential-finder .potential-finder-form .potential-finder-submit{transition:background-color .2s ease,color .2s ease}
+.home-potential-finder .potential-finder-form .potential-finder-submit:hover:not(:disabled),.home-potential-finder .potential-finder-form .potential-finder-submit:focus-visible:not(:disabled),.home-potential-finder .potential-finder-form .potential-finder-submit:active:not(:disabled){background:#fff!important;color:#12334b!important;border-color:#fff!important}
+@media(prefers-reduced-motion:reduce){.home-potential-finder .potential-finder-form .potential-finder-submit{transition:none}}
+
+/* Animate a separate line under the hovered service link. */
+.home-split-hero .home-split-links a,.home-split-hero .home-split-links a:hover,.home-split-hero .home-split-links a:focus-visible{position:relative;text-decoration:none!important;border-bottom:0!important;background:transparent!important;opacity:1}
+.home-split-hero .home-split-links a::after{content:none}
+.home-split-hero .home-split-links .service-link-line{position:absolute;left:0;bottom:2px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.home-split-hero .home-split-links a:hover .service-link-line,.home-split-hero .home-split-links a:focus-visible .service-link-line{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){.home-split-hero .home-split-links .service-link-line{transition:none}}
+
+/* Mobile hero: two full-width image panels stacked like the reference. */
+@media(max-width:760px){
+ .home-split-hero{grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr));height:100svh;min-height:760px;padding-top:76px;box-sizing:border-box}
+ .home-split-hero .home-split-panel{width:100%;min-height:0}
+ .home-split-hero .home-split-links,.home-split-hero .home-split-description{top:50%;bottom:auto;left:24px;right:24px;transform:translateY(-50%);text-align:center}
+ .home-split-hero .home-split-links{justify-items:center;gap:5px}
+ .home-split-hero .home-split-links a{font-size:20px;line-height:1.6}
+ .home-split-hero .home-split-description p{max-width:560px;margin:0 auto 14px;font-size:16px!important;line-height:1.5!important}
+ .home-split-hero .home-split-description p:last-child{margin-bottom:0}
+ .home-split-hero .home-split-brand{top:calc(50% + 38px)}
+ .home-split-hero .home-split-scroll{bottom:14px}
+}
+@keyframes home-mobile-reveal-top{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes home-mobile-reveal-bottom{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+ .home-split-hero .home-split-photo{animation-duration:1.8s;animation-delay:0s;animation-timing-function:cubic-bezier(.22,.61,.36,1);animation-fill-mode:both}
+ .home-split-hero .home-split-left .home-split-photo{animation-name:home-mobile-reveal-top}
+ .home-split-hero .home-split-right .home-split-photo{animation-name:home-mobile-reveal-bottom}
+}
+
+/* Alternating process timeline inspired by the supplied reference. */
+.home-process-compact{padding:64px 0}
+.home-process-compact h2{margin:0 0 40px}
+.home-process-steps{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(5,minmax(64px,auto));list-style:none;padding:0;margin:0}
+.home-process-steps::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 1px);width:2px;background:#12334b}
+.home-process-step{position:relative;min-width:0;align-self:start;color:#12334b;padding:0 0 24px}
+.home-process-step:nth-child(1){grid-column:1;grid-row:1 / 3}
+.home-process-step:nth-child(2){grid-column:2;grid-row:2 / 4}
+.home-process-step:nth-child(3){grid-column:1;grid-row:3 / 5}
+.home-process-step:nth-child(4){grid-column:2;grid-row:4 / 6}
+.home-process-step:nth-child(even){padding-left:40px}
+.home-process-number{display:block;font:500 38px/1.1 "Montserrat",Arial,sans-serif;letter-spacing:-.035em;padding-bottom:10px;margin-bottom:14px;border-bottom:2px solid #9ba7ae;color:#12334b}
+.home-process-step:nth-child(even) .home-process-number{margin-left:-40px;padding-left:40px}
+.home-process-step::before{content:"";position:absolute;top:48px;right:-5px;width:9px;height:9px;border-radius:50%;background:#12334b;box-shadow:0 0 0 5px #fff;z-index:1}
+.home-process-step:nth-child(even)::before{right:auto;left:-4px}
+.home-process-step h3{font-size:20px;font-weight:400;line-height:1.4;color:#12334b;margin:0 0 8px}
+.home-process-step p{font-size:15px;line-height:1.6;color:#5e6265;margin:0}
+.home-process-step:nth-child(odd) h3,.home-process-step:nth-child(odd) p{padding-right:40px}
+.home-process-more{display:inline-flex;align-items:center;gap:18px;font-size:14px;color:#12334b;margin-top:26px;padding-bottom:4px;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size .4s ease}
+.home-process-more:hover,.home-process-more:focus-visible{background-size:100% 1px}
+@media(max-width:760px){
+ .home-process-compact{padding:44px 0}
+ .home-process-compact h2{margin-bottom:30px}
+ .home-process-steps{display:block}
+ .home-process-steps::before{left:5px}
+ .home-process-step:nth-child(n){padding:0 0 28px 34px}
+ .home-process-step:last-child{padding-bottom:0}
+ .home-process-number{font-size:30px}
+ .home-process-step:nth-child(n) .home-process-number{margin-left:-29px;padding-left:29px}
+ .home-process-step:nth-child(n)::before{top:39px;left:1px;right:auto}
+ .home-process-step h3{font-size:18px}
+ .home-process-step p{font-size:14px!important;line-height:1.5!important}
+ .home-process-step:nth-child(odd) h3,.home-process-step:nth-child(odd) p{padding-right:0}
+}
+@media(prefers-reduced-motion:reduce){.home-process-more{transition:none}}
+
+/* The project timeline presents each full step permanently. */
+.project-process-timeline{padding:64px 0}
+.project-intro-accordions + .project-process-timeline{border-top:0!important}
+.project-intro-accordions + .project-process-timeline::before{content:none}
+.project-process-timeline h2{margin:0 0 24px}
+.project-timeline-entry{margin:0;border:0}
+.project-timeline-heading{position:relative;display:block;padding:0;color:#12334b}
+.project-timeline-title{display:flex;align-items:flex-start;gap:16px}
+.project-process-timeline .home-process-step:nth-child(odd) .project-timeline-title{padding-right:40px}
+.project-process-timeline .home-process-step h3{flex:1;min-width:0;margin:0;padding:0;font-size:20px;font-weight:400;line-height:1.4}
+.project-process-timeline .home-process-step:nth-child(odd) h3{padding-right:0}
+.project-timeline-body{padding-top:18px}
+.project-process-timeline .project-timeline-body p{font-size:20px;font-weight:400;line-height:1.6;color:var(--text);margin:0}
+/* Use the usual inset separators around the rent diagram. */
+main > .project-process-timeline + .project-rents,main > .project-rents + .project-sale-preparation{border-top:0!important;position:relative}
+main > .project-process-timeline + .project-rents::before,main > .project-rents + .project-sale-preparation::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(var(--max),calc(100% - 96px));height:1px;background:#000}
+@media(max-width:1100px){main > .project-process-timeline + .project-rents::before,main > .project-rents + .project-sale-preparation::before{width:calc(100% - 64px)}}
+@media(max-width:760px){main > .project-process-timeline + .project-rents::before,main > .project-rents + .project-sale-preparation::before{width:calc(100% - 40px)}}
+@media(max-width:760px){
+ .project-process-timeline{padding:44px 0}
+ .project-process-timeline .home-process-step:nth-child(odd) .project-timeline-title{padding-right:0}
+ .project-process-timeline .home-process-step h3{font-size:18px}
+ .project-process-timeline .project-timeline-body p{font-size:16px!important;line-height:1.5!important}
+}
+
+/* Homepage feature: large statement left, existing line drawing right. */
+.home-process-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-bottom:1px solid #12334b;padding-bottom:32px}
+.home-process-statement{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:32px 52px 18px 0;min-width:0}
+.home-process-feature .home-process-statement h2{font-size:clamp(36px,4.1vw,58px);font-weight:400;line-height:1.18;letter-spacing:-.025em;margin:0 0 36px;color:var(--text)}
+.home-process-feature-link{display:inline-block;font-size:21px;font-weight:400;line-height:1.5;color:var(--text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.home-process-drawing{min-width:0;border-left:1px solid #000;padding:16px 0 48px 40px;margin-bottom:-32px}
+.home-process-feature .home-process-layout{border-bottom:0}
+main > .home-process-feature + .service-areas-reveal{border-top:0!important}
+.home-process-drawing .home-process-steps{grid-template-rows:repeat(5,minmax(76px,auto))}
+.home-process-drawing .home-process-step h3{font-size:18px}
+.home-process-drawing .home-process-step p{font-size:14px}
+@media(max-width:1000px){
+ .home-process-layout{grid-template-columns:1fr}
+ .home-process-statement{padding:0 0 32px}
+ .home-process-feature .home-process-statement h2{max-width:650px;margin-bottom:22px}
+ .home-process-drawing{border-left:0;padding:12px 0 0;margin-bottom:0}
+}
+@media(max-width:760px){
+ .home-process-layout{padding-bottom:24px}
+ .home-process-feature .home-process-statement h2{font-size:36px!important;line-height:1.2!important}
+ .home-process-feature-link{font-size:18px}
+ .home-process-drawing .home-process-step h3{font-size:18px}
+}
+
+/* Split scenario feature: quiet headline left, carousel confined to the right. */
+.page-home .service-areas-reveal .service-reveal-list{gap:32px}
+.page-home .service-areas-reveal .service-reveal-block{min-height:360px}
+@media(max-width:1100px){.page-home .service-areas-reveal .service-reveal-list{gap:24px}}
+@media(max-width:760px){.page-home .service-areas-reveal .service-reveal-list{gap:28px}.page-home .service-areas-reveal .service-reveal-block{min-height:360px}}
+.scenario-feature-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center}
+.scenario-feature-heading{min-width:0;padding:30px 52px 30px 0}
+.scenario-feature .scenario-feature-heading h2{font-size:clamp(36px,3.6vw,52px);font-weight:400;line-height:1.18;letter-spacing:-.025em;margin:0;color:var(--text);overflow-wrap:normal}
+.scenario-feature-carousel{min-width:0;overflow:hidden;padding:20px 0 24px 40px}
+.scenario-feature-carousel .scenario-slider{--slide-width:78%;--slide-gap:24px;--gallery-gutter:0px;min-width:0;max-width:100%;overflow:hidden}
+.scenario-feature-carousel .scenario-slider-track{width:100%;padding-inline:0}
+.scenario-feature .scenario-feature-carousel .infill-case.scenario-slide{padding:0;text-align:center}
+.scenario-feature .scenario-feature-carousel .infill-case-diagram{width:240px;max-width:100%;height:150px;margin:0 auto 22px}
+.scenario-feature .scenario-feature-carousel .infill-case-diagram svg{width:100%;height:100%;margin:0}
+.scenario-feature .scenario-feature-carousel .infill-case h3{font-size:23px;margin-bottom:12px}
+.scenario-feature .scenario-feature-carousel .infill-case p{font-size:16px;line-height:1.5;max-width:400px;margin:0 auto}
+.scenario-feature .value-development-embedded .value-case-summary .value-case-name{display:table;width:fit-content;max-width:100%;padding:8px 12px;margin:0 0 12px;background:#12334b;color:#fff;font:500 23px/1.4 "Montserrat",Arial,sans-serif;letter-spacing:0;text-transform:none}
+.scenario-feature .value-development-embedded .value-case-summary h3{font:400 16px/1.5 "Montserrat",Arial,sans-serif;letter-spacing:0;color:var(--text);margin:0}
+.scenario-feature-carousel .scenario-slider-controls{position:static;display:flex;justify-content:center;gap:16px;margin-top:24px}
+.scenario-feature-carousel .scenario-slider-controls[hidden]{display:none}
+.scenario-feature-carousel .scenario-slider-controls button{position:static}
+
+/* Four image-reveal links form the final service navigation. */
+.footer-service-menu{position:relative;inset:auto;visibility:visible;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;align-items:stretch;margin-top:64px;margin-bottom:0;padding:0;border-top:1px solid #000;border-bottom:1px solid #000;background:#fff}
+.footer-service-menu + .home-footer-modern{border-top:0}
+.footer-service-menu .footer-service-menu-link{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-width:0;min-height:240px;padding:28px 22px;margin:0;border:0;border-bottom:0!important;background:#fff;color:#24282b;text-decoration:none;transition:color .3s ease;touch-action:pan-x pan-y}
+.footer-service-menu .footer-service-menu-link + .footer-service-menu-link{border-left:1px solid #000}
+.footer-service-menu-link img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;pointer-events:none}
+.footer-service-menu-link::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72));opacity:0;transition:opacity .35s ease;pointer-events:none}
+.footer-service-menu-link > span{display:block;max-width:100%;font:400 clamp(20px,2.1vw,30px)/1.25 "Montserrat",Arial,sans-serif;letter-spacing:-.025em;hyphens:auto;overflow-wrap:anywhere}
+.footer-service-menu .footer-service-menu-link:is(:hover,:focus-visible,.is-image-active){background:#fff;color:#fff;text-decoration:none}
+.footer-service-menu-link:is(:hover,:focus-visible,.is-image-active) img,.footer-service-menu-link:is(:hover,:focus-visible,.is-image-active)::before{opacity:1}
+.footer-service-menu-link:focus-visible{outline:2px solid #12334b;outline-offset:4px;z-index:1}
+@media(hover:none){
+ .footer-service-menu .footer-service-menu-link:hover:not(.is-image-active):not(:focus-visible){color:#24282b}
+ .footer-service-menu-link:hover:not(.is-image-active):not(:focus-visible) img,.footer-service-menu-link:hover:not(.is-image-active):not(:focus-visible)::before{opacity:0}
+}
+@media(max-width:760px){
+ .footer-service-menu{grid-template-columns:1fr;grid-auto-flow:row;overflow:visible;margin-top:40px}
+ .footer-service-menu .footer-service-menu-link{min-height:180px;padding:24px 20px;touch-action:pan-y}
+ .footer-service-menu .footer-service-menu-link + .footer-service-menu-link{border-left:0;border-top:1px solid #000}
+ .footer-service-menu-link > span{font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){.footer-service-menu .footer-service-menu-link,.footer-service-menu-link img,.footer-service-menu-link::before{transition:none}}
+
+/* Minimal final footer with contact details and a separate legal row. */
+.footer-minimal{padding:56px 0 24px;border:0;background:#fff;color:#24282b}
+.footer-minimal-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;padding-bottom:36px}
+.footer-minimal .footer-minimal-nav{position:static;inset:auto;display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin:0;padding:0;border:0;background:transparent;visibility:visible}
+.footer-minimal .footer-minimal-nav a{display:block;width:max-content;max-width:100%;margin:0;padding:0;border:0;background:transparent;color:inherit;font:400 20px/1.5 "Montserrat",Arial,sans-serif;text-decoration:none}
+.footer-minimal .footer-minimal-nav a.footer-minimal-legal-link{font-size:13px;color:#676d71}
+.footer-minimal-contact{display:flex;flex-direction:column;align-items:flex-end;gap:18px;min-width:0;text-align:right;font:400 15px/1.5 "Montserrat",Arial,sans-serif}
+.footer-minimal-contact > div{max-width:100%}
+.footer-minimal-contact > div > span{display:block;color:#676d71;margin-bottom:3px}
+.footer-minimal-contact > div > a{display:block;color:inherit;overflow-wrap:anywhere;text-decoration:none}
+.footer-minimal-instagram{display:grid;place-items:center;width:44px;height:44px;color:inherit;text-decoration:none}
+.footer-minimal-instagram svg{display:block}
+.footer-minimal .footer-minimal-legal{position:static;inset:auto;display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 28px;margin:0;padding:22px 0 0;border:0;border-top:1px solid #aeb7bc;background:transparent;visibility:visible}
+.footer-minimal .footer-minimal-legal a{display:block;width:auto;margin:0;padding:0;border:0;background:transparent;color:#676d71;font:400 13px/1.5 "Montserrat",Arial,sans-serif;text-decoration:none}
+.footer-minimal .footer-minimal-nav a:hover,.footer-minimal .footer-minimal-nav a:focus-visible,.footer-minimal .footer-minimal-legal a:hover,.footer-minimal .footer-minimal-legal a:focus-visible,.footer-minimal-contact a:hover,.footer-minimal-contact a:focus-visible{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){
+ .footer-minimal{padding:36px 0 24px}
+ .footer-minimal-main{gap:20px;padding-bottom:28px}
+ .footer-minimal .footer-minimal-nav a{font-size:18px}
+ .footer-minimal-contact{font-size:14px}
+ .footer-minimal .footer-minimal-legal{gap:12px 20px}
+}
+
+/* Six mosaic positions, using restrained input lines in place of photos. */
+.contact.knowledge-contact-trial{border:0!important}
+.contact.contact-single-intro{background:#fff}
+.contact.knowledge-contact-trial::before{content:none!important}
+.contact.knowledge-contact-trial > .wrap{width:min(1440px,calc(100% - 64px))}
+@media(max-width:760px){.contact.knowledge-contact-trial > .wrap{width:calc(100% - 40px)}}
+.contact .contact-mosaic-form{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 32px;max-width:none;width:100%}
+.contact-mosaic-form .form-field{display:flex;flex-direction:column;justify-content:flex-end;min-width:0;min-height:96px}
+.contact-mosaic-form [data-mosaic-field="name"]{grid-column:1 / 5;grid-row:1}
+.contact-mosaic-form [data-mosaic-field="email"]{grid-column:5 / 9;grid-row:1}
+.contact-mosaic-form [data-mosaic-field="phone"]{grid-column:9 / 13;grid-row:1}
+.contact-mosaic-form [data-mosaic-field="address"]{grid-column:1 / 5;grid-row:2}
+.contact-mosaic-form [data-mosaic-field="message"]{grid-column:5 / 9;grid-row:2}
+.contact-mosaic-form .contact-mosaic-actions{grid-column:9 / 13;grid-row:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:8px;min-width:0;min-height:96px}
+.contact .contact-mosaic-form .form-field label{font-size:14px;font-weight:400;line-height:1.5;margin:0 0 6px;color:#676d71}
+.contact .contact-mosaic-form .form-field input,.contact .contact-mosaic-form .form-field textarea{box-sizing:border-box;width:100%;height:52px;min-height:52px;padding:10px 0;border:0;border-bottom:1px solid #9ba7ae;border-radius:0;background:transparent;color:var(--text);font:400 16px/1.5 "Montserrat",Arial,sans-serif;box-shadow:none}
+.contact .contact-mosaic-form .form-field textarea{resize:vertical}
+.contact .contact-mosaic-form .form-field input:focus,.contact .contact-mosaic-form .form-field textarea:focus{border-bottom-color:#12334b}
+.contact .contact-mosaic-actions .check{font-size:13px;line-height:1.5}
+.contact .contact-mosaic-actions .submit{margin:0;padding:8px 0;border:0;border-bottom:1px solid #12334b;background:transparent;color:#12334b;font:400 16px/1.4 "Montserrat",Arial,sans-serif}
+.contact .contact-mosaic-actions .submit:hover:not(:disabled),.contact .contact-mosaic-actions .submit:focus-visible:not(:disabled){background:transparent;color:#12334b;border-bottom-width:2px}
+.contact .contact-mosaic-actions .form-explanation{margin:0;font-size:12px!important;line-height:1.5!important}
+.contact-mosaic-form > .form-status,.contact-mosaic-form > noscript{grid-column:1 / -1;margin:0}
+.contact-mosaic-form > .form-status:empty{display:none}
+@media(max-width:760px){
+ .contact .contact-mosaic-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+ .contact-mosaic-form [data-mosaic-field],.contact-mosaic-form .contact-mosaic-actions{grid-column:auto;grid-row:auto}
+}
+@media(max-width:520px){
+ .contact .contact-mosaic-form{grid-template-columns:1fr;gap:22px}
+ .contact-mosaic-form .form-field{min-height:100px}
+ .contact-mosaic-form .contact-mosaic-actions{min-height:0;padding-top:8px}
+}
+
+/* Placeholder-only presentation with accessible labels and a taller message. */
+.contact .contact-mosaic-form .form-field label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.contact-mosaic-form .form-field{min-height:72px}
+.contact-mosaic-form [data-mosaic-field="name"]{grid-column:1 / 5;grid-row:1}
+.contact-mosaic-form [data-mosaic-field="email"]{grid-column:5 / 9;grid-row:1}
+.contact-mosaic-form [data-mosaic-field="phone"]{grid-column:1 / 5;grid-row:2}
+.contact-mosaic-form [data-mosaic-field="address"]{grid-column:5 / 9;grid-row:2}
+.contact-mosaic-form [data-mosaic-field="message"]{grid-column:9 / 13;grid-row:1 / 3;min-height:168px;justify-content:stretch}
+.contact .contact-mosaic-form [data-mosaic-field="message"] textarea{flex:1;height:100%;min-height:168px}
+.contact .contact-mosaic-form .form-field input::placeholder,.contact .contact-mosaic-form .form-field textarea::placeholder{color:#676d71;opacity:1}
+.contact-mosaic-form .contact-mosaic-actions{grid-column:1 / -1;grid-row:3;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 28px;min-height:0;padding-top:6px}
+.contact-mosaic-actions .check{grid-column:1;grid-row:1}
+.contact-mosaic-actions .submit{grid-column:2;grid-row:1}
+.contact-mosaic-actions .form-explanation{grid-column:2;grid-row:2}
+@media(max-width:760px){
+ .contact-mosaic-form [data-mosaic-field]{grid-column:auto;grid-row:auto}
+ .contact-mosaic-form [data-mosaic-field="message"]{grid-column:1 / -1;grid-row:auto}
+ .contact-mosaic-form .contact-mosaic-actions{grid-column:1 / -1;grid-row:auto}
+}
+@media(max-width:520px){
+ .contact-mosaic-form .contact-mosaic-actions{grid-template-columns:1fr;gap:12px}
+ .contact-mosaic-actions .check,.contact-mosaic-actions .submit,.contact-mosaic-actions .form-explanation{grid-column:1;grid-row:auto}
+}
+
+/* Header navigation: animated text underline and a persistent current-page line. */
+header #primary-nav a,header #primary-nav a:hover,header #primary-nav a:focus-visible,header #primary-nav a.active{background:transparent!important;border-bottom:0!important;box-shadow:none;text-decoration:none!important}
+header #primary-nav .primary-nav-label{position:relative;display:inline-block;padding-bottom:4px}
+header #primary-nav .primary-nav-line{position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .4s ease;pointer-events:none}
+header #primary-nav a:hover .primary-nav-line,header #primary-nav a:focus-visible .primary-nav-line,header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav a.active .primary-nav-line{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){header #primary-nav .primary-nav-line{transition:none}}
+@media(max-width:1000px){
+ .scenario-feature .scenario-feature-heading h2{font-size:36px}
+ .scenario-feature-heading{padding-right:30px}
+ .scenario-feature-carousel{padding-left:24px}
+}
+@media(max-width:760px){
+ .scenario-feature-layout{grid-template-columns:1fr}
+ .scenario-feature-heading{padding:0 0 28px}
+ .scenario-feature .scenario-feature-heading h2{font-size:36px!important;line-height:1.2!important}
+ .scenario-feature-carousel{padding:0 0 24px}
 }
