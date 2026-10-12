@@ -3392,27 +3392,6 @@ header #primary-nav .primary-nav-label{position:relative;display:inline-block;pa
 header #primary-nav .primary-nav-line{position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .4s ease;pointer-events:none}
 header #primary-nav a:hover .primary-nav-line,header #primary-nav a:focus-visible .primary-nav-line,header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav a.active .primary-nav-line{transform:scaleX(1)}
 @media(prefers-reduced-motion:reduce){header #primary-nav .primary-nav-line{transition:none}}
-
-/* Mobile spacing and permanently visible section separators. */
-@media(max-width:760px){
- .home-process-feature .home-process-step:not(:last-child){padding-bottom:46px}
- .scenario-feature .mobile-scroll-divider{transform:none}
- .page-home .elbhaus-codes > .management-editorial-trial::after{transform:translateX(-50%)}
-}
-
-/* Mobile scroll reveal applies to text itself, never to image-bearing wrappers. */
-@media(max-width:760px){
- .js body.page-intro main{opacity:1!important;transition:none!important}
- .js .scroll-fly-left,.js .scroll-fly-right,.js .scope-scroll-reveal .scope-item,.js .development-heading-copy,.js .development-left-copy,.js .development-right-copy,.js .philosophy-management-column,.js .process-steps li{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
- .home-split-hero .home-split-photo{animation:none!important;clip-path:none!important;transform:none!important}
- .home-split-hero .home-split-links,.home-split-hero .home-split-description,.home-split-hero .home-split-brand,.home-split-hero .home-split-scroll{animation:none!important}
- .editorial-hero-media{clip-path:none!important;transform:none!important;transition:none!important}
- .js main .mobile-text-reveal,.js .footer-service-menu .mobile-text-reveal,.js .footer-minimal .mobile-text-reveal{opacity:0!important;translate:0 24px;animation:none!important;transition:opacity .7s ease,translate .7s cubic-bezier(.22,.61,.36,1)!important}
- .js main .mobile-text-reveal.is-mobile-text-visible,.js .footer-service-menu .mobile-text-reveal.is-mobile-text-visible,.js .footer-minimal .mobile-text-reveal.is-mobile-text-visible{opacity:1!important;translate:0 0}
-}
-@media(max-width:760px) and (prefers-reduced-motion:reduce){
- .js main .mobile-text-reveal,.js .footer-service-menu .mobile-text-reveal,.js .footer-minimal .mobile-text-reveal{opacity:1!important;translate:none;transition:none!important}
-}
 @media(max-width:1000px){
  .scenario-feature .scenario-feature-heading h2{font-size:36px}
  .scenario-feature-heading{padding-right:30px}
