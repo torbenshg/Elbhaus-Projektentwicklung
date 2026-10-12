@@ -2905,3 +2905,9 @@ main h2,.editorial-hero h1,.management-editorial-copy h3{font-family:"Montserrat
 .value-development-embedded .value-case-summary .value-case-name{font:400 20px/1.5 "Montserrat",Arial,Helvetica,sans-serif;color:var(--text)}
 @media(max-width:850px){.value-development-embedded .value-cases-grid{border-top:0;background-image:none}.value-development-embedded .value-case + .value-case{border-top:1px solid #000}.value-development-embedded .value-case{border-bottom:0}.value-development-embedded .value-case:last-child{border-bottom:1px solid #000}}
 @media(max-width:760px){.value-development-embedded .value-case-summary .value-case-name{font-size:18px}}
+
+/* Mobile accordion text scale follows the reference; retain Elbhaus Montserrat. */
+@media(max-width:760px){
+ .scope-item > summary,.project-intro-accordion.scope-item > summary,.management-career.scope-item > summary,.faq-list details > summary,.value-case > .value-case-summary{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.5}
+ .value-development-embedded .value-case-summary .value-case-name,.value-case-summary h3{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.5}
+}
