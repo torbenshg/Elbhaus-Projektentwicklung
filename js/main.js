@@ -1,3 +1,55 @@
+// Mobile text blocks rise independently, so their neighboring images stay still.
+(function () {
+  const mobile = window.matchMedia('(max-width: 760px)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let observer, mutations;
+  const selectors = [
+    'main h1', 'main h2', 'main h3', 'main p', 'main dt', 'main dd',
+    'main .prose li', 'main .home-process-number', 'main .value-case-name',
+    'main summary > span:not(.scope-chevron)', 'main strong', 'main a',
+    'main label > span', 'main .form-field label',
+    '.footer-service-menu-link > span', '.footer-minimal-nav a',
+    '.footer-minimal-contact > div > span', '.footer-minimal-contact > div > a',
+    '.footer-minimal-legal a'
+  ].join(',');
+  function setup() {
+    if (observer) observer.disconnect();
+    if (mutations) mutations.disconnect();
+    document.querySelectorAll('.mobile-text-reveal').forEach(element => {
+      element.classList.remove('mobile-text-reveal', 'is-mobile-text-visible');
+    });
+    if (!mobile.matches || reduced.matches || !('IntersectionObserver' in window)) return;
+    const seen = new WeakSet();
+    observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-mobile-text-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -32px 0px' });
+    function scan() {
+      const candidates = Array.from(document.querySelectorAll(selectors));
+      candidates.forEach(element => {
+        if (seen.has(element) || !element.textContent.trim()) return;
+        // Animate text only; never move a card or link containing a picture.
+        if (element.querySelector('img, svg, input, textarea, h1, h2, h3, p, li')) return;
+        if (element.closest('.mobile-text-reveal')) return;
+        seen.add(element);
+        element.classList.add('mobile-text-reveal');
+        observer.observe(element);
+      });
+    }
+    scan();
+    if ('MutationObserver' in window) {
+      mutations = new MutationObserver(scan);
+      mutations.observe(document.body, { childList: true, subtree: true });
+    }
+  }
+  mobile.addEventListener('change', setup);
+  reduced.addEventListener('change', setup);
+  setup();
+})();
+
 // Neubau-Angebotsmieten: Balken und Beschriftung wachsen gemeinsam.
 document.querySelectorAll('.rent-chart').forEach(chart => {
   const groups = Array.from(chart.querySelectorAll('.rent-bar-group')).map(group => ({
