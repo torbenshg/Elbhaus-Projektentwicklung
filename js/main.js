@@ -20,6 +20,7 @@
     let expanded = false;
     function update(open) {
       expanded = open;
+      list.classList.toggle('is-mobile-process-expanded', open);
       texts.forEach(text => { text.hidden = !open; });
       button.setAttribute('aria-expanded', String(open));
       button.setAttribute('aria-label', open ? 'Erläuterungen zu 01 bis 04 schließen' : 'Erläuterungen zu 01 bis 04 öffnen');

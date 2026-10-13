@@ -3446,3 +3446,82 @@ header #primary-nav a:hover .primary-nav-line,header #primary-nav a:focus-visibl
  .mobile-process-content[hidden]{display:none!important}
  .mobile-process-content{margin-top:16px}
 }
+
+/* Approved compact square preview, rendered in the site's Montserrat typeface. */
+@media(max-width:760px){
+ .home-process-steps{display:flex;flex-direction:column;justify-content:space-between;width:100%;aspect-ratio:1;container-type:inline-size;font-family:"Montserrat",Arial,Helvetica,sans-serif}
+ .home-process-steps::before{top:0;bottom:0}
+ .home-process-steps .home-process-step:nth-child(1){--mobile-step-indent:11cqw}
+ .home-process-steps .home-process-step:nth-child(2){--mobile-step-indent:21cqw}
+ .home-process-steps .home-process-step:nth-child(3){--mobile-step-indent:31cqw}
+ .home-process-steps .home-process-step:nth-child(4){--mobile-step-indent:41cqw}
+ .home-process-steps .home-process-step:nth-child(n){width:100%;box-sizing:border-box;padding-top:0;padding-bottom:0;flex:none}
+ .home-process-steps .home-process-step:nth-child(n) .home-process-number{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:clamp(24px,7vw,28px);font-weight:500;line-height:1.1;padding-bottom:8px;margin-bottom:10px}
+ .home-process-steps .home-process-step:nth-child(n)::before{top:calc(clamp(24px,7vw,28px) * 1.1 + 4px)}
+ .home-process-steps .home-process-step:nth-child(n) h3,.project-process-timeline .home-process-step h3{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.4;margin:0}
+ .home-process-steps .home-process-step .project-timeline-title{padding-right:0}
+ .home-process-steps.is-mobile-process-expanded{aspect-ratio:auto;gap:28px}
+ .home-process-steps .mobile-process-content{font-family:"Montserrat",Arial,Helvetica,sans-serif;margin-top:14px}
+}
+
+/* Reference layout: slim horizontal rent bars with years and end labels. */
+.project-rents .rent-chart-horizontal{list-style:none;padding:0;margin:36px 0 0;max-width:900px;font-family:"Montserrat",Arial,Helvetica,sans-serif}
+.project-rents .rent-horizontal-row{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:16px;margin:0;padding:0;min-height:48px;font-size:18px;font-weight:400;color:#000}
+.project-rents .rent-horizontal-plot{display:flex;align-items:center;gap:12px;min-width:0}
+.project-rents .rent-horizontal-bar{display:block;flex:none;width:calc((100% - 76px) * var(--rent-length));height:2px;background:#000}
+.project-rents .rent-horizontal-amount{white-space:nowrap;font-weight:500;font-variant-numeric:tabular-nums}
+@media(max-width:760px){
+ .project-rents .rent-chart-horizontal{margin-top:28px}
+ .project-rents .rent-horizontal-row{grid-template-columns:42px minmax(0,1fr);gap:10px;min-height:34px;font-size:14px}
+ .project-rents .rent-horizontal-plot{gap:8px}
+ .project-rents .rent-horizontal-bar{width:calc((100% - 52px) * var(--rent-length))}
+}
+
+/* Mobile copy follows the compact reference; heading sizes are preserved. */
+@media(max-width:760px){
+ body{font-size:14px;line-height:1.6}
+ main p,main li,main .prose,main .knowledge-prose,
+ main .owner-welcome .prose p,main .project-process-editorial .process-intro p,
+ main .project-overview .project-section-copy p,
+ main .home-process-step p,main .project-process-timeline .project-timeline-body p,
+ main .home-split-hero .home-split-description p,
+ main .management-editorial-trial .management-editorial-qualifications{font-size:14px!important;line-height:1.6!important}
+ main .scope-item > summary,
+ main .project-intro-accordion.scope-item > summary,
+ main .management-career.scope-item > summary,
+ main .faq-list details > summary,
+ main .elbhaus-codes-list .project-intro-accordion.scope-item > summary{font-size:16px;line-height:1.5}
+ .footer-minimal-contact,.footer-minimal-contact p{font-size:14px;line-height:1.6}
+}
+
+/* Equal mobile spacing from accordion label to copy and from copy to rule. */
+@media(max-width:760px){
+ main .scope-item:not(.management-career) > summary,
+ main .faq-list details > summary{min-height:0;padding-top:18px;padding-bottom:18px}
+ main .scope-item > .project-intro-answer.prose,
+ main .elbhaus-codes-list .project-intro-answer.prose,
+ main .service-scope-accordion .scope-answer,
+ main .scope-item > .scope-answer,
+ main .faq-list details > p,
+ main .faq-list .project-intro-accordion.scope-item > p{padding-top:10px;padding-bottom:28px;margin-top:0;margin-bottom:0}
+ main .scope-item > .project-intro-answer > :first-child,
+ main .scope-item > .scope-answer > :first-child{margin-top:0}
+ main .scope-item > .project-intro-answer > :last-child,
+ main .scope-item > .scope-answer > :last-child{margin-bottom:0}
+}
+
+/* Mobile accordion controls sit at the right edge. */
+@media(max-width:760px){
+ main details.scope-item > summary,
+ main .faq-list details > summary,
+ main details.value-case > summary{display:flex;align-items:center;justify-content:space-between;gap:16px}
+ main details > summary > .scope-chevron{order:1!important;margin-left:auto!important;margin-right:0;flex-shrink:0}
+ main details > summary > :not(.scope-chevron){min-width:0}
+}
+
+/* Right-aligned accordion controls on desktop as well. */
+main details.scope-item > summary,
+main .faq-list details > summary,
+main details.value-case > summary{display:flex;align-items:center;justify-content:space-between;gap:16px}
+main details > summary > .scope-chevron{order:1!important;margin-left:auto!important;margin-right:0;flex-shrink:0}
+main details > summary > :not(.scope-chevron){min-width:0}
