@@ -3525,3 +3525,330 @@ main .faq-list details > summary,
 main details.value-case > summary{display:flex;align-items:center;justify-content:space-between;gap:16px}
 main details > summary > .scope-chevron{order:1!important;margin-left:auto!important;margin-right:0;flex-shrink:0}
 main details > summary > :not(.scope-chevron){min-width:0}
+
+/* Desktop: editorial split with a square horizontal scenario carousel. */
+.scenario-feature-selection{display:none}
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-layout{align-items:stretch}
+ .scenario-feature .scenario-feature-heading{display:flex;flex-direction:column;justify-content:flex-end;padding:32px 40px 44px 0}
+ .scenario-feature .scenario-feature-selection{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:32px}
+ .scenario-feature-selection a{font-size:20px;font-weight:400;line-height:1.5;color:var(--text);text-decoration:none;padding-bottom:3px;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size .35s ease}
+ .scenario-feature-selection a:hover,.scenario-feature-selection a:focus-visible{background-size:100% 1px}
+ .scenario-feature .scenario-feature-carousel{width:100%;aspect-ratio:1;box-sizing:border-box;border-left:1px solid #000;padding:32px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+ .scenario-feature .scenario-feature-carousel .scenario-slider{width:100%;--slide-width:78%;--slide-gap:24px}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram{width:100%;max-width:300px;height:clamp(150px,15vw,210px);margin-bottom:22px}
+ .scenario-feature .scenario-feature-carousel .scenario-slider-controls{margin-top:24px}
+}
+
+/* Accordion copy aligns with the label now that controls are on the right. */
+main .scope-item > .project-intro-answer,
+main .scope-item > .scope-answer,
+main .faq-list details > p,
+main .management-career-body{padding-left:0!important;margin-left:0!important}
+
+/* Desktop management follows the mobile content order, with a square portrait. */
+@media(min-width:761px){
+ .management-editorial-trial .management-editorial-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+ .management-editorial-trial .management-editorial-copy,
+ .management-editorial-trial .management-editorial-information{display:block}
+ .management-editorial-trial .management-editorial-copy{padding:0}
+ .management-editorial-trial .management-mobile-heading{display:block;margin:0 0 28px}
+ .management-editorial-trial .management-editorial-copy h3{font-size:23px;margin:0 0 28px;padding:0}
+ .management-editorial-trial .management-role-line{display:none}
+ .management-editorial-trial .management-editorial-qualifications{margin:0 0 24px}
+ .management-editorial-trial .management-career{max-width:none;margin-top:0;margin-bottom:0}
+ .management-editorial-trial .management-editorial-portrait{grid-column:auto;grid-row:auto;align-self:start;width:100%;aspect-ratio:1;height:auto;min-height:0;box-sizing:border-box;border:1px solid #000;background:#fff;opacity:1}
+ .management-editorial-trial .management-editorial-portrait svg{display:none}
+ .management-editorial-trial .management-editorial-portrait span{font-size:16px}
+}
+
+/* Remove the inherited chevron edges from the process accordion plus. */
+.mobile-process-toggle .scope-chevron{border:0!important;border-radius:0;background:none;box-shadow:none}
+.mobile-process-toggle{appearance:none;box-shadow:none;border-radius:0}
+
+/* Service preview copy matches the project-development link size. */
+.page-home .service-reveal-copy .service-reveal-benefit{font-size:21px!important;font-weight:400;line-height:1.5!important}
+@media(max-width:760px){.page-home .service-reveal-copy .service-reveal-benefit{font-size:18px!important}}
+
+/* Desktop reference: controls above the larger scenario drawings. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel{padding:24px}
+ .scenario-feature .scenario-feature-carousel .scenario-slider{display:flex;flex-direction:column;height:100%;--slide-width:88%;--slide-gap:20px}
+ .scenario-feature .scenario-feature-carousel .scenario-slider-controls{order:-1;justify-content:flex-end;flex:none;margin:0 0 24px}
+ .scenario-feature .scenario-feature-carousel .scenario-slider-track{flex:1;align-items:center;min-height:0}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram{width:100%;max-width:none;height:clamp(180px,22vw,340px);margin-bottom:22px}
+}
+@media(min-width:761px) and (max-width:1000px){
+ .scenario-feature .scenario-feature-carousel{padding:18px}
+ .scenario-feature .scenario-feature-carousel .scenario-slider-controls{margin-bottom:16px}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram{height:150px;margin-bottom:16px}
+}
+
+/* Desktop management reference: wide text column and smaller square at right. */
+@media(min-width:761px){
+ .management-editorial-trial .management-editorial-row{grid-template-columns:minmax(0,1fr) minmax(240px,30%);gap:48px;border-bottom:1px solid #000;padding-bottom:0}
+ .management-editorial-trial .management-editorial-portrait{align-self:end;justify-self:end;max-width:100%;aspect-ratio:1}
+ .management-editorial-trial .management-editorial-copy{padding-bottom:24px}
+ .management-editorial-trial .management-career{width:100%}
+}
+
+/* Rent chart: original animated vertical bars on desktop, horizontal rows on mobile. */
+@media(min-width:761px){.project-rents .rent-chart-horizontal{display:none}.project-rents .rent-chart-desktop{display:block}}
+@media(max-width:760px){.project-rents .rent-chart-desktop{display:none}}
+
+/* Desktop management expands upward from the fixed lower rule. */
+@media(min-width:761px){
+ .management-editorial-trial .management-editorial-row{height:560px;align-items:stretch}
+ .management-editorial-trial .management-editorial-copy{position:relative;align-self:stretch;height:100%;min-height:0;padding-bottom:0;box-sizing:border-box}
+ .management-editorial-trial .management-mobile-heading{position:absolute;top:0;left:0;margin:0}
+ .management-editorial-trial .management-bottom-stack{position:absolute;left:0;right:0;bottom:0}
+ .management-editorial-trial .management-career-body{padding-bottom:20px}
+ .management-editorial-trial .management-career-body p{margin:0}
+ .management-editorial-trial .management-editorial-portrait{align-self:end}
+}
+@media(min-width:761px) and (max-width:1000px){.management-editorial-trial .management-editorial-row{height:620px}}
+
+/* Desktop value-creation block framed as in the annotated reference. */
+@media(min-width:761px){
+ main > .scenario-feature{border-top:0!important;border-bottom:0!important}
+ main > .scenario-feature::before{content:none!important}
+ .scenario-feature .scenario-feature-layout{border-top:1px solid #000;border-bottom:1px solid #000}
+ .scenario-feature .scenario-feature-heading{padding-bottom:28px}
+ .scenario-feature .scenario-feature-carousel{border-left:1px solid #000}
+}
+
+/* Larger mobile service-preview text. */
+@media(max-width:760px){.page-home .service-reveal-copy .service-reveal-benefit{font-size:21px!important;line-height:1.5!important}}
+
+/* Scenario explanations align directly with the blue title box. */
+.scenario-feature .scenario-feature-carousel .infill-case.scenario-slide{text-align:left}
+.scenario-feature .scenario-feature-carousel .infill-case h3{margin-left:0;margin-right:0}
+.scenario-feature .scenario-feature-carousel .infill-case p{text-align:left;margin-left:0;margin-right:0}
+
+/* Match the project-development links and align the two columns at the bottom. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-selection{gap:0;margin-top:32px}
+ .scenario-feature .scenario-feature-selection a{font-size:21px;font-weight:400;line-height:1.5;padding-bottom:0;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;background-image:none;transition:none}
+ .scenario-feature .scenario-feature-heading{justify-content:flex-end;padding-bottom:28px}
+ .scenario-feature .scenario-feature-carousel{padding-bottom:28px}
+ .scenario-feature .scenario-feature-carousel .scenario-slider-track{align-items:flex-end}
+}
+
+/* Compact stack: headline immediately above the two consecutive links. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-heading{gap:0}
+ .scenario-feature .scenario-feature-heading h2{margin-bottom:0}
+ .scenario-feature .scenario-feature-selection{margin-top:0;gap:0}
+ .scenario-feature .scenario-feature-selection a{margin:0;padding-top:0;padding-bottom:0}
+}
+
+/* Match the process feature's height and left-column placement on desktop. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-layout{height:var(--process-feature-height,560px);box-sizing:border-box}
+ .scenario-feature .scenario-feature-heading{padding:32px 52px 50px 0;justify-content:flex-end;gap:0}
+ .scenario-feature .scenario-feature-heading h2{margin:0}
+ .scenario-feature .scenario-feature-selection{margin-top:36px;gap:0}
+ .scenario-feature .scenario-feature-carousel{height:100%;min-height:0;aspect-ratio:auto;padding-bottom:50px}
+}
+
+/* Free desktop scrolling with shared graphic, title and description rows. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel .scenario-slider-track{align-items:stretch;flex:none;margin-top:auto}
+ .scenario-feature .scenario-feature-carousel .infill-case.scenario-slide{display:grid;grid-template-rows:calc(clamp(180px,22vw,340px) + 22px) 92px 1fr;align-content:start}
+ .scenario-feature .scenario-feature-carousel .infill-case h3{align-self:start;margin-top:0;min-height:0}
+ .scenario-feature .scenario-feature-carousel .infill-case p{align-self:start}
+}
+@media(min-width:761px) and (max-width:1000px){
+ .scenario-feature .scenario-feature-carousel .infill-case.scenario-slide{grid-template-rows:166px 92px 1fr}
+}
+
+/* Compact management layout with headline and portrait aligned at the top. */
+@media(min-width:761px){
+ .management-editorial-trial .management-editorial-row{height:auto;align-items:start}
+ .management-editorial-trial .management-editorial-copy{height:auto;position:relative;align-self:start;padding-bottom:20px}
+ .management-editorial-trial .management-mobile-heading{position:static;margin:0 0 28px}
+ .management-editorial-trial .management-bottom-stack{position:static}
+ .management-editorial-trial .management-editorial-portrait{align-self:start}
+}
+
+/* Equal top anchors for every scenario graphic, including Baulückenschluss. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel .scenario-slider-track{scroll-behavior:auto;scroll-snap-type:none;align-items:stretch}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram{align-self:start;margin-top:0}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram svg{display:block;align-self:start}
+ .scenario-feature .scenario-feature-carousel .infill-case h3{grid-row:2;align-self:start;margin-top:0}
+ .scenario-feature .scenario-feature-carousel .infill-case p{grid-row:3;align-self:start}
+}
+
+/* Desktop accordion typography and balanced copy spacing from the reference. */
+@media(min-width:761px){
+ main .scope-item > summary,
+ main .faq-list details > summary{font-size:24px!important;font-weight:400;line-height:1.5!important}
+ main .scope-item:not(.management-career) > summary,
+ main .faq-list details > summary{min-height:0;padding-top:24px!important;padding-bottom:24px!important}
+ main .scope-item > .project-intro-answer,
+ main .scope-item > .scope-answer,
+ main .faq-list details > p{padding-top:8px!important;padding-bottom:32px!important;margin-top:0;margin-bottom:0}
+ main .scope-item > .project-intro-answer p,
+ main .scope-item > .project-intro-answer li,
+ main .scope-item > .scope-answer p,
+ main .scope-item > .scope-answer li,
+ main .faq-list details > p,
+ main .management-career-body p{font-size:18px!important;font-weight:400;line-height:1.6!important}
+ main .scope-item > .project-intro-answer > :first-child,
+ main .scope-item > .scope-answer > :first-child{margin-top:0}
+ main .scope-item > .project-intro-answer > :last-child,
+ main .scope-item > .scope-answer > :last-child{margin-bottom:0}
+ main .management-career-body{padding-top:24px;padding-bottom:32px}
+}
+
+/* Reserve visible space for every explanation within the fixed-height carousel. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel .scenario-slider-track{flex:1;min-height:0;height:auto;margin-top:0;align-items:stretch}
+ .scenario-feature .scenario-feature-carousel .infill-case.scenario-slide{height:100%;grid-template-rows:minmax(0,1fr) 92px 72px;min-height:0}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram{height:calc(100% - 22px);min-height:0;max-height:none;margin-bottom:22px}
+ .scenario-feature .scenario-feature-carousel .infill-case p{display:block;visibility:visible;opacity:1;margin-top:0;margin-bottom:0}
+}
+
+/* Career label uses the same size as the qualifications. */
+.management-editorial-trial .management-career.scope-item > summary{font-size:16px!important;line-height:1.7!important}
+@media(max-width:760px){.management-editorial-trial .management-career.scope-item > summary{font-size:14px!important;line-height:1.6!important}}
+
+/* Restore the larger drawings and let title and explanation follow naturally. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel .scenario-slider-track{flex:none;height:auto;margin-top:auto;align-items:flex-start}
+ .scenario-feature .scenario-feature-carousel .infill-case.scenario-slide{display:block;height:auto;min-height:0;grid-template-rows:none}
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram{height:clamp(180px,22vw,340px);width:100%;max-width:none;margin:0}
+ .scenario-feature .scenario-feature-carousel .infill-case h3{margin:0 0 12px;min-height:0}
+ .scenario-feature .scenario-feature-carousel .infill-case p{display:block;margin:0;text-align:left}
+}
+@media(min-width:761px) and (max-width:1000px){.scenario-feature .scenario-feature-carousel .infill-case-diagram{height:150px}}
+
+/* Extend the scenario area to the same right edge as the service navigation. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel{padding-right:0}
+ .scenario-feature .scenario-feature-carousel .scenario-slider-controls{padding-right:24px}
+}
+@media(min-width:761px) and (max-width:1000px){.scenario-feature .scenario-feature-carousel .scenario-slider-controls{padding-right:18px}}
+
+/* Enlarge drawings toward the upper-right; keep arrow size without a frame. */
+@media(min-width:761px){
+ .scenario-feature .scenario-feature-carousel .infill-case-diagram svg{transform:scale(1.06);transform-origin:left bottom}
+}
+.scenario-feature-carousel .scenario-slider-controls button{border:0;border-radius:0;background:transparent;box-shadow:none}
+.scenario-feature-carousel .scenario-slider-controls button:hover{background:transparent}
+
+/* Remove only the divider between the statement and the 01–04 drawing. */
+.home-process-feature .home-process-drawing{border-left:0}
+.management-editorial-trial .management-career-body p{font-size:16px!important;line-height:1.7!important}
+@media(max-width:760px){.management-editorial-trial .management-career-body p{font-size:14px!important;line-height:1.6!important}}
+
+/* Content-width divider between the process statement and our services. */
+main > .home-process-feature + .service-areas-reveal{position:relative}
+main > .home-process-feature + .service-areas-reveal::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(var(--max),calc(100% - 96px));height:1px;background:#000}
+@media(max-width:1100px){main > .home-process-feature + .service-areas-reveal::before{width:calc(100% - 64px)}}
+@media(max-width:850px){main > .home-process-feature + .service-areas-reveal::before{width:calc(100% - 40px)}}
+
+/* Desktop career copy appears in a fixed area without moving surrounding content. */
+@media(min-width:761px){
+ .management-editorial-trial .management-editorial-row{min-height:var(--management-fixed-height,0px)}
+ .management-editorial-trial .management-career{position:relative}
+ .management-editorial-trial .management-career-body{position:absolute;top:100%;left:0;right:0;box-sizing:border-box}
+}
+
+/* Portrait and lower rule share the same baseline; career text fades in gently. */
+@media(min-width:761px){
+ .management-editorial-trial .management-editorial-portrait{align-self:end}
+}
+.management-editorial-trial .management-career[open] .management-career-body{animation:none}
+@keyframes managementCareerReveal{from{opacity:1;transform:none;clip-path:inset(0 0 100% 0)}to{opacity:1;transform:none;clip-path:inset(0 0 0 0)}}
+@media(prefers-reduced-motion:reduce){.management-editorial-trial .management-career[open] .management-career-body{animation:none}}
+
+/* Tighter spacing only for the career explanation. */
+.management-editorial-trial .management-career-body{padding-top:10px;padding-bottom:12px}
+.management-editorial-trial .management-editorial-copy{padding-bottom:12px}
+
+/* Value examples meet the scenario block at one shared dividing rule. */
+main > .typical-situations.scenario-feature{padding-bottom:0}
+.scenario-feature .scenario-feature-layout{border-bottom:1px solid #000}
+main > .value-examples{padding-top:0!important;margin-top:0}
+.value-examples .value-development.value-development-embedded{padding-top:0}
+.value-examples .value-cases-grid{border-top:0}
+.value-examples .mobile-scroll-divider{display:none}
+/* Scope headings and accordion rows follow the sale-preparation editorial style. */
+.service-content .prose h2.service-scope-heading{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:31px;font-weight:400;line-height:1.25;letter-spacing:-.02em;color:#000;margin:55px 0 28px;padding:0;border:0}
+.service-content .service-scope-list{margin-top:0;border-top:0}
+.service-content .service-scope-list .scope-item{opacity:1;transform:none}
+.service-content .service-scope-list .scope-item > summary{padding-left:0;padding-right:0;font-weight:400;color:var(--text)}
+@media(max-width:760px){.service-content .prose h2.service-scope-heading{font-size:36px!important;line-height:1.2!important}}
+
+/* Compact accordion label rows; the career accordion stays unchanged. */
+main .scope-item:not(.management-career) > summary,
+main .faq-list details:not(.management-career) > summary{min-height:0;padding-top:16px!important;padding-bottom:16px!important}
+main .scope-item:not(.management-career) > .project-intro-answer,
+main .scope-item:not(.management-career) > .scope-answer,
+main .faq-list details > p{padding-top:16px!important}
+.value-examples .value-case{padding-top:18px;padding-bottom:18px}
+.value-examples .value-case-summary{min-height:0}
+@media(max-width:760px){
+ main .scope-item:not(.management-career) > summary,
+ main .faq-list details:not(.management-career) > summary{padding-top:14px!important;padding-bottom:14px!important}
+ main .scope-item:not(.management-career) > .project-intro-answer,
+ main .scope-item:not(.management-career) > .scope-answer,
+ main .faq-list details > p{padding-top:14px!important}
+}
+
+/* Six addition forms in a quiet black-line grid, matching the reference. */
+.infill-scenarios.scenario-reference-grid .infill-scenarios-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid #000}
+.infill-scenarios.scenario-reference-grid .infill-case:nth-child(n){display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:24px;padding:24px;min-height:360px;box-sizing:border-box;border:0;border-right:1px solid #000}
+.infill-scenarios.scenario-reference-grid .infill-case:nth-child(3n){border-right:0}
+.infill-scenarios.scenario-reference-grid .infill-case:nth-child(n+4){border-top:1px solid #000}
+.infill-scenarios.scenario-reference-grid .infill-case h3{margin:0;flex:none}
+.infill-scenarios.scenario-reference-grid .infill-case-diagram{width:100%;height:auto;aspect-ratio:3/2;max-height:none;margin:0;background:transparent;flex:none}
+.infill-scenarios.scenario-reference-grid .infill-case p{margin:0;min-height:3.2em}
+@media(max-width:760px){
+ .infill-scenarios.scenario-reference-grid .infill-scenarios-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .infill-scenarios.scenario-reference-grid .infill-case:nth-child(n){min-height:300px;padding:18px;border-top:0;border-right:1px solid #000}
+ .infill-scenarios.scenario-reference-grid .infill-case:nth-child(2n){border-right:0}
+ .infill-scenarios.scenario-reference-grid .infill-case:nth-child(n+3){border-top:1px solid #000}
+}
+@media(max-width:520px){
+ .infill-scenarios.scenario-reference-grid .infill-scenarios-grid{grid-template-columns:1fr}
+ .infill-scenarios.scenario-reference-grid .infill-case:nth-child(n){min-height:0;padding:24px 0;border-right:0;border-top:1px solid #000}
+ .infill-scenarios.scenario-reference-grid .infill-case:first-child{border-top:0}
+}
+
+/* Larger drawings followed by a blue title and its explanation. */
+.infill-scenarios.scenario-reference-grid .infill-case:nth-child(n){display:grid;grid-template-rows:minmax(0,1fr) auto auto;align-content:start;align-items:start;gap:0;min-height:380px}
+.infill-scenarios.scenario-reference-grid .infill-case-diagram{width:100%;aspect-ratio:3/2;margin:0 0 16px;align-self:center}
+.infill-scenarios.scenario-reference-grid .infill-case-diagram svg{width:100%;height:100%}
+.infill-scenarios.scenario-reference-grid .infill-case h3{margin:0 0 16px;justify-self:start}
+.infill-scenarios.scenario-reference-grid .infill-case p{margin:0}
+@media(max-width:760px){.infill-scenarios.scenario-reference-grid .infill-case:nth-child(n){min-height:320px}}
+@media(max-width:520px){.infill-scenarios.scenario-reference-grid .infill-case:nth-child(n){min-height:0}}
+
+/* Brief introduction and an open top edge for the addition grid. */
+.infill-scenarios.scenario-reference-grid .addition-grid-intro{margin:0 0 32px;max-width:900px}
+.infill-scenarios.scenario-reference-grid .infill-scenarios-grid{border-top:0}
+
+/* Scenario heading matches the homepage service heading. */
+.infill-scenarios.scenario-reference-grid > h2{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:31px;font-weight:400;line-height:1.25;letter-spacing:-.02em;color:#000;margin:0 0 28px;padding:0;border:0}
+@media(max-width:760px){.infill-scenarios.scenario-reference-grid > h2{font-size:36px!important;line-height:1.2!important}}
+
+/* Remove the requested upper rules only. */
+.infill-editorial-grid.scenario-reference-grid{border-top:0}
+main > .project-process-timeline + .project-rents::before{content:none!important}
+/* Selected section headings match Raum für Wertschöpfung. */
+main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-height:1.18!important}
+@media(max-width:760px){main h2.matched-feature-heading{font-size:36px!important;line-height:1.2!important}}
+
+/* Remove the full-width sale boundary and the isolated line below management. */
+.page-home main > #verkauf{border-top:0!important}
+.page-home .elbhaus-codes > .management-editorial-trial::after{content:none!important}
+.page-home main > .elbhaus-codes + .home-faq{border-top:0!important}
+/* Use the same title-to-rule spacing above Chiffre and management. */
+.page-home .elbhaus-codes > .management-editorial-trial{padding-top:var(--chiffre-heading-gap,172px)}
+
+/* Original portrait photograph in the existing square management field. */
+.management-editorial-trial .management-editorial-portrait{overflow:hidden;background:#000}
+.management-editorial-trial .management-editorial-portrait img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;object-position:center;min-width:0;min-height:0}

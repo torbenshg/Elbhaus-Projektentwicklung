@@ -916,6 +916,9 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
       const startHeight = details.getBoundingClientRect().height;
       expanded = !expanded;
       details.dispatchEvent(new CustomEvent('accordion:change', {detail:{expanded}}));
+      const fixedCareer = details.classList.contains('management-career') && window.matchMedia('(min-width:761px)').matches;
+      const careerBody = fixedCareer ? details.querySelector('.management-career-body') : null;
+      const careerStart = careerBody && animation ? window.getComputedStyle(careerBody).clipPath : null;
       if (animation) { animation.cancel(); animation = null; }
       if (icon) icon.style.transform = expanded ? (icon.classList.contains('value-toggle-arrow') ? 'rotate(180deg)' : 'rotate(45deg)') : 'rotate(0deg)';
       if (reduced.matches || typeof details.animate !== 'function') {
@@ -924,6 +927,21 @@ document.querySelectorAll('.rent-chart').forEach(chart => {
         return;
       }
       resetStyles();
+      if (careerBody) {
+        details.open = true;
+        const current = careerBody.animate([
+          {clipPath: careerStart || (expanded ? 'inset(0 0 100% 0)' : 'inset(0 0 0 0)')},
+          {clipPath: expanded ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)'}
+        ], {duration:400, easing:'cubic-bezier(.22,.61,.36,1)'});
+        animation = current;
+        current.onfinish = () => {
+          if (animation !== current) return;
+          details.open = expanded;
+          animation = null;
+          resetStyles();
+        };
+        return;
+      }
       details.open = expanded;
       const endHeight = details.getBoundingClientRect().height;
       // Keep the contents mounted while the closing height is animated.
@@ -1066,7 +1084,7 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
     let cycle = 0, step = 0, frame = 0, animating = false;
     const queue = [];
     const measure = () => {
-      step = originals[1].offsetLeft - originals[0].offsetLeft;
+      step = originals[1].getBoundingClientRect().left - originals[0].getBoundingClientRect().left;
       cycle = step * originals.length;
     };
     const normalize = () => {
@@ -1096,17 +1114,26 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
       frame = requestAnimationFrame(tick);
     };
     const move = direction => {queue.push(direction);animateNext();};
-    const interrupt = () => {cancelAnimationFrame(frame);animating = false;queue.length = 0;normalize();};
+    const interrupt = () => {cancelAnimationFrame(frame);animating = false;queue.length = 0;};
     controls.querySelector('.scenario-prev').addEventListener('click', () => move(-1));
     controls.querySelector('.scenario-next').addEventListener('click', () => move(1));
     track.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {event.preventDefault();move(event.key === 'ArrowLeft' ? -1 : 1);}
     });
     ['pointerdown', 'touchstart', 'wheel'].forEach(type => track.addEventListener(type, interrupt, {passive:true}));
-    track.addEventListener('scroll', () => {normalize();highlightContact();}, {passive:true});
+    let dragging = false, rebaseTimer;
+    track.addEventListener('pointerdown', () => { dragging = true; }, {passive:true});
+    const endDrag = () => { dragging = false; };
+    window.addEventListener('pointerup', endDrag, {passive:true});
+    window.addEventListener('pointercancel', endDrag, {passive:true});
+    track.addEventListener('scroll', () => {
+      highlightContact();
+      clearTimeout(rebaseTimer);
+      rebaseTimer = setTimeout(() => { if (!dragging && !animating) normalize(); }, 300);
+    }, {passive:true});
     window.addEventListener('resize', () => {
       interrupt();
-      const index = step ? track.scrollLeft / step : originals.length;
+      const index = step ? Math.round(track.scrollLeft / step) : originals.length;
       measure();
       track.scrollLeft = index * step;
       normalize();
@@ -1140,7 +1167,7 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   draw();
 })();
 
-// Restore the touch preview on mobile service fields; keep desktop fields open.
+// Reveal only the service field under the pointer, touch, or keyboard focus.
 (function () {
   const blocks = Array.from(document.querySelectorAll('[data-service-block]'));
   if (!blocks.length) return;
@@ -1155,15 +1182,15 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
     blocks.forEach(other => setOpen(other, other === block));
   }
   function sync() {
-    blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, !mobile.matches); });
+    blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, false); });
   }
   blocks.forEach(block => {
     let previewOnly = false;
     block.addEventListener('pointerenter', event => {
-      if (mobile.matches && event.pointerType !== 'touch') preview(block);
+      if (event.pointerType !== 'touch') preview(block);
     });
     block.addEventListener('pointerleave', event => {
-      if (mobile.matches && event.pointerType !== 'touch' && block.dataset.pinned !== 'true') setOpen(block, false);
+      if (event.pointerType !== 'touch' && (!mobile.matches || block.dataset.pinned !== 'true') && !block.contains(document.activeElement)) setOpen(block, false);
     });
     block.addEventListener('pointerdown', event => {
       if (!mobile.matches || (event.pointerType !== 'touch' && event.pointerType !== 'pen')) return;
@@ -1176,7 +1203,10 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
       if (mobile.matches && previewOnly && event.detail !== 0) event.preventDefault();
       previewOnly = false;
     });
-    block.addEventListener('focusin', () => { if (mobile.matches) preview(block); });
+    block.addEventListener('focusin', () => preview(block));
+    block.addEventListener('focusout', event => {
+      if (!block.contains(event.relatedTarget) && (!mobile.matches || block.dataset.pinned !== 'true')) setOpen(block, false);
+    });
   });
   document.addEventListener('touchmove', event => {
     if (!mobile.matches || !event.touches[0]) return;
@@ -1193,4 +1223,61 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   }, { passive: true });
   mobile.addEventListener('change', sync);
   sync();
+})();
+
+// Keep the desktop value-creation feature as tall as the process feature.
+(() => {
+  const source = document.querySelector('.home-process-feature .home-process-layout');
+  const target = document.querySelector('.scenario-feature .scenario-feature-layout');
+  if (!source || !target) return;
+  const desktop = window.matchMedia('(min-width:761px)');
+  const syncHeight = () => {
+    if (desktop.matches) target.style.setProperty('--process-feature-height', source.offsetHeight + 'px');
+    else target.style.removeProperty('--process-feature-height');
+  };
+  if ('ResizeObserver' in window) new ResizeObserver(syncHeight).observe(source);
+  window.addEventListener('resize', syncHeight);
+  desktop.addEventListener('change', syncHeight);
+  syncHeight();
+})();
+
+// Size the desktop career area once per width change; toggling does not change layout.
+(() => {
+ const row = document.querySelector('.management-editorial-row');
+ if (!row) return;
+ const panel = row.querySelector('.management-career');
+ const copy = row.querySelector('.management-editorial-copy');
+ const body = panel.querySelector('.management-career-body');
+ const desktop = window.matchMedia('(min-width:761px)');
+ let lastWidth = 0;
+ const measure = () => {
+  row.style.removeProperty('--management-fixed-height');
+  if (!desktop.matches) return;
+  const wasOpen = panel.open;
+  panel.open = true;
+  const required = Math.max(row.offsetHeight, copy.offsetHeight + body.offsetHeight);
+  row.style.setProperty('--management-fixed-height', Math.ceil(required) + 'px');
+  panel.open = wasOpen;
+  lastWidth = row.getBoundingClientRect().width;
+ };
+ measure();
+ if ('ResizeObserver' in window) new ResizeObserver(() => {
+  if (Math.abs(row.getBoundingClientRect().width - lastWidth) > .5) measure();
+ }).observe(row);
+ desktop.addEventListener('change', measure);
+ if (document.fonts) document.fonts.ready.then(measure);
+})();
+
+// Match management's top spacing to the space above Elbhaus Chiffre.
+(() => {
+ const sale = document.querySelector('.page-home #verkauf');
+ const codes = document.querySelector('.page-home .elbhaus-codes');
+ const management = codes && codes.querySelector('.management-editorial-trial');
+ if (!sale || !management) return;
+ const sync = () => {
+  const gap = parseFloat(window.getComputedStyle(sale).paddingBottom) + parseFloat(window.getComputedStyle(codes).paddingTop);
+  management.style.setProperty('--chiffre-heading-gap', gap + 'px');
+ };
+ window.addEventListener('resize', sync);
+ sync();
 })();
