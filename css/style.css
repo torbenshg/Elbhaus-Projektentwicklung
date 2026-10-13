@@ -3852,3 +3852,15 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
 /* Original portrait photograph in the existing square management field. */
 .management-editorial-trial .management-editorial-portrait{overflow:hidden;background:#000}
 .management-editorial-trial .management-editorial-portrait img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;object-position:center;min-width:0;min-height:0}
+
+/* Mobile value creation follows the reference: links, top-right arrows, larger drawings. */
+@media(max-width:760px){
+ .typical-situations .scenario-feature-heading{padding:0 0 28px}
+ .typical-situations .scenario-feature-selection{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-top:16px}
+ .typical-situations .scenario-feature-selection a{font-size:18px;font-weight:400;line-height:1.5;margin:0;padding:0;color:var(--text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;background:none}
+ .typical-situations .scenario-feature-carousel .scenario-slider{display:flex;flex-direction:column;--slide-width:88%;--slide-gap:20px}
+ .typical-situations .scenario-feature-carousel .scenario-slider-controls{order:-1;justify-content:flex-end;margin:0 0 20px;gap:16px}
+ .typical-situations .scenario-feature-carousel .infill-case-diagram{width:100%;max-width:none;height:auto;aspect-ratio:3/2;margin:0 0 12px}
+ .typical-situations .scenario-feature-carousel .infill-case-diagram svg{display:block;width:100%;height:100%}
+ .typical-situations .scenario-feature-carousel .infill-case h3{margin-top:0}
+}
