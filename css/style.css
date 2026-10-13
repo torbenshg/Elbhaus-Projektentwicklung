@@ -3864,3 +3864,22 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .typical-situations .scenario-feature-carousel .infill-case-diagram svg{display:block;width:100%;height:100%}
  .typical-situations .scenario-feature-carousel .infill-case h3{margin-top:0}
 }
+
+/* Mobile links match the reference size and share the heading's left edge. */
+@media(max-width:760px){
+ .typical-situations nav.scenario-feature-selection{position:static;inset:auto;width:auto;padding:0;border:0;background:transparent;margin-left:0;margin-right:0;visibility:visible}
+ .typical-situations .scenario-feature-selection a{font-size:14px;line-height:1.5;width:auto;border:0}
+ .typical-situations .scenario-feature-carousel{padding-bottom:48px}
+}
+
+/* Mobile project-development link matches the Investment reference. */
+@media(max-width:760px){.home-process-feature .home-process-feature-link{font-size:14px;line-height:1.5}}
+
+/* Career label follows the qualifications without an extra blank line. */
+.management-editorial-trial .management-editorial-qualifications{margin-bottom:0!important}
+.management-editorial-trial .management-career.scope-item{margin-top:0}
+.management-editorial-trial .management-career.scope-item > summary{padding-top:0;padding-bottom:0;min-height:0}
+@media(max-width:760px){
+ .management-editorial-trial .management-editorial-copy{padding-bottom:0}
+ .management-editorial-trial .management-career{margin-bottom:16px}
+}

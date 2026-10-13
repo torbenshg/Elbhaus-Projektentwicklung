@@ -1281,3 +1281,37 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
  window.addEventListener('resize', sync);
  sync();
 })();
+
+// Mobile rent chart grows horizontally and counts up when it enters view.
+(() => {
+ document.querySelectorAll('.rent-chart-horizontal').forEach(chart => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches) return;
+  const rows = Array.from(chart.querySelectorAll('.rent-horizontal-row')).map(row => {
+   const bar = row.querySelector('.rent-horizontal-bar');
+   const label = row.querySelector('.rent-horizontal-amount');
+   return {bar, label, length:Number(bar.style.getPropertyValue('--rent-length')), value:Number(label.textContent.replace('.', '').replace(',', '.'))};
+  });
+  const paint = progress => rows.forEach(({bar,label,length,value}) => {
+   bar.style.setProperty('--rent-length', String(length * progress));
+   label.textContent = (value * progress).toLocaleString('de-DE', {minimumFractionDigits:2,maximumFractionDigits:2});
+  });
+  paint(0);
+  const animate = () => {
+   let started;
+   const tick = time => {
+    if (started === undefined) started = time;
+    const fraction = Math.min(1, (time - started) / 2400);
+    const progress = fraction < .5 ? 4 * fraction ** 3 : 1 - (-2 * fraction + 2) ** 3 / 2;
+    paint(progress);
+    if (fraction < 1) requestAnimationFrame(tick);
+   };
+   requestAnimationFrame(tick);
+  };
+  if (!('IntersectionObserver' in window)) {animate();return;}
+  const observer = new IntersectionObserver(entries => {
+   if (entries.some(entry => entry.isIntersecting)) {observer.disconnect();animate();}
+  }, {threshold:.22});
+  observer.observe(chart);
+ });
+})();
