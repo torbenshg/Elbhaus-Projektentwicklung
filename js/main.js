@@ -1,3 +1,37 @@
+// Mobile process summaries expand independently; desktop content stays visible.
+(function () {
+  const mobile = window.matchMedia('(max-width: 760px)');
+  const entries = Array.from(document.querySelectorAll('.home-process-step')).map((step, index) => {
+    const content = step.querySelector('.project-timeline-body') || step.querySelector(':scope > p');
+    const title = step.querySelector('h3');
+    if (!content || !title) return null;
+    content.id = 'mobile-process-content-' + index;
+    content.classList.add('mobile-process-content');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'mobile-process-toggle';
+    button.setAttribute('aria-controls', content.id);
+    button.setAttribute('aria-label', title.textContent + ': Erläuterung öffnen');
+    button.innerHTML = '<span class="scope-chevron" aria-hidden="true"></span>';
+    step.append(button);
+    function update(expanded) {
+      content.hidden = !expanded;
+      button.setAttribute('aria-expanded', String(expanded));
+      button.setAttribute('aria-label', title.textContent + (expanded ? ': Erläuterung schließen' : ': Erläuterung öffnen'));
+    }
+    button.addEventListener('click', () => update(content.hidden));
+    return { button, update };
+  }).filter(Boolean);
+  function sync() {
+    entries.forEach(entry => {
+      entry.button.hidden = !mobile.matches;
+      entry.update(!mobile.matches);
+    });
+  }
+  mobile.addEventListener('change', sync);
+  sync();
+})();
+
 // Neubau-Angebotsmieten: Balken und Beschriftung wachsen gemeinsam.
 document.querySelectorAll('.rent-chart').forEach(chart => {
   const groups = Array.from(chart.querySelectorAll('.rent-bar-group')).map(group => ({
@@ -965,67 +999,6 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   if (document.fonts) document.fonts.ready.then(update);
   update();
 });
-
-
-(function () {
-  const blocks = Array.from(document.querySelectorAll('[data-service-block]'));
-  if (!blocks.length) return;
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  function setOpen(block, open) {
-    block.classList.toggle('is-open', open);
-    const panel = block.querySelector('.service-reveal-panel');
-    panel.setAttribute('aria-hidden', String(!open));
-    panel.inert = !open;
-  }
-  function openOnly(block) {
-    blocks.forEach(other => { if (other !== block) { other.dataset.pinned = ''; setOpen(other, false); } });
-    setOpen(block, true);
-  }
-  blocks.forEach(block => {
-    const toggle = block.querySelector('.service-reveal-toggle');
-    let previewOnlyClick = false;
-    block.addEventListener('pointerdown', event => {
-      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
-      previewOnlyClick = block.dataset.pinned !== 'true';
-      openOnly(block);
-      block.dataset.pinned = 'true';
-    }, { passive: true });
-    block.addEventListener('pointerenter', () => { if (finePointer.matches) openOnly(block); });
-    block.addEventListener('pointerleave', () => {
-      if (finePointer.matches && block.dataset.pinned !== 'true' && !block.contains(document.activeElement)) setOpen(block, false);
-    });
-    block.addEventListener('focusin', () => openOnly(block));
-    block.addEventListener('focusout', event => {
-      if (!block.contains(event.relatedTarget) && block.dataset.pinned !== 'true') setOpen(block, false);
-    });
-    block.addEventListener('click', event => {
-      // The first touch reveals on contact; a subsequent deliberate tap follows the link.
-      if (event.detail !== 0 && (previewOnlyClick || (!finePointer.matches && block.dataset.pinned !== 'true'))) {
-        event.preventDefault();
-        openOnly(block);
-        block.dataset.pinned = 'true';
-      }
-      previewOnlyClick = false;
-    });
-    block.addEventListener('keydown', event => {
-      if (event.key === 'Escape') { block.dataset.pinned = ''; toggle.focus(); setOpen(block, false); }
-    });
-  });
-  // Native scrolling stays enabled, including after pointercancel from the browser.
-  document.addEventListener('touchmove', event => {
-    const touch = event.touches[0];
-    if (!touch) return;
-    const element = document.elementFromPoint(touch.clientX, touch.clientY);
-    const block = element && element.closest('[data-service-block]');
-    if (block && blocks.includes(block)) {
-      openOnly(block);
-      block.dataset.pinned = 'true';
-    }
-  }, { passive: true });
-  document.addEventListener('pointerdown', event => {
-    if (!event.target.closest('[data-service-block]')) blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, false); });
-  });
-})();
 
 
 // Three identical sets allow invisible rebasing and endless native swiping.

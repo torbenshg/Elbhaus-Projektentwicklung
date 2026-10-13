@@ -3396,9 +3396,11 @@ header #primary-nav a:hover .primary-nav-line,header #primary-nav a:focus-visibl
 /* Mobile spacing and permanently visible section separators. */
 @media(max-width:760px){
  .home-process-feature .home-process-step:not(:last-child){padding-bottom:64px}
- .scenario-feature .mobile-scroll-divider{transform:none}
+ .scenario-feature .mobile-scroll-divider{transform:none;margin-bottom:0}
+ .scenario-feature .value-development-embedded > .wrap{opacity:1!important;transform:none!important;transition:none!important}
  .page-home .elbhaus-codes > .management-editorial-trial::after{transform:translateX(-50%)}
 }
+
 @media(max-width:1000px){
  .scenario-feature .scenario-feature-heading h2{font-size:36px}
  .scenario-feature-heading{padding-right:30px}
@@ -3409,4 +3411,38 @@ header #primary-nav a:hover .primary-nav-line,header #primary-nav a:focus-visibl
  .scenario-feature-heading{padding:0 0 28px}
  .scenario-feature .scenario-feature-heading h2{font-size:36px!important;line-height:1.2!important}
  .scenario-feature-carousel{padding:0 0 24px}
+}
+
+.management-mobile-heading{display:none}
+.mobile-process-toggle{display:none}
+@media(max-width:760px){
+ .management-editorial-trial .management-mobile-heading{display:block;font-size:36px!important;font-weight:600;margin:0 0 28px}
+ .management-editorial-trial .management-editorial-row{display:block}
+ .management-editorial-trial .management-editorial-copy,.management-editorial-trial .management-editorial-information{display:block}
+ .management-editorial-trial .management-editorial-copy{padding:0}
+ .management-editorial-trial .management-editorial-copy h3{font-size:23px;margin:0 0 28px}
+ .management-editorial-trial .management-role-line{display:none}
+ .management-editorial-trial .management-editorial-qualifications{font-size:17px!important;line-height:1.5!important;margin-bottom:24px}
+ .management-editorial-trial .management-career{max-width:none;margin-top:0;margin-bottom:36px}
+ .management-editorial-trial .management-editorial-portrait{width:100%;aspect-ratio:1;height:auto;min-height:0;box-sizing:border-box;border:1px solid #000;background:#fff;opacity:1}
+ .management-editorial-trial .management-editorial-portrait svg{display:none}
+ .management-editorial-trial .management-editorial-portrait span{font-size:16px}
+ .footer-service-menu .footer-service-menu-link{aspect-ratio:1;min-height:0;box-sizing:border-box}
+ .page-home .service-areas-reveal .service-reveal-block{aspect-ratio:1;min-height:0;box-sizing:border-box}
+ .home-process-steps .home-process-step:nth-child(1){--mobile-step-indent:32px}
+ .home-process-steps .home-process-step:nth-child(2){--mobile-step-indent:58px}
+ .home-process-steps .home-process-step:nth-child(3){--mobile-step-indent:84px}
+ .home-process-steps .home-process-step:nth-child(4){--mobile-step-indent:110px}
+ .home-process-steps .home-process-step:nth-child(n){padding-left:var(--mobile-step-indent);padding-bottom:40px}
+ .home-process-steps .home-process-step:last-child{padding-bottom:20px}
+ .home-process-steps .home-process-step:nth-child(n) .home-process-number{margin-left:calc(5px - var(--mobile-step-indent));padding-left:calc(var(--mobile-step-indent) - 5px);padding-right:48px}
+ .home-process-steps .home-process-step:nth-child(n) h3{padding-right:0}
+ .home-process-step .mobile-process-toggle{display:grid;place-items:center;position:absolute;right:0;top:0;width:36px;height:36px;padding:6px;background:transparent;border:0;color:#12334b;cursor:pointer}
+ .mobile-process-toggle .scope-chevron{display:block;position:relative;width:24px;height:24px;transform:rotate(0);transition:transform .25s ease}
+ .mobile-process-toggle .scope-chevron::before,.mobile-process-toggle .scope-chevron::after{content:"";position:absolute;background:currentColor}
+ .mobile-process-toggle .scope-chevron::before{left:0;right:0;top:11.5px;height:1px}
+ .mobile-process-toggle .scope-chevron::after{top:0;bottom:0;left:11.5px;width:1px}
+ .mobile-process-toggle[aria-expanded="true"] .scope-chevron{transform:rotate(45deg)}
+ .mobile-process-content[hidden]{display:none!important}
+ .mobile-process-content{margin-top:16px}
 }
