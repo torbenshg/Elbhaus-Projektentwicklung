@@ -1231,22 +1231,6 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   sync();
 })();
 
-// Keep the desktop value-creation feature as tall as the process feature.
-(() => {
-  const source = document.querySelector('.home-process-feature .home-process-layout');
-  const target = document.querySelector('.scenario-feature .scenario-feature-layout');
-  if (!source || !target) return;
-  const desktop = window.matchMedia('(min-width:761px)');
-  const syncHeight = () => {
-    if (desktop.matches) target.style.setProperty('--process-feature-height', source.offsetHeight + 'px');
-    else target.style.removeProperty('--process-feature-height');
-  };
-  if ('ResizeObserver' in window) new ResizeObserver(syncHeight).observe(source);
-  window.addEventListener('resize', syncHeight);
-  desktop.addEventListener('change', syncHeight);
-  syncHeight();
-})();
-
 // Size the desktop career area once per width change; toggling does not change layout.
 (() => {
  const row = document.querySelector('.management-editorial-row');

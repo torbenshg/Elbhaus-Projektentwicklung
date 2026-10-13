@@ -3961,3 +3961,45 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .project-rents{padding-bottom:var(--mobile-transition-gap)}
  .project-rents + .project-sale-preparation{padding-top:var(--mobile-transition-gap)}
 }
+
+/* Value examples use one plain-text heading on every screen size. */
+.page-home .value-examples .value-case-summary > div{flex:1;container-type:inline-size}
+.page-home .value-examples .value-case-summary h3{white-space:nowrap}
+
+/* Desktop value creation scales from its own width, with proportional content. */
+@media(min-width:761px){
+ .page-home .typical-situations .scenario-feature-layout{container-type:inline-size;height:auto;min-height:0;align-items:stretch}
+ .page-home .typical-situations .scenario-feature-heading{min-height:0;padding:2.666667cqw 4.333333cqw 4.166667cqw 0}
+ .page-home .typical-situations .scenario-feature-heading h2{font-size:4.333333cqw;line-height:1.18}
+ .page-home .typical-situations .scenario-feature-selection{margin-top:3cqw;gap:0}
+ .page-home .typical-situations .scenario-feature-selection a{font-size:1.75cqw;line-height:1.5;text-underline-offset:.5cqw}
+ .page-home .typical-situations .scenario-feature-carousel{height:auto;min-height:0;aspect-ratio:auto;padding:2cqw 0 4.166667cqw 2cqw}
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider{height:auto;min-height:0;--slide-width:88%;--slide-gap:1.666667cqw}
+ .page-home .typical-situations .scenario-slider-controls{gap:1.333333cqw;margin:0 0 2cqw;padding-right:2cqw}
+ .page-home .typical-situations .scenario-slider-controls button{width:3.666667cqw;height:3.666667cqw}
+ .page-home .typical-situations .scenario-slider-controls svg{width:2.166667cqw;height:1.666667cqw}
+ .page-home .typical-situations .scenario-slider-track{height:auto;flex:none;min-height:0;margin-top:0;align-items:flex-start}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram{width:100%;height:auto;max-height:none;aspect-ratio:8/5;margin:0}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram svg{width:100%;height:100%}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case h3{font-size:1.916667cqw;line-height:1.4;padding:.666667cqw 1cqw;margin:0 0 1cqw}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case p{font-size:1.333333cqw;line-height:1.5;max-width:none;margin:0}
+}
+
+/* Keep the inset divider and remove the duplicate full-width mobile rule. */
+@media(max-width:760px){
+ .page-home main > .value-examples{border-top:0!important}
+}
+
+/* Chiffre mirrors sale preparation: text left and a square photograph right. */
+.page-home .elbhaus-codes > .elbhaus-codes-split-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.page-home .elbhaus-codes-copy{min-width:0}
+.page-home .elbhaus-codes-copy > h2{margin:0 0 26px}
+.page-home .elbhaus-codes-photo{display:block;width:100%;aspect-ratio:1;margin:0;overflow:hidden}
+.page-home .elbhaus-codes-photo img{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){
+ .page-home .elbhaus-codes > .elbhaus-codes-split-layout{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+
+/* The wide roof photograph sits above the original full-width sale content. */
+.page-home #verkauf .project-sale-banner{width:100%;margin:0 0 clamp(28px,4vw,56px)}
+.page-home #verkauf .project-sale-banner img{display:block;width:100%;height:auto;aspect-ratio:16/9}
