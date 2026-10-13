@@ -3883,3 +3883,42 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .management-editorial-trial .management-editorial-copy{padding-bottom:0}
  .management-editorial-trial .management-career{margin-bottom:16px}
 }
+
+/* Mobile reference: arrows beside the links and snug blue title boxes. */
+@media(max-width:760px){
+ .typical-situations .scenario-feature-layout{position:relative}
+ .typical-situations .scenario-feature-carousel .scenario-slider{position:static}
+ .typical-situations .scenario-feature-carousel .scenario-slider-controls{position:absolute;inset:auto;right:0;top:calc(36px * 1.2 * 2 + 16px + 42px - 44px);margin:0;padding:0;gap:16px}
+ .typical-situations .scenario-feature-carousel .infill-case h3{display:block;width:fit-content;max-width:100%;box-sizing:border-box}
+}
+
+/* Mobile scenario titles use the accordion-label size and remain on one line. */
+@media(max-width:760px){
+ .typical-situations .scenario-feature-carousel .infill-case h3{font-size:16px!important;line-height:1.5;white-space:nowrap;width:max-content;max-width:none}
+}
+
+/* Value-example blue titles match the accordion-label sizes. */
+.page-home .value-examples .value-case-summary .value-case-name{font-size:24px!important}
+@media(max-width:760px){.page-home .value-examples .value-case-summary .value-case-name{font-size:16px!important}}
+
+/* Mobile process numbers and labels share one left alignment. */
+@media(max-width:760px){
+ .home-process-steps .home-process-step:nth-child(n){--mobile-step-indent:11cqw}
+ .home-process-steps .home-process-step:nth-child(n) h3,
+ .project-process-timeline .home-process-step h3{font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;line-height:1.5;color:var(--text)}
+}
+
+/* Mobile service reveal text matches accordion-label size. */
+@media(max-width:760px){.page-home .service-reveal-copy .service-reveal-benefit{font-size:16px!important;line-height:1.5!important}}
+
+/* Mobile header service links match the accordion-label size. */
+@media(max-width:760px){
+ .home-split-hero .home-split-links a{font-size:16px!important;line-height:1.5}
+ header #primary-nav a:is([href="/projektentwicklung/"],[href="/machbarkeitsstudie/"],[href="/nachverdichtung/"],[href="/aufstockung/"]){font-size:16px}
+}
+
+/* Mobile director name matches the accordion-label size. */
+@media(max-width:760px){.management-editorial-trial .management-editorial-copy h3{font-size:16px;font-weight:400;line-height:1.5}}
+
+/* Mobile service names use accordion-label size in bold. */
+@media(max-width:760px){.page-home .service-areas-reveal .service-reveal-title{font-size:16px!important;font-weight:700;line-height:1.5!important;letter-spacing:0}}

@@ -1123,11 +1123,17 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
     ['pointerdown', 'touchstart', 'wheel'].forEach(type => track.addEventListener(type, interrupt, {passive:true}));
     let dragging = false, rebaseTimer;
     track.addEventListener('pointerdown', () => { dragging = true; }, {passive:true});
-    const endDrag = () => { dragging = false; };
+    const endDrag = () => {
+      dragging = false;
+      clearTimeout(rebaseTimer);
+      rebaseTimer = setTimeout(() => { if (!animating) normalize(); }, 300);
+    };
     window.addEventListener('pointerup', endDrag, {passive:true});
     window.addEventListener('pointercancel', endDrag, {passive:true});
     track.addEventListener('scroll', () => {
       highlightContact();
+      // Rebase identical copies before reaching either physical scroll edge.
+      if (!animating && cycle && (track.scrollLeft < step || track.scrollLeft > track.scrollWidth - track.clientWidth - step)) normalize();
       clearTimeout(rebaseTimer);
       rebaseTimer = setTimeout(() => { if (!dragging && !animating) normalize(); }, 300);
     }, {passive:true});
@@ -1314,4 +1320,28 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   }, {threshold:.22});
   observer.observe(chart);
  });
+})();
+
+// Multiline blue scenario titles end after their widest rendered line.
+(() => {
+ const titles = Array.from(document.querySelectorAll('.typical-situations .scenario-feature-carousel .infill-case h3'));
+ if (!titles.length) return;
+ const mobile = window.matchMedia('(max-width:760px)');
+ const fitTitles = () => {
+  titles.forEach(title => {
+   title.style.removeProperty('width');
+   if (!mobile.matches) return;
+   const range = document.createRange();
+   range.selectNodeContents(title);
+   const lines = Array.from(range.getClientRects());
+   if (lines.length < 2) return;
+   const style = window.getComputedStyle(title);
+   const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+   title.style.width = Math.ceil(Math.max(...lines.map(line => line.width)) + padding + 1) + 'px';
+  });
+ };
+ fitTitles();
+ window.addEventListener('resize', fitTitles);
+ mobile.addEventListener('change', fitTitles);
+ if (document.fonts) document.fonts.ready.then(fitTitles);
 })();
