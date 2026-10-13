@@ -1,31 +1,36 @@
-// Mobile process summaries expand independently; desktop content stays visible.
+// One mobile toggle controls the four process explanations together.
 (function () {
   const mobile = window.matchMedia('(max-width: 760px)');
-  const entries = Array.from(document.querySelectorAll('.home-process-step')).map((step, index) => {
-    const content = step.querySelector('.project-timeline-body') || step.querySelector(':scope > p');
-    const title = step.querySelector('h3');
-    if (!content || !title) return null;
-    content.id = 'mobile-process-content-' + index;
-    content.classList.add('mobile-process-content');
+  const groups = Array.from(document.querySelectorAll('.home-process-steps')).map((list, groupIndex) => {
+    const steps = Array.from(list.querySelectorAll('.home-process-step'));
+    const texts = steps.map((step, index) => {
+      const content = step.querySelector('.project-timeline-body') || step.querySelector(':scope > p');
+      if (!content) return null;
+      content.id = 'mobile-process-content-' + groupIndex + '-' + index;
+      content.classList.add('mobile-process-content');
+      return content;
+    }).filter(Boolean);
+    if (!texts.length || !steps.length) return null;
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'mobile-process-toggle';
-    button.setAttribute('aria-controls', content.id);
-    button.setAttribute('aria-label', title.textContent + ': Erläuterung öffnen');
+    button.setAttribute('aria-controls', texts.map(text => text.id).join(' '));
     button.innerHTML = '<span class="scope-chevron" aria-hidden="true"></span>';
-    step.append(button);
-    function update(expanded) {
-      content.hidden = !expanded;
-      button.setAttribute('aria-expanded', String(expanded));
-      button.setAttribute('aria-label', title.textContent + (expanded ? ': Erläuterung schließen' : ': Erläuterung öffnen'));
+    steps[0].append(button);
+    let expanded = false;
+    function update(open) {
+      expanded = open;
+      texts.forEach(text => { text.hidden = !open; });
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Erläuterungen zu 01 bis 04 schließen' : 'Erläuterungen zu 01 bis 04 öffnen');
     }
-    button.addEventListener('click', () => update(content.hidden));
+    button.addEventListener('click', () => update(!expanded));
     return { button, update };
   }).filter(Boolean);
   function sync() {
-    entries.forEach(entry => {
-      entry.button.hidden = !mobile.matches;
-      entry.update(!mobile.matches);
+    groups.forEach(group => {
+      group.button.hidden = !mobile.matches;
+      group.update(!mobile.matches);
     });
   }
   mobile.addEventListener('change', sync);
@@ -1132,4 +1137,59 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   window.addEventListener('resize', schedule);
   reduced.addEventListener('change', schedule);
   draw();
+})();
+
+// Restore the touch preview on mobile service fields; keep desktop fields open.
+(function () {
+  const blocks = Array.from(document.querySelectorAll('[data-service-block]'));
+  if (!blocks.length) return;
+  const mobile = window.matchMedia('(max-width: 760px)');
+  function setOpen(block, open) {
+    block.classList.toggle('is-open', open);
+    const panel = block.querySelector('.service-reveal-panel');
+    panel.setAttribute('aria-hidden', String(!open));
+    panel.inert = !open;
+  }
+  function preview(block) {
+    blocks.forEach(other => setOpen(other, other === block));
+  }
+  function sync() {
+    blocks.forEach(block => { block.dataset.pinned = ''; setOpen(block, !mobile.matches); });
+  }
+  blocks.forEach(block => {
+    let previewOnly = false;
+    block.addEventListener('pointerenter', event => {
+      if (mobile.matches && event.pointerType !== 'touch') preview(block);
+    });
+    block.addEventListener('pointerleave', event => {
+      if (mobile.matches && event.pointerType !== 'touch' && block.dataset.pinned !== 'true') setOpen(block, false);
+    });
+    block.addEventListener('pointerdown', event => {
+      if (!mobile.matches || (event.pointerType !== 'touch' && event.pointerType !== 'pen')) return;
+      previewOnly = block.dataset.pinned !== 'true';
+      blocks.forEach(other => { if (other !== block) other.dataset.pinned = ''; });
+      preview(block);
+      block.dataset.pinned = 'true';
+    }, { passive: true });
+    block.addEventListener('click', event => {
+      if (mobile.matches && previewOnly && event.detail !== 0) event.preventDefault();
+      previewOnly = false;
+    });
+    block.addEventListener('focusin', () => { if (mobile.matches) preview(block); });
+  });
+  document.addEventListener('touchmove', event => {
+    if (!mobile.matches || !event.touches[0]) return;
+    const touch = event.touches[0];
+    const hit = document.elementFromPoint(touch.clientX, touch.clientY);
+    const block = hit && hit.closest('[data-service-block]');
+    if (block && blocks.includes(block)) {
+      blocks.forEach(other => { other.dataset.pinned = other === block ? 'true' : ''; });
+      preview(block);
+    }
+  }, { passive: true });
+  document.addEventListener('pointerdown', event => {
+    if (mobile.matches && !event.target.closest('[data-service-block]')) sync();
+  }, { passive: true });
+  mobile.addEventListener('change', sync);
+  sync();
 })();
