@@ -982,13 +982,18 @@ document.addEventListener('keydown', event => {
   const rules = Array.from(document.querySelectorAll('[data-mobile-scroll-rule],[data-mobile-rule-top],[data-mobile-rule-bottom]'));
   const mobile = window.matchMedia('(max-width:760px)');
   const reduced = window.matchMedia('(prefers-reduced-motion:reduce)');
+  const persistentProgress = new WeakMap();
   let pending = false;
   const draw = () => {
     pending = false;
     rules.forEach(rule => {
       const bounds = rule.getBoundingClientRect();
       const position = rule.hasAttribute('data-mobile-rule-bottom') ? bounds.bottom : bounds.top;
-      const progress = !mobile.matches || reduced.matches ? 1 : Math.max(0, Math.min(1, (window.innerHeight * .9 - position) / (window.innerHeight * .45)));
+      let progress = !mobile.matches || reduced.matches ? 1 : Math.max(0, Math.min(1, (window.innerHeight * .9 - position) / (window.innerHeight * .45)));
+      if (mobile.matches && rule.hasAttribute('data-mobile-rule-persistent')) {
+        progress = Math.max(persistentProgress.get(rule) || 0, progress);
+        persistentProgress.set(rule, progress);
+      }
       rule.style.setProperty('--mobile-rule-progress', String(progress));
     });
   };

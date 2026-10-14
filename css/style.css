@@ -4143,3 +4143,22 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
 @media(max-width:760px){
  .mobile-scenarios-match > h2{hyphens:none;overflow-wrap:anywhere}
 }
+
+/* The mobile Services divider draws on scroll and retains its completed progress. */
+@media(max-width:760px){
+ html.js .page-home main > .home-process-feature + .service-areas-reveal::before{transform:translateX(-50%) scaleX(var(--mobile-rule-progress,0));transform-origin:center}
+}
+
+/* Remove the mobile separator above value creation. */
+@media(max-width:760px){
+ .page-home main > .typical-situations.scenario-feature{border-top:0!important}
+ .page-home main > .typical-situations.scenario-feature::before{content:none!important}
+ .page-home .typical-situations .scenario-feature-layout{border-top:0!important}
+}
+
+/* Homepage mobile section headings match the supplied Poliform reference. */
+@media(max-width:760px){
+ .page-home #main-content .mobile-reference-heading{font-size:28px!important;line-height:1.2!important}
+ .page-home .typical-situations .scenario-feature-heading{padding:0 0 28px}
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider-controls{top:calc(28px * 1.2 + (28px * 1.2 - 32px) / 2)}
+}
