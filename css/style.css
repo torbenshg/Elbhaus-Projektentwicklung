@@ -4183,28 +4183,11 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .page-home .home-process-feature{padding-top:calc(var(--mobile-transition-gap,64px) + 32px)}
 }
 
-/* The mobile roof photo reveals its original color under a finger. */
-@media(max-width:760px){
- .page-home #verkauf .project-sale-banner img{filter:grayscale(1);transition:filter .35s ease}
- .page-home #verkauf .project-sale-banner.is-color-active img{filter:grayscale(0)}
-}
-@media(max-width:760px) and (prefers-reduced-motion:reduce){
- .page-home #verkauf .project-sale-banner img{transition:none}
-}
-
 /* Mobile timeline disclosure changes visibility while preserving every step's position. */
 @media(max-width:760px){
  .project-process-timeline .home-process-steps{aspect-ratio:auto;justify-content:flex-start;gap:28px}
  .project-process-timeline .mobile-process-content{display:block;visibility:visible}
  .project-process-timeline .mobile-process-content[hidden]{display:block!important;visibility:hidden;pointer-events:none}
-}
-
-/* Immediate color feedback and touch fallback for the roof photo. */
-@media(max-width:760px){
- .page-home #verkauf .project-sale-banner{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
- .page-home #verkauf .project-sale-banner img{-webkit-touch-callout:none}
- .page-home #verkauf .project-sale-banner.is-color-active img,
- .page-home #verkauf .project-sale-banner:active img{filter:grayscale(0)!important;transition-duration:0s}
 }
 
 /* Desktop Services mirrors the footer menu across three equal content-width fields. */
@@ -4230,4 +4213,99 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .page-home .mobile-process-photo-placeholder{display:block;width:100%;aspect-ratio:16/9;border:1px solid #000;box-sizing:border-box;background:transparent}
  .page-home main > .home-process-feature + .service-areas-reveal{border-top:0!important}
  .page-home main > .home-process-feature + .service-areas-reveal::before{content:none!important}
+}
+
+/* Mobile service titles stay bottom-aligned as preview text appears above them. */
+@media(max-width:760px){
+ .page-home .service-areas-reveal .service-reveal-block{justify-content:flex-end;gap:8px}
+ .page-home .service-areas-reveal .service-reveal-title{order:2}
+ .page-home .service-areas-reveal .service-reveal-panel{order:1}
+}
+
+/* Mobile contact strip: starts below the photo frame, then docks below the header. */
+.mobile-contact-dock-slot{display:none}
+@media(max-width:760px){
+ .page-home .mobile-contact-dock-slot{display:block;margin-top:32px}
+ .mobile-contact-dock{position:relative;width:100%;min-height:84px;padding:20px 0;background:#f5f4f3;box-sizing:border-box}
+ .mobile-contact-dock.is-stuck{position:fixed;left:0;right:0;z-index:15}
+ .mobile-contact-dock-content{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:44px}
+ .mobile-contact-dock-brand{flex:1;min-width:0;container-type:inline-size;color:#000}
+ .mobile-contact-dock-brand span{display:block;font-family:"Montserrat",Arial,sans-serif;font-size:min(18px,7.1cqw);font-weight:500;line-height:1.2;letter-spacing:-.035em;white-space:nowrap}
+ .mobile-contact-dock-actions{display:flex;flex:none;gap:12px}
+ .mobile-contact-dock-actions a{display:grid;place-items:center;width:32px;height:32px;background:var(--blue);color:#fff;border:0;text-decoration:none}
+ .mobile-contact-dock-actions a:focus-visible{outline:2px solid #12334b;outline-offset:3px}
+ body.mobile-menu-open .mobile-contact-dock.is-stuck{visibility:hidden;pointer-events:none}
+}
+
+/* Compact contact strip uses the original logo outlines at equal letter heights. */
+@media(max-width:760px){
+ .page-home .home-process-feature{padding-bottom:0}
+ .page-home .mobile-contact-dock-slot{margin-top:var(--mobile-transition-gap,64px)}
+ .page-home .service-areas-reveal{padding-top:var(--mobile-transition-gap,64px)}
+ .mobile-contact-dock{min-height:48px;padding:8px 0}
+ .mobile-contact-dock-content{min-height:32px}
+ .mobile-contact-dock-brand{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+ .mobile-contact-dock-brand img{display:block;height:min(14px,5.16cqw);width:auto;max-width:none}
+}
+
+/* The contact strip has a strict flat height, independent of SVG intrinsic dimensions. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock{height:44px;min-height:44px;max-height:44px;padding:6px 0;overflow:hidden}
+ .page-home .mobile-contact-dock-content{height:32px;min-height:32px;max-height:32px;padding-top:0;padding-bottom:0}
+ .page-home .mobile-contact-dock-brand{container-type:normal;gap:2px;justify-content:center;overflow:hidden}
+ .page-home .mobile-contact-dock-brand img{height:var(--contact-logo-height,12px);min-height:0;max-height:12px;width:auto;max-width:none;flex:none;object-fit:contain}
+}
+
+/* The compact contact strip contains only the original Elbhaus wordmark. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock-brand img{height:var(--contact-logo-height,20px);max-height:20px}
+}
+
+/* The former header house photo fills the mobile landscape frame. */
+@media(max-width:760px){
+ .page-home .mobile-process-photo-placeholder{overflow:hidden}
+ .page-home .mobile-process-photo-placeholder img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+}
+
+.home-split-photo picture{display:block;width:100%;height:100%}
+
+/* Match the mobile contact wordmark to the 16 px value-example label size. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock-brand img{height:var(--contact-logo-height,16px);max-height:16px}
+}
+
+/* Small contact tagline shares the mobile accordion-copy size within the flat strip. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock-brand{gap:0}
+ .page-home .mobile-contact-dock-brand .mobile-contact-dock-tagline{font-size:var(--contact-tagline-size,14px);font-weight:400;line-height:16px;letter-spacing:0;margin:0;white-space:nowrap}
+}
+
+/* Contact wordmark follows the actual header wordmark size and left edge. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock{height:48px;min-height:48px;max-height:48px;padding:6px 0 10px}
+ .page-home .mobile-contact-dock-brand{margin-left:var(--contact-logo-offset,0px)}
+ .page-home .mobile-contact-dock-brand img{height:var(--contact-logo-height,16px);max-height:none}
+}
+
+/* Mobile landscape crop: align the three marked infill plots across the center. */
+@media(max-width:760px){
+ .page-home .mobile-process-infill-photo{position:relative}
+ .page-home .mobile-process-infill-photo img{position:absolute;left:50%;top:50%;width:110%;height:auto;max-width:none;object-fit:initial;transform:translate(-50%,-50%) rotate(88.5deg) translate(-1%,-12.9%)}
+}
+
+/* Two-line tagline retains the compact contact strip without clipping. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock{height:64px;min-height:64px;max-height:64px}
+ .page-home .mobile-contact-dock-content{height:48px;min-height:48px;max-height:48px}
+}
+
+/* Mobile navigation bar ends cleanly without the pale divider or shadow. */
+@media(max-width:760px){
+ header,header.is-scrolled{border-bottom:0;box-shadow:none}
+}
+
+/* Contact copy matches disclosure labels, then their smaller body copy when docked. */
+@media(max-width:760px){
+ .page-home .mobile-contact-dock-brand .mobile-contact-dock-tagline{font-size:16px;line-height:1.5}
+ .page-home .mobile-contact-dock.is-stuck .mobile-contact-dock-tagline{font-size:14px;line-height:1.6}
 }
