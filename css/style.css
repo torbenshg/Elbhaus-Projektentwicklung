@@ -4162,3 +4162,72 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .page-home .typical-situations .scenario-feature-heading{padding:0 0 28px}
  .page-home .typical-situations .scenario-feature-carousel .scenario-slider-controls{top:calc(28px * 1.2 + (28px * 1.2 - 32px) / 2)}
 }
+
+/* Mobile subpage headings share the homepage reference size. */
+@media(max-width:760px){
+ #main-content .mobile-reference-heading{font-size:28px!important;line-height:1.2!important}
+ .page-home .service-areas-reveal .service-reveal-list{gap:0;border-top:1px solid #000;border-bottom:1px solid #000}
+ .page-home .service-areas-reveal .service-reveal-block{height:180px;min-height:180px;aspect-ratio:auto;padding:24px 20px;gap:0;border:0;background:#fff;color:#24282b;touch-action:pan-y}
+ .page-home .service-areas-reveal .service-reveal-block + .service-reveal-block{border-top:1px solid #000}
+ .page-home .service-areas-reveal .service-reveal-title{font-size:26px!important;font-weight:400;line-height:1.25!important;letter-spacing:-.025em;white-space:normal;hyphens:auto;overflow-wrap:anywhere}
+ .page-home .service-areas-reveal .service-reveal-image{opacity:0}
+ .page-home .service-areas-reveal .service-reveal-image::after{background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72))}
+ .page-home .service-areas-reveal .service-reveal-block.is-open{color:#fff}
+ .page-home .service-areas-reveal .service-reveal-block.is-open .service-reveal-image{opacity:1}
+ .page-home .service-areas-reveal .service-reveal-panel{display:none}
+ .page-home .service-areas-reveal .service-reveal-block.is-open .service-reveal-panel{display:block}
+}
+
+/* Match the process text's upper gap to its existing gap above the Services rule. */
+@media(max-width:760px){
+ .page-home .home-process-feature{padding-top:calc(var(--mobile-transition-gap,64px) + 32px)}
+}
+
+/* The mobile roof photo reveals its original color under a finger. */
+@media(max-width:760px){
+ .page-home #verkauf .project-sale-banner img{filter:grayscale(1);transition:filter .35s ease}
+ .page-home #verkauf .project-sale-banner.is-color-active img{filter:grayscale(0)}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+ .page-home #verkauf .project-sale-banner img{transition:none}
+}
+
+/* Mobile timeline disclosure changes visibility while preserving every step's position. */
+@media(max-width:760px){
+ .project-process-timeline .home-process-steps{aspect-ratio:auto;justify-content:flex-start;gap:28px}
+ .project-process-timeline .mobile-process-content{display:block;visibility:visible}
+ .project-process-timeline .mobile-process-content[hidden]{display:block!important;visibility:hidden;pointer-events:none}
+}
+
+/* Immediate color feedback and touch fallback for the roof photo. */
+@media(max-width:760px){
+ .page-home #verkauf .project-sale-banner{touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+ .page-home #verkauf .project-sale-banner img{-webkit-touch-callout:none}
+ .page-home #verkauf .project-sale-banner.is-color-active img,
+ .page-home #verkauf .project-sale-banner:active img{filter:grayscale(0)!important;transition-duration:0s}
+}
+
+/* Desktop Services mirrors the footer menu across three equal content-width fields. */
+@media(min-width:761px){
+ .page-home .service-areas-reveal .service-reveal-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:0;border-top:1px solid #000;border-bottom:1px solid #000;background:#fff}
+ .page-home .service-areas-reveal .service-reveal-block{min-width:0;min-height:240px;padding:28px 22px;margin:0;border:0;background:#fff;color:#24282b;gap:16px}
+ .page-home .service-areas-reveal .service-reveal-block + .service-reveal-block{border-left:1px solid #000}
+ .page-home .service-areas-reveal .service-reveal-title{font-family:"Montserrat",Arial,sans-serif;font-size:clamp(20px,2.1vw,30px)!important;font-weight:400;line-height:1.25!important;letter-spacing:-.025em;hyphens:auto;overflow-wrap:anywhere;margin:0}
+ .page-home .service-areas-reveal .service-reveal-image{opacity:0;transition:opacity .35s ease}
+ .page-home .service-areas-reveal .service-reveal-image::after{background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72))}
+ .page-home .service-areas-reveal .service-reveal-block.is-open{color:#fff}
+ .page-home .service-areas-reveal .service-reveal-block.is-open .service-reveal-image{opacity:1}
+}
+
+/* Desktop service fields remain square as the content width changes. */
+@media(min-width:761px){
+ .page-home .service-areas-reveal .service-reveal-block{aspect-ratio:1;height:auto;min-height:0;box-sizing:border-box}
+}
+
+/* An empty mobile landscape frame separates the process statement from Services. */
+.mobile-process-photo-placeholder{display:none}
+@media(max-width:760px){
+ .page-home .mobile-process-photo-placeholder{display:block;width:100%;aspect-ratio:16/9;border:1px solid #000;box-sizing:border-box;background:transparent}
+ .page-home main > .home-process-feature + .service-areas-reveal{border-top:0!important}
+ .page-home main > .home-process-feature + .service-areas-reveal::before{content:none!important}
+}

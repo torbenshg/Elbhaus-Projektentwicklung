@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Potenziale Ihrer Immobilie | Elbhaus Projektentwicklung Hamburg</title><meta name="description" content="Elbhaus erkennt und prüft Entwicklungspotenziale von Grundstücken und Bestandsimmobilien in Hamburg – für private Eigentümer, Bestandshalter und Investoren."><link rel="stylesheet" href="./css/style.css?v=20261014-mobile-reference-headings-r144"><script>document.documentElement.classList.add("js");</script><link rel="canonical" href="https://elbhaus-projekt.de/"><script>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Potenziale Ihrer Immobilie | Elbhaus Projektentwicklung Hamburg</title><meta name="description" content="Elbhaus erkennt und prüft Entwicklungspotenziale von Grundstücken und Bestandsimmobilien in Hamburg – für private Eigentümer, Bestandshalter und Investoren."><link rel="stylesheet" href="./css/style.css?v=20261014-mobile-process-photo-frame-r152"><script>document.documentElement.classList.add("js");</script><link rel="canonical" href="https://elbhaus-projekt.de/"><script>
 if(location.protocol === 'file:') {
   const root = new URL('./', location.href);
   const localLink = link => {
@@ -97,6 +97,7 @@ header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav
       <h2 id="process-heading" class="mobile-reference-heading">Mit hohem Anspruch<br>Flächenpotenziale aktivieren</h2>
       <a class="home-process-feature-link" href="/projektentwicklung/">Projektentwicklung</a>
     </div>
+    <div class="mobile-process-photo-placeholder" aria-hidden="true"></div>
     <div class="home-process-drawing">
       <ol class="home-process-steps" aria-label="Vier Schritte der Projektentwicklung">
       <li class="home-process-step">
@@ -373,7 +374,7 @@ header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav
       <a href="/datenschutz/">Datenschutzerklärung</a>
     </nav>
   </div>
-</footer><script src="./js/main.js?v=20261014-services-line-persistent-r142"></script><script id="service-link-interaction">
+</footer><script src="./js/main.js?v=20261014-mobile-roof-touch-r149"></script><script id="service-link-interaction">
 (function () {
   document.querySelectorAll('a[data-service-underline]').forEach(function (link) {
     var line = link.querySelector('.service-link-line');
@@ -422,5 +423,48 @@ header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav
     link.addEventListener('blur', restore);
     restore();
   });
+})();
+</script><script id="roof-photo-touch-color">
+// Dedicated photo handling stays independent of the shared page script.
+(() => {
+  const banner = document.querySelector('.page-home .project-sale-banner');
+  if (!banner) return;
+  const mobile = window.matchMedia('(max-width:760px)');
+  let point = null, timer;
+  const reset = () => { clearTimeout(timer); point = null; banner.classList.remove('is-color-active'); };
+  const release = () => {
+    point = null;
+    clearTimeout(timer);
+    timer = setTimeout(() => banner.classList.remove('is-color-active'), 800);
+  };
+  const update = () => {
+    if (!mobile.matches || !point) return;
+    const box = banner.getBoundingClientRect();
+    const inside = point.x >= box.left && point.x <= box.right && point.y >= box.top && point.y <= box.bottom;
+    if (inside) { clearTimeout(timer); banner.classList.add('is-color-active'); }
+    else if (banner.classList.contains('is-color-active')) {
+      clearTimeout(timer);
+      timer = setTimeout(() => banner.classList.remove('is-color-active'), 600);
+    }
+  };
+  const follow = event => {
+    if (event.pointerType === 'mouse') return;
+    const contact = event.touches ? event.touches[0] : event;
+    if (!contact) return;
+    point = {x:contact.clientX,y:contact.clientY};
+    update();
+  };
+  const options = {passive:true,capture:true};
+  document.addEventListener('touchstart', follow, options);
+  document.addEventListener('touchmove', follow, options);
+  document.addEventListener('touchend', release, options);
+  document.addEventListener('touchcancel', release, options);
+  document.addEventListener('pointerdown', follow, options);
+  document.addEventListener('pointermove', event => { if (point) follow(event); }, options);
+  document.addEventListener('pointerup', release, options);
+  document.addEventListener('pointercancel', release, options);
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('blur', reset);
+  mobile.addEventListener('change', reset);
 })();
 </script></body></html>
