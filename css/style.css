@@ -4309,3 +4309,21 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .page-home .mobile-contact-dock-brand .mobile-contact-dock-tagline{font-size:16px;line-height:1.5}
  .page-home .mobile-contact-dock.is-stuck .mobile-contact-dock-tagline{font-size:14px;line-height:1.6}
 }
+
+/* Compact mobile process steps and left-aligned scenario artwork. */
+@media(max-width:760px){
+ .project-process-timeline .home-process-steps{gap:8px}
+ .project-process-timeline .home-process-step:nth-child(n){padding-bottom:0}
+ .project-process-timeline .mobile-process-content{margin-top:4px}
+ .project-process-timeline .project-timeline-body{padding-top:4px}
+ .project-process-timeline .home-process-number{padding-bottom:4px;margin-bottom:4px}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram{background:transparent;justify-content:flex-start}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram svg,
+ .mobile-scenarios-match.scenario-reference-grid .infill-case-diagram svg{margin-left:0;margin-right:auto}
+}
+
+/* Future mobile photograph below the three service fields. */
+.mobile-services-photo-placeholder{display:none}
+@media(max-width:760px){
+ .page-home .mobile-services-photo-placeholder{display:block;width:100%;aspect-ratio:16/9;margin-top:var(--mobile-transition-gap,64px);border:1px solid #000;box-sizing:border-box;background:transparent}
+}
