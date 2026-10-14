@@ -1,33 +1,39 @@
-// One mobile toggle controls the four process explanations together.
+// Mobile project-development steps each have their own disclosure button.
 (function () {
   const mobile = window.matchMedia('(max-width: 760px)');
-  const groups = Array.from(document.querySelectorAll('.home-process-steps')).map((list, groupIndex) => {
+  const groups = Array.from(document.querySelectorAll('.home-process-steps')).flatMap((list, groupIndex) => {
     const steps = Array.from(list.querySelectorAll('.home-process-step'));
-    const texts = steps.map((step, index) => {
-      const content = step.querySelector('.project-timeline-body') || step.querySelector(':scope > p');
-      if (!content) return null;
-      content.id = 'mobile-process-content-' + groupIndex + '-' + index;
-      content.classList.add('mobile-process-content');
-      return content;
+    const independent = Boolean(list.closest('.project-process-timeline'));
+    const sets = independent ? steps.map(step => [step]) : [steps];
+    return sets.map((set, setIndex) => {
+      const texts = set.map(step => {
+        const content = step.querySelector('.project-timeline-body') || step.querySelector(':scope > p');
+        if (!content) return null;
+        content.id = 'mobile-process-content-' + groupIndex + '-' + steps.indexOf(step);
+        content.classList.add('mobile-process-content');
+        return content;
+      }).filter(Boolean);
+      if (!texts.length || !set.length) return null;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'mobile-process-toggle';
+      button.setAttribute('aria-controls', texts.map(text => text.id).join(' '));
+      button.innerHTML = '<span class="scope-chevron" aria-hidden="true"></span>';
+      set[0].append(button);
+      const label = independent ? String(setIndex + 1).padStart(2, '0') : '01 bis 04';
+      let expanded = false;
+      function update(open) {
+        expanded = open;
+        set.forEach(step => step.classList.toggle('is-mobile-step-expanded', open));
+        list.classList.toggle('is-mobile-process-expanded', steps.some(step => step.classList.contains('is-mobile-step-expanded')));
+        texts.forEach(text => { text.hidden = !open; });
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', 'Erläuterungen zu ' + label + (open ? ' schließen' : ' öffnen'));
+      }
+      button.addEventListener('click', () => update(!expanded));
+      return { button, update };
     }).filter(Boolean);
-    if (!texts.length || !steps.length) return null;
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'mobile-process-toggle';
-    button.setAttribute('aria-controls', texts.map(text => text.id).join(' '));
-    button.innerHTML = '<span class="scope-chevron" aria-hidden="true"></span>';
-    steps[0].append(button);
-    let expanded = false;
-    function update(open) {
-      expanded = open;
-      list.classList.toggle('is-mobile-process-expanded', open);
-      texts.forEach(text => { text.hidden = !open; });
-      button.setAttribute('aria-expanded', String(open));
-      button.setAttribute('aria-label', open ? 'Erläuterungen zu 01 bis 04 schließen' : 'Erläuterungen zu 01 bis 04 öffnen');
-    }
-    button.addEventListener('click', () => update(!expanded));
-    return { button, update };
-  }).filter(Boolean);
+  });
   function sync() {
     groups.forEach(group => {
       group.button.hidden = !mobile.matches;
@@ -1328,4 +1334,30 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
  window.addEventListener('resize', fitTitles);
  mobile.addEventListener('change', fitTitles);
  if (document.fonts) document.fonts.ready.then(fitTitles);
+})();
+
+// Align the service-carousel arrows to the heading's last rendered text line.
+(() => {
+  const mobile = window.matchMedia('(max-width:760px)');
+  const sections = Array.from(document.querySelectorAll('.mobile-scenarios-match'));
+  const align = () => sections.forEach(section => {
+    const heading = section.querySelector(':scope > h2');
+    const controls = section.querySelector('.service-mobile-scenario-carousel .scenario-slider-controls');
+    if (!heading || !controls) return;
+    if (!mobile.matches) { controls.style.removeProperty('top'); return; }
+    const range = document.createRange();
+    range.selectNodeContents(heading);
+    const lines = Array.from(range.getClientRects()).filter(rect => rect.height > 0);
+    const last = lines[lines.length - 1];
+    if (!last) return;
+    controls.style.top = (last.top + (last.height - controls.getBoundingClientRect().height) / 2 - section.getBoundingClientRect().top) + 'px';
+  });
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(align);
+    sections.forEach(section => { const heading = section.querySelector(':scope > h2'); if (heading) observer.observe(heading); });
+  }
+  window.addEventListener('resize', align, {passive:true});
+  mobile.addEventListener('change', align);
+  if (document.fonts) document.fonts.ready.then(align);
+  align();
 })();

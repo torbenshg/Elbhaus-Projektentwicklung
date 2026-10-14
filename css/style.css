@@ -4003,3 +4003,143 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
 /* The wide roof photograph sits above the original full-width sale content. */
 .page-home #verkauf .project-sale-banner{width:100%;margin:0 0 clamp(28px,4vw,56px)}
 .page-home #verkauf .project-sale-banner img{display:block;width:100%;height:auto;aspect-ratio:16/9}
+
+/* Mobile: omit the process drawing and show the Chiffre illustration before its text block. */
+.chiffre-mobile-between-blocks{display:none}
+@media(max-width:760px){
+ .page-home .home-process-feature .home-process-drawing{display:none}
+ .page-home .elbhaus-codes-photo{display:none}
+ .page-home #verkauf .chiffre-mobile-between-blocks{display:block;width:100%;aspect-ratio:1;margin:var(--mobile-transition-gap,64px) 0 0;overflow:hidden}
+ .page-home .chiffre-mobile-between-blocks img{display:block;width:100%;height:100%;object-fit:cover}
+}
+
+/* Mobile service previews use the footer navigation's landscape height. */
+@media(max-width:760px){
+ .page-home .service-areas-reveal .service-reveal-block{height:180px;min-height:180px;aspect-ratio:auto;padding:24px 20px;gap:6px}
+ .page-home .service-areas-reveal .service-reveal-title{order:1;margin:0}
+ .page-home .service-areas-reveal .service-reveal-panel{order:2}
+ .page-home .service-areas-reveal .service-reveal-copy p{margin:0}
+}
+
+/* Mobile service labels sit at the previous benefit line, with the benefit directly below. */
+@media(max-width:760px){
+ .page-home .service-areas-reveal .service-reveal-block{container-type:inline-size;padding-bottom:0;gap:0}
+ .page-home .service-areas-reveal .service-reveal-title{font-weight:400;white-space:nowrap}
+ .page-home .service-areas-reveal .service-reveal-copy .service-reveal-benefit{font-size:min(16px,6.2cqw)!important;line-height:24px!important;white-space:nowrap;margin:0}
+}
+
+/* Mobile illustration matches the roof photograph's 16:9 landscape frame. */
+@media(max-width:760px){
+ .page-home #verkauf .chiffre-mobile-between-blocks{aspect-ratio:16/9}
+ .page-home .chiffre-mobile-between-blocks img{object-fit:contain}
+}
+
+/* Mobile scenario graphic, title and description together match the roof photo's height. */
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-slider-track{aspect-ratio:16/9;height:auto;min-height:0;flex:none;align-items:stretch}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case.scenario-slide{display:grid;grid-template-rows:minmax(0,1fr) auto auto;height:100%;min-height:0;gap:0}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram{width:100%;height:100%;min-height:0;max-height:none;aspect-ratio:auto;margin:0}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram svg{width:100%;height:100%}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case h3{margin:0}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case p{margin:0;line-height:1.5}
+}
+
+/* Mobile scenarios use the same overall height as the service preview cards. */
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-slider-track{height:180px;aspect-ratio:auto}
+}
+
+/* Narrow mobile scenario cards with equal side padding and two-line explanations. */
+.scenario-description-mobile{display:none}
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider{--slide-width:min(260px,calc(100% - 12px))}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case.scenario-slide{container-type:inline-size;box-sizing:border-box;padding:0 12px;grid-template-rows:minmax(0,1fr) 40px 48px}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case h3{font-size:min(16px,var(--mobile-title-fit))!important;line-height:24px;padding:8px 12px}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case p{font-size:min(16px,var(--mobile-description-fit));line-height:24px;white-space:nowrap}
+ .page-home .typical-situations .scenario-description-desktop{display:none}
+ .page-home .typical-situations .scenario-description-mobile{display:inline}
+}
+
+/* Mobile value-creation heading matches Services, with controls above it. */
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-feature-selection{display:none}
+ .page-home .typical-situations .scenario-feature-heading{padding:44px 0 28px}
+ .page-home .typical-situations .scenario-feature-heading h2{font-size:36px!important;line-height:1.2!important;white-space:normal}
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider-controls{top:0;right:0;bottom:auto;gap:12px}
+ .page-home .typical-situations .scenario-slider-controls button{width:32px;height:32px;padding:0}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case.scenario-slide{flex:0 0 var(--slide-width);width:var(--slide-width);min-width:0}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram,
+ .page-home .typical-situations .scenario-feature-carousel .infill-case h3{width:100%;max-width:100%;box-sizing:border-box}
+}
+
+/* Mobile: snug blue labels, a consistent slide gap, and arrows beside the second heading line. */
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-feature-heading{padding:0 0 28px}
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider{--slide-gap:20px}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case h3{width:max-content;max-width:100%;justify-self:start}
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider-controls{top:calc(36px * 1.2 + (36px * 1.2 - 32px) / 2);gap:8px}
+ .page-home .typical-situations .scenario-slider-controls button{width:26px;height:32px}
+}
+@media(max-width:374px){
+ .page-home .typical-situations .scenario-feature-heading{padding-bottom:68px}
+ .page-home .typical-situations .scenario-feature-carousel .scenario-slider-controls{top:calc(36px * 1.2 * 2 + 8px)}
+}
+
+/* Mobile scenario titles use plain text instead of a blue label box. */
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-feature-carousel .infill-case h3{background:transparent;color:var(--text);padding-left:0;padding-right:0}
+}
+
+/* Long labels cannot widen any mobile scenario's graphic column or card. */
+@media(max-width:760px){
+ .page-home .typical-situations .scenario-feature-carousel .infill-case.scenario-slide{width:var(--slide-width);max-width:var(--slide-width);flex:0 0 var(--slide-width);grid-template-columns:minmax(0,1fr);overflow:hidden}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case-diagram{min-width:0;max-width:100%;overflow:hidden}
+ .page-home .typical-situations .scenario-feature-carousel .infill-case p{width:100%;min-width:0;max-width:100%}
+}
+
+/* Service-page scenarios use the approved mobile homepage card format. */
+@media(max-width:760px){
+ .mobile-scenarios-match.scenario-reference-grid .infill-scenarios-grid{grid-template-columns:repeat(auto-fit,260px);gap:20px;border:0;justify-content:start}
+ .mobile-scenarios-match.scenario-reference-grid .infill-case:nth-child(n){container-type:inline-size;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 40px 48px;width:260px;max-width:100%;height:180px;min-height:0;padding:0 12px;gap:0;border:0;overflow:hidden;box-sizing:border-box}
+ .mobile-scenarios-match.scenario-reference-grid .infill-case-diagram{width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:none;aspect-ratio:auto;margin:0;align-self:start;overflow:hidden}
+ .mobile-scenarios-match.scenario-reference-grid .infill-case-diagram svg{display:block;width:100%;height:100%;margin:0}
+ .mobile-scenarios-match.scenario-reference-grid .infill-case-diagram svg > g{transform:none}
+ .mobile-scenarios-match.scenario-reference-grid .infill-case h3{font-size:min(16px,var(--mobile-title-fit));font-weight:500;line-height:24px;letter-spacing:0;background:transparent;color:var(--text);padding:8px 0;margin:0;width:max-content;max-width:100%;white-space:nowrap;justify-self:start}
+ .mobile-scenarios-match.scenario-reference-grid .infill-case p{font-size:min(16px,var(--mobile-description-fit));font-weight:400;line-height:24px;letter-spacing:0;white-space:nowrap;margin:0;min-height:0;width:100%;min-width:0;max-width:100%}
+ .mobile-scenarios-match .scenario-description-desktop{display:none}
+ .mobile-scenarios-match .scenario-description-mobile{display:inline}
+}
+
+/* Service-page mobile carousels reuse the homepage's endless swipe and arrow controls. */
+.service-mobile-scenario-carousel{display:none}
+@media(max-width:760px){
+ .mobile-scenarios-match{position:relative;padding-top:44px}
+ .mobile-scenarios-match > h2{margin:0 0 28px;font-size:36px!important;line-height:1.2!important;hyphens:auto;overflow-wrap:break-word}
+ .mobile-scenarios-match > .infill-scenarios-grid{display:none}
+ .mobile-scenarios-match .service-mobile-scenario-carousel{display:block;background:transparent;padding:0;overflow:hidden}
+ .service-mobile-scenario-carousel .scenario-slider{position:static;width:100%;max-width:100%;--slide-width:min(260px,calc(100% - 12px));--slide-gap:20px;--gallery-gutter:0px}
+ .service-mobile-scenario-carousel .scenario-slider-track{display:flex;gap:20px;width:100%;height:180px;min-height:0;padding:0;align-items:stretch;scroll-snap-type:none}
+ .mobile-scenarios-match .service-mobile-scenario-carousel .infill-case.scenario-slide{width:var(--slide-width);max-width:var(--slide-width);min-width:0;flex:0 0 var(--slide-width)}
+ .service-mobile-scenario-carousel .scenario-slider-controls{position:absolute;inset:auto;top:0;right:0;display:flex;gap:8px;margin:0;pointer-events:none}
+ .service-mobile-scenario-carousel .scenario-slider-controls[hidden]{display:none}
+ .service-mobile-scenario-carousel .scenario-slider-controls button{position:static;width:26px;height:32px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;pointer-events:auto}
+ .service-mobile-scenario-carousel .scenario-slider-controls svg{width:26px;height:20px}
+}
+
+/* The mobile carousel replaces the desktop scenario grid completely. */
+@media(max-width:760px){
+ .infill-scenarios.scenario-reference-grid.mobile-scenarios-match > .infill-scenarios-grid{display:none!important}
+}
+
+/* Service carousel arrows align with the last line of the scenario heading. */
+@media(max-width:760px){
+ .mobile-scenarios-match{padding-top:0}
+ .mobile-scenarios-match > h2{padding-right:76px}
+ .service-mobile-scenario-carousel .scenario-slider-controls{top:calc(36px * 1.2 * 2 + (36px * 1.2 - 32px) / 2)}
+}
+
+/* Keep the scenario heading free of hyphenation. */
+.mobile-scenarios-match > h2{hyphens:none}
+@media(max-width:760px){
+ .mobile-scenarios-match > h2{hyphens:none;overflow-wrap:anywhere}
+}
