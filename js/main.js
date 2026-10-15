@@ -1366,3 +1366,39 @@ document.querySelectorAll('.value-cases-grid').forEach(grid => {
   if (document.fonts) document.fonts.ready.then(align);
   align();
 })();
+
+// Align the visible desktop navigation letters with the bottom of the logo.
+(() => {
+ const nav = document.querySelector('header #primary-nav');
+ const logo = document.querySelector('header .logo');
+ if (!nav || !logo) return;
+ const desktop = matchMedia('(min-width:1101px)');
+ const ctx = document.createElement('canvas').getContext('2d');
+ let pending = false;
+ const align = () => {
+  pending = false;
+  nav.style.removeProperty('--desktop-nav-offset');
+  if (!desktop.matches || !ctx) return;
+  const labels = [...nav.querySelectorAll('.primary-nav-label')].filter(el => el.getClientRects().length);
+  if (!labels.length) return;
+  const bottom = Math.max(...labels.map(el => {
+   const style = getComputedStyle(el);
+   ctx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+   const metrics = ctx.measureText(el.textContent.trim());
+   const ascent = metrics.fontBoundingBoxAscent ?? metrics.actualBoundingBoxAscent;
+   const descent = metrics.fontBoundingBoxDescent ?? metrics.actualBoundingBoxDescent;
+   const lineHeight = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.55;
+   return el.getBoundingClientRect().top + parseFloat(style.paddingTop || 0) + (lineHeight - ascent - descent) / 2 + ascent + metrics.actualBoundingBoxDescent;
+  }));
+  nav.style.setProperty('--desktop-nav-offset', `${logo.getBoundingClientRect().bottom - bottom}px`);
+ };
+ const schedule = () => { if (!pending) { pending = true; requestAnimationFrame(align); } };
+ addEventListener('resize', schedule, {passive:true});
+ addEventListener('scroll', schedule, {passive:true});
+ logo.addEventListener('load', schedule);
+ logo.addEventListener('transitionend', schedule);
+ desktop.addEventListener('change', schedule);
+ if (document.fonts) document.fonts.ready.then(schedule);
+ if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(logo);
+ schedule();
+})();

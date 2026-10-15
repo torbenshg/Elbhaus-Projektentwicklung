@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Potenziale Ihrer Immobilie | Elbhaus Projektentwicklung Hamburg</title><meta name="description" content="Elbhaus erkennt und prüft Entwicklungspotenziale von Grundstücken und Bestandsimmobilien in Hamburg – für private Eigentümer, Bestandshalter und Investoren."><link rel="stylesheet" href="./css/style.css?v=20261015-potential-finder-anthracite-r203"><script>document.documentElement.classList.add("js");</script><link rel="canonical" href="https://elbhaus-projekt.de/"><script>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Potenziale Ihrer Immobilie | Elbhaus Projektentwicklung Hamburg</title><meta name="description" content="Elbhaus erkennt und prüft Entwicklungspotenziale von Grundstücken und Bestandsimmobilien in Hamburg – für private Eigentümer, Bestandshalter und Investoren."><link rel="stylesheet" href="./css/style.css?v=20261015-finder-white-surround-r220"><script>document.documentElement.classList.add("js");</script><link rel="canonical" href="https://elbhaus-projekt.de/"><script>
 if(location.protocol === 'file:') {
   const root = new URL('./', location.href);
   const localLink = link => {
@@ -27,11 +27,11 @@ header #primary-nav a{background:transparent!important;border-bottom:0!important
 header #primary-nav .primary-nav-label{position:relative;display:inline-block;padding-bottom:4px}
 header #primary-nav .primary-nav-line{display:block!important;position:absolute;left:0;bottom:0;width:100%;height:2px;background:currentColor;opacity:1!important;visibility:visible!important;transform:scaleX(0);transform-origin:left center;transition:transform .4s ease;pointer-events:none}
 header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav a:hover .primary-nav-line,header #primary-nav a:focus-visible .primary-nav-line{transform:scaleX(1)}
-</style></head><body class="page-intro page-home"><header>
+</style><link rel="icon" href="./favicon.svg?v=205" type="image/svg+xml"><link rel="icon" href="./favicon-32.png?v=205" type="image/png" sizes="32x32"><link rel="shortcut icon" href="./favicon.ico?v=205"><link rel="apple-touch-icon" href="./favicon-180.png?v=205" sizes="180x180"></head><body class="page-intro page-home"><header>
   <div class="wrap nav">
     <a href="/" aria-label="Elbhaus Projektentwicklung – Startseite"><img class="logo" src="./images/logo-navigation-geometric-black.svg?v=198" alt="Elbhaus" width="3282" height="790"></a>
     <nav id="primary-nav" aria-label="Hauptnavigation">
-        <a href="/" class="active" aria-current="page"><span class="primary-nav-label">Elbhaus<span class="primary-nav-line" aria-hidden="true"></span></span></a>
+        <a href="/" class="active" aria-current="page" data-nav-home><span class="primary-nav-label">Elbhaus<span class="primary-nav-line" aria-hidden="true"></span></span></a>
         <a href="/projektentwicklung/"><span class="primary-nav-label">Projektentwicklung<span class="primary-nav-line" aria-hidden="true"></span></span></a>
         <a href="/machbarkeitsstudie/"><span class="primary-nav-label">Machbarkeitsstudie<span class="primary-nav-line" aria-hidden="true"></span></span></a>
         <a href="/nachverdichtung/"><span class="primary-nav-label">Nachverdichtung<span class="primary-nav-line" aria-hidden="true"></span></span></a>
@@ -158,7 +158,7 @@ header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav
 <section class="typical-situations scenario-gallery scenario-feature" aria-labelledby="situations-heading">
   <div class="wrap scenario-feature-layout scroll-fly-left">
     <div class="scenario-feature-heading">
-      <h2 id="situations-heading" class="mobile-reference-heading">Raum für<br>Wertschöpfung</h2>
+      <h2 id="situations-heading" class="mobile-reference-heading">Werte heben,<br>Lebensraum schaffen</h2>
       <nav class="scenario-feature-selection" aria-label="Entwicklungsleistungen">
         <a href="/nachverdichtung/">Nachverdichtung</a>
         <a href="/aufstockung/">Aufstockung</a>
@@ -375,7 +375,7 @@ header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav
       <a href="/datenschutz/">Datenschutzerklärung</a>
     </nav>
   </div>
-</footer><script src="./js/main.js?v=20261014-mobile-roof-touch-r149"></script><script id="service-link-interaction">
+</footer><script src="./js/main.js?v=20261015-desktop-nav-bottom-align-r207"></script><script id="service-link-interaction">
 (function () {
   document.querySelectorAll('a[data-service-underline]').forEach(function (link) {
     var line = link.querySelector('.service-link-line');
@@ -413,7 +413,7 @@ header #primary-nav a[aria-current="page"] .primary-nav-line,header #primary-nav
       line.style.setProperty('transform', 'scaleX(1)', 'important');
     }
     function restore() {
-      var selected = link.getAttribute('aria-current') === 'page' || link.classList.contains('active');
+      var selected = !window.matchMedia('(min-width:1101px)').matches && (link.getAttribute('aria-current') === 'page' || link.classList.contains('active'));
       line.style.setProperty('transform', selected ? 'scaleX(1)' : 'scaleX(0)', 'important');
     }
     link.addEventListener('mouseenter', show);

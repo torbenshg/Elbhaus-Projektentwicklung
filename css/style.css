@@ -4339,3 +4339,121 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
 @media(max-width:1100px){
  html.js header nav{background:#000}
 }
+
+/* Desktop navigation has the stronger weight of the Elbhaus wordmark. */
+@media(min-width:1101px){
+ header #primary-nav a,.page-home header:not(.is-scrolled) #primary-nav a{font-weight:600;color:#000}
+}
+
+@media(min-width:1101px){header #primary-nav{transform:translateY(var(--desktop-nav-offset,0px))}}
+
+/* Larger desktop menu without a duplicate home link beside the wordmark. */
+@media(min-width:1101px){
+ header #primary-nav > a[href="/"]{display:none}
+ header #primary-nav a,.page-home header:not(.is-scrolled) #primary-nav a{font-size:16px;line-height:1.4}
+}
+
+/* Shared finder on service pages matches the homepage mobile heading size. */
+@media(max-width:760px){
+ .service-page-potential-finder #potential-finder-heading{font-size:28px;line-height:1.2}
+}
+
+/* Desktop underline is interaction-only, including on the current page. */
+@media(min-width:1101px){
+ header #primary-nav > a[href="/"]{display:none!important}
+ header #primary-nav a:not(:hover):not(:focus-visible) .primary-nav-line{transform:scaleX(0)!important}
+ header #primary-nav a:hover .primary-nav-line,
+ header #primary-nav a:focus-visible .primary-nav-line{transform:scaleX(1)!important}
+}
+
+@font-face{font-family:"Elbhaus Jost";src:url("../fonts/jost-navigation-500.ttf") format("truetype");font-style:normal;font-weight:500;font-display:swap}
+@media(min-width:1101px){
+ header #primary-nav a,.page-home header:not(.is-scrolled) #primary-nav a{font-family:"Elbhaus Jost",sans-serif;font-weight:500;font-feature-settings:"ss01" 1}
+}
+
+/* Stable home-link marker also works when file previews rewrite the URL. */
+@media(min-width:1101px){
+ header #primary-nav > a[data-nav-home]{display:none!important}
+}
+
+/* Desktop value-creation reference: heading above a compact, full-width carousel. */
+@media(min-width:761px){
+ .page-home .typical-situations.scenario-feature{padding:0 0 36px;border-top:1px solid #000;border-bottom:1px solid #000;background:#fff}
+ .page-home .typical-situations.scenario-feature .scenario-feature-layout{position:relative;display:block;container-type:normal;width:100%;max-width:none;height:auto;min-height:0;margin:0;padding:0;border:0}
+ .page-home .typical-situations.scenario-feature .scenario-feature-heading{display:block;width:auto;min-height:0;margin:0;padding:30px 120px 24px 40px;border:0}
+ .page-home .typical-situations.scenario-feature .scenario-feature-heading h2{font-size:36px;line-height:1.15;margin:0}
+ .page-home .typical-situations.scenario-feature .scenario-feature-selection{display:none}
+ .page-home .typical-situations.scenario-feature .scenario-feature-carousel{position:static;display:block;width:100%;height:auto;min-height:0;aspect-ratio:auto;padding:0;border:0;overflow:visible}
+ .page-home .typical-situations.scenario-feature .scenario-slider{position:static;display:block;width:100%;height:auto;min-height:0;--slide-width:260px;--slide-gap:40px;--gallery-gutter:40px}
+ .page-home .typical-situations.scenario-feature .scenario-slider-track{display:flex;align-items:stretch;width:100%;height:auto;min-height:0;aspect-ratio:auto;margin:0;padding:0 var(--gallery-gutter);gap:var(--slide-gap)}
+ .page-home .typical-situations.scenario-feature .infill-case.scenario-slide{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:120px 48px auto;align-content:start;gap:6px;width:var(--slide-width);max-width:var(--slide-width);min-width:0;height:auto;min-height:0;flex:0 0 var(--slide-width);padding:0;border:0}
+ .page-home .typical-situations.scenario-feature .infill-case-diagram{display:flex;align-items:flex-start;justify-content:flex-start;width:180px;height:112px;min-height:0;max-height:none;aspect-ratio:auto;margin:0;background:transparent}
+ .page-home .typical-situations.scenario-feature .infill-case-diagram svg{display:block;width:180px;height:112px;max-width:100%;margin:0;transform:none}
+ .page-home .typical-situations.scenario-feature .infill-case h3{align-self:start;width:auto;min-height:0;margin:0;padding:0;background:transparent;color:var(--text);font-size:16px;font-weight:500;line-height:24px;letter-spacing:0}
+ .page-home .typical-situations.scenario-feature .infill-case p{align-self:start;margin:0;padding:0;font-size:14px;line-height:22px;letter-spacing:0;max-width:260px}
+ .page-home .typical-situations.scenario-feature .scenario-slider-controls{position:absolute;inset:58px 40px auto auto;display:flex;gap:12px;margin:0;padding:0}
+ .page-home .typical-situations.scenario-feature .scenario-slider-controls[hidden]{display:none}
+ .page-home .typical-situations.scenario-feature .scenario-slider-controls button{position:static;width:32px;height:32px;padding:0;border:0;background:transparent}
+ .page-home .typical-situations.scenario-feature .scenario-slider-controls svg{width:26px;height:20px}
+ .page-home main > .service-areas-reveal + .scenario-gallery::before{content:none}
+}
+
+/* Arrows share the second heading line; divider sits directly above the examples. */
+@media(min-width:761px){
+ .page-home .typical-situations.scenario-feature .scenario-slider-controls{top:calc(30px + 36px * 1.15 + (36px * 1.15 - 32px) / 2)}
+ .page-home .typical-situations.scenario-feature{border-bottom:0}
+ .page-home main > .value-examples{border-top:1px solid #000!important}
+}
+
+/* The service pages share the compact desktop scenario carousel. */
+@media(min-width:761px){
+ .service-content .mobile-scenarios-match.scenario-reference-grid{position:relative;display:block;width:100vw;max-width:none;margin:48px calc((100% - 100vw)/2);padding:0 0 36px;border-top:1px solid #000;border-bottom:1px solid #000;overflow:hidden}
+ .service-content .mobile-scenarios-match.scenario-reference-grid > h2{margin:0;padding:30px 130px 24px 40px;font-size:36px;line-height:1.15;font-weight:400}
+ .service-content .mobile-scenarios-match.scenario-reference-grid > .infill-scenarios-grid{display:none!important}
+ .service-content .mobile-scenarios-match .service-mobile-scenario-carousel{display:block;width:100%;padding:0;background:transparent;overflow:visible}
+ .service-content .mobile-scenarios-match .scenario-slider{position:static;width:100%;height:auto;--slide-width:260px;--slide-gap:40px;--gallery-gutter:40px}
+ .service-content .mobile-scenarios-match .scenario-slider-track{display:flex;align-items:stretch;height:auto;min-height:0;margin:0;padding:0 40px;gap:40px}
+ .service-content .mobile-scenarios-match .infill-case.scenario-slide{container-type:normal;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:120px 48px auto;align-content:start;gap:6px;flex:0 0 260px;width:260px;max-width:260px;min-width:0;height:auto;min-height:0;padding:0;border:0}
+ .service-content .mobile-scenarios-match .infill-case-diagram{display:flex;align-items:flex-start;justify-content:flex-start;width:180px;height:112px;min-height:0;max-height:none;aspect-ratio:auto;margin:0;background:transparent}
+ .service-content .mobile-scenarios-match .infill-case-diagram svg{display:block;width:180px;height:112px;max-width:100%;margin:0;transform:none}
+ .service-content .mobile-scenarios-match .infill-case-diagram svg > g{transform:none}
+ .service-content .mobile-scenarios-match .infill-case h3{align-self:start;width:auto;min-height:0;margin:0;padding:0;background:transparent;color:var(--text);font-size:16px;font-weight:500;line-height:24px;letter-spacing:0}
+ .service-content .mobile-scenarios-match .infill-case p{align-self:start;margin:0;padding:0;max-width:260px;font-size:14px;line-height:22px;letter-spacing:0}
+ .service-content .mobile-scenarios-match .scenario-slider-controls{position:absolute;inset:35px 40px auto auto;display:flex;gap:12px;margin:0;padding:0;pointer-events:none}
+ .service-content .mobile-scenarios-match .scenario-slider-controls[hidden]{display:none}
+ .service-content .mobile-scenarios-match .scenario-slider-controls button{position:static;width:32px;height:32px;padding:0;border:0;border-radius:0;background:transparent;pointer-events:auto}
+ .service-content .mobile-scenarios-match .scenario-slider-controls svg{width:26px;height:20px}
+}
+
+/* All three desktop carousels align with the normal content and divider width. */
+@media(min-width:761px){
+ .page-home .typical-situations.scenario-feature{width:min(var(--max),calc(100% - 80px));margin-left:auto;margin-right:auto}
+ .page-home .typical-situations.scenario-feature .scenario-feature-heading{padding-left:0;padding-right:80px}
+ .page-home .typical-situations.scenario-feature .scenario-slider{--gallery-gutter:0px}
+ .page-home .typical-situations.scenario-feature .scenario-slider-controls{right:0}
+ .page-home main > .value-examples{border-top:0!important}
+ .page-home .typical-situations.scenario-feature{border-bottom:1px solid #000}
+ .service-content .mobile-scenarios-match.scenario-reference-grid{width:100%;max-width:none;margin:48px 0}
+ .service-content .mobile-scenarios-match.scenario-reference-grid > h2{padding-left:0;padding-right:80px}
+ .service-content .mobile-scenarios-match .scenario-slider{--gallery-gutter:0px}
+ .service-content .mobile-scenarios-match .scenario-slider-track{padding-left:0;padding-right:0}
+ .service-content .mobile-scenarios-match .scenario-slider-controls{right:0}
+}
+
+/* One-line gap below each desktop scenario title, rather than a two-line title slot. */
+@media(min-width:761px){
+ .page-home .typical-situations.scenario-feature .infill-case.scenario-slide,
+ .service-content .mobile-scenarios-match .infill-case.scenario-slide{grid-template-rows:120px auto auto;row-gap:6px;align-content:start}
+ .page-home .typical-situations.scenario-feature .infill-case h3,
+ .service-content .mobile-scenarios-match .infill-case h3{margin-bottom:12px}
+}
+
+/* Hide only process explanations while preserving every diagram measurement. */
+@media(min-width:761px){
+ .page-home .home-process-feature .home-process-drawing .home-process-step p{visibility:hidden}
+}
+
+/* White section around the unchanged anthracite finder box. */
+.home-potential-finder{background:#fff;border-top-color:transparent;border-bottom-color:transparent}
+.home-potential-finder .potential-finder-intro #potential-finder-heading{color:#000}
+.home-potential-finder > .wrap > .potential-finder{background:#202020}
