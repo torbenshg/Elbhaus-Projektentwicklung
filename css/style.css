@@ -1807,8 +1807,8 @@ header nav a{margin:0;padding:8px 10px;white-space:nowrap}
 .potential-finder-consent{grid-column:1/-1;display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:12px;line-height:1.55}
 .potential-finder-consent input{flex:none;width:16px;height:16px;margin:2px 0 0;padding:0;accent-color:var(--blue)}
 .potential-finder-consent a{text-decoration:underline;text-underline-offset:3px}
-.potential-finder-submit{grid-column:1/-1!important;background:#12334b!important;border-color:#fff!important;color:#fff!important;font-family:"Montserrat",Arial,Helvetica,sans-serif!important;font-size:13px!important;font-weight:600;letter-spacing:0!important;text-transform:none;padding:12px 22px!important}
-.potential-finder-submit:hover:not(:disabled){background:#fff!important;color:#12334b!important}
+.potential-finder-submit{grid-column:1/-1!important;background:#202020!important;border-color:#fff!important;color:#fff!important;font-family:"Montserrat",Arial,Helvetica,sans-serif!important;font-size:13px!important;font-weight:600;letter-spacing:0!important;text-transform:none;padding:12px 22px!important}
+.potential-finder-submit:hover:not(:disabled){background:#fff!important;color:#202020!important}
 .potential-finder-submit:disabled{opacity:.55;cursor:wait}
 .potential-finder-form-note,.potential-finder-form .form-status{grid-column:1/-1;margin:0;color:var(--muted);font-size:12px;line-height:1.55}
 .potential-finder-form .form-status:empty{display:none}
@@ -3051,7 +3051,7 @@ nav.home-split-links a::before,nav.home-split-links a::after{content:none}
 
 /* Two-by-two finder steps with only the central cross as a divider. */
 .potential-finder-options,.potential-finder-options.potential-finder-situations{position:relative;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px;gap:0;border:0}
-.potential-finder-options::before,.potential-finder-options::after{content:"";position:absolute;background:#000;pointer-events:none;z-index:1}
+.potential-finder-options::before,.potential-finder-options::after{content:"";position:absolute;background:#202020;pointer-events:none;z-index:1}
 .potential-finder-options::before{left:50%;top:0;bottom:0;width:1px}
 .potential-finder-options::after{left:0;right:0;top:50%;height:1px}
 .potential-finder-options .potential-finder-option:nth-child(n){border:0;padding:18px 24px}
@@ -3095,41 +3095,41 @@ nav.home-split-links a::before,nav.home-split-links a::after{content:none}
 @media(max-width:760px){.potential-finder{padding:20px 14px}.potential-finder-options,.potential-finder-options.potential-finder-situations{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.potential-finder-progress{margin-bottom:24px}.finder-step-actions{gap:12px}.finder-step-actions button{font-size:13px;padding:10px 12px}}
 
 /* Elbhaus-blue finder with white icons, text and fine reference-style outlines. */
-.home-potential-finder{background:#12334b;--blue:#fff;--text:#fff;--muted:rgba(255,255,255,.76);--soft-line:rgba(255,255,255,.35);--line:rgba(255,255,255,.55);color:#fff}
+.home-potential-finder{background:#202020;--blue:#fff;--text:#fff;--muted:rgba(255,255,255,.76);--soft-line:rgba(255,255,255,.35);--line:rgba(255,255,255,.55);color:#fff}
 .home-potential-finder h2,.home-potential-finder h3,.home-potential-finder p,.home-potential-finder label,.home-potential-finder strong{color:#fff}
 .home-potential-finder .potential-finder{background:transparent;border-color:#fff}
 .home-potential-finder .potential-finder-step,.home-potential-finder .potential-finder-question{color:#fff}
-.home-potential-finder .potential-finder-progress > button::before{background:#12334b;color:#fff;border-color:#fff}
-.home-potential-finder .potential-finder-progress > button.is-active::before{background:#fff;color:#12334b}
+.home-potential-finder .potential-finder-progress > button::before{background:#202020;color:#fff;border-color:#fff}
+.home-potential-finder .potential-finder-progress > button.is-active::before{background:#fff;color:#202020}
 .home-potential-finder .finder-step-actions button{background:transparent;color:#fff;border-color:#fff}
-.home-potential-finder .finder-step-actions button:hover:not(:disabled){background:#fff;color:#12334b}
+.home-potential-finder .finder-step-actions button:hover:not(:disabled){background:#fff;color:#202020}
 .home-potential-finder .potential-finder-form{background:transparent;border-color:rgba(255,255,255,.4)}
 .home-potential-finder input:not([type="checkbox"]),.home-potential-finder textarea{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
-.home-potential-finder .potential-finder-form button[type="submit"]{background:#fff;color:#12334b;border-color:#fff}
+.home-potential-finder .potential-finder-form button[type="submit"]{background:#fff;color:#202020;border-color:#fff}
 
-.home-potential-finder .potential-finder-form button[type="submit"]{background:#12334b;color:#fff;border:1px solid #fff}
+.home-potential-finder .potential-finder-form button[type="submit"]{background:#202020;color:#fff;border:1px solid #fff}
 
 /* Keep unavailable stages visible; native buttons support mouse, touch and keyboard. */
 .potential-finder-progress > button:disabled{cursor:default}
 .potential-finder-result-back{display:block;margin:0 0 20px auto;padding:10px 22px;border:1px solid #fff;background:transparent;color:#fff;font:400 15px/1.5 "Montserrat",Arial,sans-serif;cursor:pointer}
 .potential-finder-result-back[hidden]{display:none}
-.home-potential-finder .potential-finder-result-back:hover,.home-potential-finder .potential-finder-result-back:focus-visible{background:#fff!important;color:#12334b!important;border-color:#fff!important}
+.home-potential-finder .potential-finder-result-back:hover,.home-potential-finder .potential-finder-result-back:focus-visible{background:#fff!important;color:#202020!important;border-color:#fff!important}
 .potential-finder-navigation{display:flex;align-items:flex-end;gap:24px;margin-bottom:38px}
 .potential-finder-navigation .potential-finder-progress{flex:1;min-width:0;width:100%;margin:0 auto}
 .potential-finder-navigation .potential-finder-result-back{flex:none;margin:0 0 -11px;padding:10px 16px;font-size:12px;line-height:1.4;transition:background-color .2s ease,color .2s ease}
-.potential-finder-result-back:active{background:#fff;color:#12334b}
+.potential-finder-result-back:active{background:#fff;color:#202020}
 @media(max-width:760px){.potential-finder-navigation{gap:10px;margin-bottom:24px}.potential-finder-navigation .potential-finder-result-back{padding:10px 8px}}
 
 /* Highlight only the potential result cards against the blue finder section. */
 .home-potential-finder .potential-finder-results{grid-template-columns:1fr;gap:14px;border:0}
 .home-potential-finder .potential-finder-results.is-single{grid-template-columns:1fr}
-.home-potential-finder .potential-finder-final-results .potential-finder-result{background:#fff;color:#000;--blue:#000;--text:#000;--muted:#000;padding:20px;border:0;grid-template-columns:minmax(0,1fr);grid-template-rows:subgrid;grid-row:span 3;align-items:start;gap:12px}
+.home-potential-finder .potential-finder-final-results .potential-finder-result{background:#fff;color:#202020;--blue:#202020;--text:#202020;--muted:#202020;padding:20px;border:0;grid-template-columns:minmax(0,1fr);grid-template-rows:subgrid;grid-row:span 3;align-items:start;gap:12px}
 .home-potential-finder .potential-finder-result > div:not(.potential-finder-diagram){display:contents}
 .home-potential-finder .potential-finder-result .potential-finder-diagram{width:180px;max-width:100%;height:94px;margin:0;grid-row:auto}
 .home-potential-finder .potential-finder-result h3,.home-potential-finder .potential-finder-result p{margin:0}
 .home-potential-finder .potential-finder-result h3{font-size:22px;font-weight:600;line-height:1.35}
 .home-potential-finder .potential-finder-result p{font-size:15px;line-height:1.6}
-.home-potential-finder .potential-finder-result h3,.home-potential-finder .potential-finder-result p,.home-potential-finder .potential-finder-result .potential-finder-diagram{color:#000}
+.home-potential-finder .potential-finder-result h3,.home-potential-finder .potential-finder-result p,.home-potential-finder .potential-finder-result .potential-finder-diagram{color:#202020}
 @media(max-width:760px){
  .home-potential-finder .potential-finder-results{gap:12px 10px}
  .home-potential-finder .potential-finder-final-results .potential-finder-result{padding:16px;gap:12px}
@@ -3145,7 +3145,7 @@ nav.home-split-links a::before,nav.home-split-links a::after{content:none}
 
 /* Clearly highlight the inquiry action on hover and keyboard focus. */
 .home-potential-finder .potential-finder-form .potential-finder-submit{transition:background-color .2s ease,color .2s ease}
-.home-potential-finder .potential-finder-form .potential-finder-submit:hover:not(:disabled),.home-potential-finder .potential-finder-form .potential-finder-submit:focus-visible:not(:disabled),.home-potential-finder .potential-finder-form .potential-finder-submit:active:not(:disabled){background:#fff!important;color:#12334b!important;border-color:#fff!important}
+.home-potential-finder .potential-finder-form .potential-finder-submit:hover:not(:disabled),.home-potential-finder .potential-finder-form .potential-finder-submit:focus-visible:not(:disabled),.home-potential-finder .potential-finder-form .potential-finder-submit:active:not(:disabled){background:#fff!important;color:#202020!important;border-color:#fff!important}
 @media(prefers-reduced-motion:reduce){.home-potential-finder .potential-finder-form .potential-finder-submit{transition:none}}
 
 /* Animate a separate line under the hovered service link. */
@@ -4328,3 +4328,14 @@ main h2.matched-feature-heading{font-size:clamp(36px,3.6vw,52px)!important;line-
  .page-home .mobile-services-photo-placeholder{display:block;width:100%;aspect-ratio:16/9;margin-top:var(--mobile-transition-gap,64px);border:1px solid #000;box-sizing:border-box;background:transparent}
 }
 
+
+/* Keep the existing logo in its header position above the open mobile menu. */
+@media(max-width:1100px){
+ body.mobile-menu-open header .nav > a{position:relative;z-index:3}
+ body.mobile-menu-open header .nav > a .logo{filter:brightness(0) invert(1)}
+}
+
+/* Black mobile navigation overlay. */
+@media(max-width:1100px){
+ html.js header nav{background:#000}
+}
